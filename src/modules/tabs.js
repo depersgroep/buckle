@@ -1,4 +1,28 @@
 'use strict';
+/**
+ *
+ *	Our tabs module is used to have multiple toggle items as 
+ *	tabbed behaviour items
+ * 
+ *
+ *	@class Tabs
+ *	@constructor
+ *	@requires Toggle
+ *
+ *	@property {Bonzo} tabs The dom element item that needs to have tab functionality
+ *	@property {event} [mouseEvent] default 'click', can be changed to hover
+ *	@property {function} [onTabChange] callback function when the tab is changed
+ *	@property {boolean} [noPreventDefault] cancel the default action on the trigger, default false
+ *
+ *	@example
+ *
+ *		new Tabs({
+ *		tabs: $('.tab-block'),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *
+ *
+ */
 function Tabs(args){
 
 	if (args){
@@ -38,6 +62,23 @@ function Tabs(args){
 
 }
 
+/**
+ *
+ *	@method show
+ *	@for Tabs
+ *
+ *	@description
+ *	calls the show callback function
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $('.tab-block'),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *	obj.show();
+ *
+ */
 Tabs.prototype.show = function(tab){
 
 	if (tab && this.defaults){
@@ -60,6 +101,23 @@ Tabs.prototype.show = function(tab){
 
 };
 
+/**
+ *
+ *	@method hide
+ *	@for Tabs
+ *
+ *	@description
+ *	calls the hide callback function
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $('.tab-block'),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *	obj.hide();
+ *
+ */
 Tabs.prototype.hide = function(tab){
 
 	if (tab && this.defaults){
@@ -76,6 +134,23 @@ Tabs.prototype.hide = function(tab){
 
 };
 
+/**
+ *
+ *	@method destroy
+ *	@for Tabs
+ *
+ *	@description
+ *	destroys the tabs instance
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $('.tab-block'),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *	obj.destroy();
+ *
+ */
 Tabs.prototype.destroy = function(){
 
 	if (this.defaults){

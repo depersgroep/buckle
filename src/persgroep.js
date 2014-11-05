@@ -30,7 +30,7 @@
  *  Ajax all over again! Includes support for xmlHttpRequest, JSONP,
  *  CORS and CommonJS Promises A.
  *
- * @class README
+ * @module Persgroep
  *
  */
 window.$ = null;

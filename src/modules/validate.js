@@ -1,4 +1,24 @@
 'use strict';
+/**
+ *
+ *	Validating forms like a boss! On submit it automatically 
+ *	validates the form with 
+ * 
+ *
+ *	@class Validate
+ *	@constructor
+ *
+ *
+ *	@property {Bonzo} form The dom element form
+ *
+ *	@example
+ *
+ *		new Validate({
+ *	frm: $('.form-to-validate'),
+ *	});
+ *
+ *
+ */
 function Validate(args){
 
 	if (args){
@@ -38,6 +58,23 @@ function Validate(args){
 
 }
 
+/**
+ *
+ *	@method checkValidation
+ *	@for Validate
+ *
+ *	@description
+ *	check the form validation
+ *
+ *	@example
+ *
+ *		var theForm = new Validate({
+ *	frm: $('.form-to-validate'),
+ *	});
+ *	theForm.checkValidation();
+ *
+ *
+ */
 Validate.prototype.checkValidation = function(){
 
 	var error = false;
@@ -102,6 +139,26 @@ Validate.prototype.checkValidation = function(){
 
 };
 
+/**
+ *
+ *	@method checkValidation
+ *	@for Validate
+ *
+ *	@description
+ *	check if an input / textarea value is valid
+ *	
+ *	@return {boolean} validation
+ *
+ *	@example
+ *
+ *		var theForm = new Validate({
+ *	frm: $('.form-to-validate'),
+ *	}),
+ *	inp = document.getElementById('inputName');
+ *	theForm.checkValue(inp);
+ *
+ *
+ */
 Validate.prototype.checkValue = function(htmlObj){
 
 	var r = false;
@@ -121,6 +178,7 @@ Validate.prototype.checkValue = function(htmlObj){
 
 };
 
+// this is not a public function
 Validate.prototype.triggerError = function(field, msg){
 
 	if ((field || field === 0) && msg){
@@ -156,6 +214,7 @@ Validate.prototype.triggerError = function(field, msg){
 
 };
 
+// neither is this
 Validate.prototype.removeError = function(field){
 
 	if (field){
@@ -180,6 +239,23 @@ Validate.prototype.removeError = function(field){
 
 };
 
+/**
+ *
+ *	@method removeAllErrors
+ *	@for Validate
+ *
+ *	@description
+ *	Remove all errors
+ *
+ *	@example
+ *
+ *		var theForm = new Validate({
+ *	frm: $('.form-to-validate'),
+ *	});
+ *	theForm.removeAllErrors();
+ *
+ *
+ */
 Validate.prototype.removeAllErrors = function() {
 	for(var k in this.defaults.fields) {
 		if(!this.defaults.fields[k] || !this.defaults.fields[k].htmlObj) {

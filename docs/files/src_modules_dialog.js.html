@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\modules\dialog.js - De Persgroep Publishing</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="De Persgroep Publishing" src="../assets/css/logo.png" style="max-height: 65%;" title="De Persgroep Publishing">
+        
+            De Persgroep Publishing
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/$", "classes/Cycle", "classes/Dialog", "classes/Tabs", "classes/Toggle", "classes/Validate", "modules/Persgroep"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/$.html">$</a></li>
+                    
+                        <li><a href="../classes/Cycle.html">Cycle</a></li>
+                    
+                        <li><a href="../classes/Dialog.html">Dialog</a></li>
+                    
+                        <li><a href="../classes/Tabs.html">Tabs</a></li>
+                    
+                        <li><a href="../classes/Toggle.html">Toggle</a></li>
+                    
+                        <li><a href="../classes/Validate.html">Validate</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/Persgroep.html">Persgroep</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\modules\dialog.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	Modals you say? Lightboxes? What&#x27;s in a name. This thing uses
+ *	the WAI ARIA specced items to create modals
+ * 
+ *
+ *	@class Dialog
+ *	@constructor
+ *	@requires Toggle
+ *
+ *
+ *	@property {Bonzo} trigger The dom element item that needs to have tab functionality
+ *	@property {boolean} [overlay] does the modal has an overlay, default true
+ *	@property {String} [close] the class of the close button, default is none
+ *	@property {object} [position] the x / y coordinates. default is 50 / 50 percent
+ *	@property {function} onShow callback function when the dialog is shown
+ *	@property {function} onHide callback function when the dialog is hidden
+ *
+ *	@example
+ *
+ *		new Dialog({
+ *	trigger: $(&#x27;.modal-trigger&#x27;),
+ *	closer: &#x27;.close&#x27;
+ *	});
+ *
+ *
+ */
+function Dialog(args){
+
+	var _this = this;
+
+	_this.defaults = {
+			trigger: (args.trigger ? args.trigger : null),
+			overlay: (args.overlay === false ? args.overlay : true),
+			closer: (args.close ? args.close : false),
+			position: (args.position ? args.position : {x: &#x27;50%&#x27;, y: &#x27;50%&#x27;}),
+			onShow: (args.onShow ? args.onShow : $.noop),
+			onHide: (args.onHide ? args.onHide : $.noop),
+		};
+
+	// console.log(&#x27;we have to create a dialog&#x27;);
+
+	// create toggle modules without global close
+	$(_this.defaults.trigger).each(function(){
+		// if we have a panel create a toggle
+		var trigger = $(this),
+			id = trigger.attr(&#x27;data-trigger&#x27;),
+			modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
+		if (id &amp;&amp; modal.length){
+			trigger.data(&#x27;toggle&#x27;,
+				new Toggle({
+					trigger: this,
+					toggle: modal,
+					globalClose: false,
+					onShow: function(){
+						_this.show(trigger, modal);
+					},
+					onHide: function(){
+						_this.hide(trigger, modal);
+					}
+				})
+			);
+			if (_this.defaults.closer){
+				$(_this.defaults.closer, modal).on(&#x27;click.dialog.close&#x27;, function(){
+					var tgl = $(_this.defaults.trigger).data(&#x27;toggle&#x27;);
+					if (tgl){
+						tgl.hide.call(tgl);
+					}
+				});
+			}
+		}
+	});
+
+	return _this;
+
+}
+
+/**
+ *
+ *	@method show
+ *	@for Dialog
+ *
+ *	@description
+ *	calls the show callback function
+ *
+ *	@example
+ *
+ *		var obj = new Dialog({
+ *	trigger: $(&#x27;.modal-trigger&#x27;),
+ *	closer: &#x27;.close&#x27;
+ *	});
+ *	obj.show();
+ *
+ */
+Dialog.prototype.show = function(trigger, modal){
+
+	App.views.dialog.unshift($(this.defaults.trigger).data(&#x27;toggle&#x27;));
+
+	this.defaults.onShow.call(this, {
+		overlay: this.defaults.overlay,
+		modal: modal,
+		trigger: trigger,
+		position: this.defaults.position
+	});
+
+};
+
+/**
+ *
+ *	@method hide
+ *	@for Dialog
+ *
+ *	@description
+ *	calls the hide callback function
+ *
+ *	@example
+ *
+ *		var obj = new Dialog({
+ *	trigger: $(&#x27;.modal-trigger&#x27;),
+ *	closer: &#x27;.close&#x27;
+ *	});
+ *	obj.hide();
+ *
+ */
+Dialog.prototype.hide = function(trigger, modal){
+
+	if (App.views.dialog.length){
+		App.views.dialog.shift();
+	}
+
+	this.defaults.onHide.call(this, {
+		overlay: this.defaults.overlay,
+		modal: modal,
+		trigger: trigger,
+		position: this.defaults.position
+	});
+
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

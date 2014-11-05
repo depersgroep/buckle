@@ -1,4 +1,47 @@
 'use strict';
+/**
+ *
+ *	Sometimes stuff has to cycle. Carousels, slideshows, etc...
+ *	Look no further 'cause this piece of code will do it all
+ * 
+ *
+ *	@class Cycle
+ *	@constructor
+ *
+ *	@property {Bonzo} cycle The dom element containing the items
+ *	@property {Bonzo} [container] The container if left / right positioning is needed
+ *  @property {Integer} [containerwidth] Width of the container
+ *	@property {Integer} [slidesLimit] Limit of slides
+ *	@property {Integer} [initialSlide] default 0 is used but if another slide is the current one
+ *	@property {Integer} [step] how many slides should be changed at once
+ *	@property {Integer} [slideWidth] The width of 1 slide (for equal cycle items)
+ *	@property {Bonzo} [navigation] do we need navigation? Pass array with next / previous /play / pause html objects
+ *	@property {Bonzo} [number] do we need numbers? If so pass an array with the number html objects
+ *	@property {Bonzo} [bullets] do we need bullets? If so pass an array with the bullets html objects
+ *	@property {Boolean} [autoplay] if it should move to the next slide automaticly
+ *	@property {Integer} [timer] time between slides on autoplay
+ *	@property {Boolean} [loop] continuous loop 1 - 2 - 3 -4 -1 -2 -3 -4 - 1 ...
+ *	@property {String} [animation] can be whatever you need in your callback. fade, slide, etc..
+ *	@property {function} onSlideChange callback function when the toggle is active
+ *
+ *	@example
+ *
+ *		var slideshow = $(obj).data('cycle',
+ *			new Cycle({
+ *				cycle: $(obj),
+ *				container: container,
+ *				slides: items,
+ *				navigation: (nav.length ? nav : false),
+ *				bullets: (bullets.length ? bullets : false),
+ *				loop: true,
+ *				animation: animation,
+ *				autoplay: autoplay,
+ *				timer: timer,
+ *				onSlideChange: function(args){ // callback function; }
+ *			})
+ *		);
+ *
+ */
 function Cycle(args) {
 
 	var _this = this;
@@ -127,7 +170,22 @@ function Cycle(args) {
 
 }
 
-// function to show the slide
+/**
+ *
+ *	@method show
+ *	@for Cycle
+ *
+ *	@description
+ *	Show a specific slide
+ *
+ *	@param {Integer} slidenumber the index of the slide to show
+ *	@param {String} [direction] the direction (left / right) to slide if animated
+ *
+ *	@example
+ *
+ *		slideshow.show(slideNumber, 'left');
+ *
+ */
 Cycle.prototype.show = function(slideNumber, direction) {
 
 	var showSlide = false,
@@ -180,7 +238,19 @@ Cycle.prototype.show = function(slideNumber, direction) {
 
 };
 
-// shorthand to show the next slide
+/**
+ *
+ *	@method showNext
+ *	@for Cycle
+ *
+ *	@description
+ *	Shorthand to show the next slide
+ *
+ *	@example
+ *
+ *		slideshow.showNext();
+ *
+ */
 Cycle.prototype.showNext = function(isAutoplay) {
 
 	var newPosition = 0;
@@ -199,7 +269,19 @@ Cycle.prototype.showNext = function(isAutoplay) {
 
 };
 
-// shorthand to show the previous slide
+/**
+ *
+ *	@method showPrevious
+ *	@for Cycle
+ *
+ *	@description
+ *	Shorthand to show the previous slide
+ *
+ *	@example
+ *
+ *		slideshow.showPrevious();
+ *
+ */
 Cycle.prototype.showPrevious = function(isAutoplay) {
 
 	var newPosition = 0;
@@ -215,6 +297,19 @@ Cycle.prototype.showPrevious = function(isAutoplay) {
 
 };
 
+/**
+ *
+ *	@method startAutoplay
+ *	@for Cycle
+ *
+ *	@description
+ *	start the autoplay
+ *
+ *	@example
+ *
+ *		slideshow.startAutoplay();
+ *
+ */
 Cycle.prototype.startAutoplay = function(timer) {
 
 	var that = this;
@@ -234,6 +329,19 @@ Cycle.prototype.startAutoplay = function(timer) {
 
 };
 
+/**
+ *
+ *	@method stopAutoplay
+ *	@for Cycle
+ *
+ *	@description
+ *	stop the autoplay
+ *
+ *	@example
+ *
+ *		slideshow.stopAutoplay();
+ *
+ */
 Cycle.prototype.stopAutoplay = function(isAutoplay) {
 	this.isPlaying = false;
 	if (!isAutoplay && this.defaults.settings.autoplay && this.defaults.settings._interval) {

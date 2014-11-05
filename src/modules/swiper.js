@@ -1,4 +1,5 @@
 'use strict';
+
  /*jshint unused:false*/
 function Swiper(options) {
 	var config = {

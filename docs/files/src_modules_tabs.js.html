@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\modules\tabs.js - De Persgroep Publishing</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="De Persgroep Publishing" src="../assets/css/logo.png" style="max-height: 65%;" title="De Persgroep Publishing">
+        
+            De Persgroep Publishing
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/$", "classes/Cycle", "classes/Dialog", "classes/Tabs", "classes/Toggle", "classes/Validate", "modules/Persgroep"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/$.html">$</a></li>
+                    
+                        <li><a href="../classes/Cycle.html">Cycle</a></li>
+                    
+                        <li><a href="../classes/Dialog.html">Dialog</a></li>
+                    
+                        <li><a href="../classes/Tabs.html">Tabs</a></li>
+                    
+                        <li><a href="../classes/Toggle.html">Toggle</a></li>
+                    
+                        <li><a href="../classes/Validate.html">Validate</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/Persgroep.html">Persgroep</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\modules\tabs.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	Our tabs module is used to have multiple toggle items as 
+ *	tabbed behaviour items
+ * 
+ *
+ *	@class Tabs
+ *	@constructor
+ *	@requires Toggle
+ *
+ *	@property {Bonzo} tabs The dom element item that needs to have tab functionality
+ *	@property {event} [mouseEvent] default &#x27;click&#x27;, can be changed to hover
+ *	@property {function} [onTabChange] callback function when the tab is changed
+ *	@property {boolean} [noPreventDefault] cancel the default action on the trigger, default false
+ *
+ *	@example
+ *
+ *		new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *
+ *
+ */
+function Tabs(args){
+
+	if (args){
+		var _this = this;
+
+		this.defaults = {
+				tabs: (args.tabs ? args.tabs : null),
+				mouseEvent: (args.mouseEvent ? args.mouseEvent : &#x27;click&#x27;),
+				onTabChange: (args.onTabChange ? args.onTabChange : function(){}),
+				noPreventDefault: (args.noPreventDefault ? args.noPreventDefault : false)
+			};
+
+		// create toggle modules without global close
+		$(this.defaults.tabs).each(function(){
+			// if we have a panel create a toggle
+			var tab = $(this),
+				id = tab.attr(&#x27;aria-controls&#x27;);
+			if (id){
+				tab.data(&#x27;toggle&#x27;,
+					new Toggle({
+						trigger: tab,
+						toggle: $(&#x27;#&#x27; + id),
+						mouseEvent: _this.defaults.mouseEvent,
+						globalClose: false,
+						toggleClick: false,
+						onShow: function(){
+							_this.show(tab);
+						},
+						noPreventDefault: _this.defaults.noPreventDefault
+					})
+				);
+			}
+		});
+	}
+
+	return this;
+
+}
+
+/**
+ *
+ *	@method show
+ *	@for Tabs
+ *
+ *	@description
+ *	calls the show callback function
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *	obj.show();
+ *
+ */
+Tabs.prototype.show = function(tab){
+
+	if (tab &amp;&amp; this.defaults){
+		var _this = this;
+
+		// loop throug the tabs that are not the active one and hide them
+		$(this.defaults.tabs).each(function(){
+			_this.hide($(this));
+		});
+
+		Arbiter.publish(&#x27;/tabs/show&#x27;, {
+			tab: tab,
+			pane: $(&#x27;#&#x27; + tab.attr(&#x27;aria-controls&#x27;))
+		});
+
+		_this.defaults.onTabChange.call(_this);
+	}
+
+	return this;
+
+};
+
+/**
+ *
+ *	@method hide
+ *	@for Tabs
+ *
+ *	@description
+ *	calls the hide callback function
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *	obj.hide();
+ *
+ */
+Tabs.prototype.hide = function(tab){
+
+	if (tab &amp;&amp; this.defaults){
+		// hide the tab
+		tab.data(&#x27;toggle&#x27;).hide();
+
+		Arbiter.publish(&#x27;/tabs/hide&#x27;, {
+			tab: tab,
+			pane: $(&#x27;#&#x27; + tab.attr(&#x27;aria-controls&#x27;))
+		});
+	}
+
+	return this;
+
+};
+
+/**
+ *
+ *	@method destroy
+ *	@for Tabs
+ *
+ *	@description
+ *	destroys the tabs instance
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args){ // do stuff; },
+ *	});
+ *	obj.destroy();
+ *
+ */
+Tabs.prototype.destroy = function(){
+
+	if (this.defaults){
+		$(this.defaults.tabs).each(function(){
+			// if we have a panel create a toggle
+			var tab = $(this);
+			if (tab.data(&#x27;toggle&#x27;)){
+				tab.data(&#x27;toggle&#x27;).destroy();
+				tab.data(&#x27;toggle&#x27;, &#x27;&#x27;);
+			}
+		});
+	}
+
+	return this;
+
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

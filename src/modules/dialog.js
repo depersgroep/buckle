@@ -1,4 +1,31 @@
 'use strict';
+/**
+ *
+ *	Modals you say? Lightboxes? What's in a name. This thing uses
+ *	the WAI ARIA specced items to create modals
+ * 
+ *
+ *	@class Dialog
+ *	@constructor
+ *	@requires Toggle
+ *
+ *
+ *	@property {Bonzo} trigger The dom element item that needs to have tab functionality
+ *	@property {boolean} [overlay] does the modal has an overlay, default true
+ *	@property {String} [close] the class of the close button, default is none
+ *	@property {object} [position] the x / y coordinates. default is 50 / 50 percent
+ *	@property {function} onShow callback function when the dialog is shown
+ *	@property {function} onHide callback function when the dialog is hidden
+ *
+ *	@example
+ *
+ *		new Dialog({
+ *	trigger: $('.modal-trigger'),
+ *	closer: '.close'
+ *	});
+ *
+ *
+ */
 function Dialog(args){
 
 	var _this = this;
@@ -49,6 +76,23 @@ function Dialog(args){
 
 }
 
+/**
+ *
+ *	@method show
+ *	@for Dialog
+ *
+ *	@description
+ *	calls the show callback function
+ *
+ *	@example
+ *
+ *		var obj = new Dialog({
+ *	trigger: $('.modal-trigger'),
+ *	closer: '.close'
+ *	});
+ *	obj.show();
+ *
+ */
 Dialog.prototype.show = function(trigger, modal){
 
 	App.views.dialog.unshift($(this.defaults.trigger).data('toggle'));
@@ -62,6 +106,23 @@ Dialog.prototype.show = function(trigger, modal){
 
 };
 
+/**
+ *
+ *	@method hide
+ *	@for Dialog
+ *
+ *	@description
+ *	calls the hide callback function
+ *
+ *	@example
+ *
+ *		var obj = new Dialog({
+ *	trigger: $('.modal-trigger'),
+ *	closer: '.close'
+ *	});
+ *	obj.hide();
+ *
+ */
 Dialog.prototype.hide = function(trigger, modal){
 
 	if (App.views.dialog.length){
