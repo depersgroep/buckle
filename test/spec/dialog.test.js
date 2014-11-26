@@ -97,7 +97,7 @@ describe('Dialog Module', function() {
 	
 				test = new Dialog({
 					trigger: trig,
-					closer: '.close'
+					close: '.close'
 				});
 	
 			});

@@ -147,3 +147,28 @@ Dialog.prototype.hide = function(trigger, modal){
 	return this;
 
 };
+
+Dialog.prototype.destroy = function(){
+
+	var _this = this;
+	if (this.defaults){
+		$(this.defaults.trigger).each(function(){
+			if ($(this).data('toggle')){
+				$(this).data('toggle').destroy();
+				$(this).data('toggle', '');
+			}
+			var trigger = $(this),
+				id = trigger.attr('data-trigger'),
+				modal = $('*[data-modal="' + id + '"]');
+			if (_this.defaults.closer){
+				$(_this.defaults.closer, modal).each(function(){
+					bean.off(this, 'click.dialog');
+				});
+			}
+		});
+
+	}
+
+	return this;
+
+};

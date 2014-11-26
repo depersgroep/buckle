@@ -113,8 +113,64 @@ describe('Toggle Module', function() {
 			});
 			
 		});
+		
+		describe('click action with toggleclick', function(){
+			
+			var test = null,
+				trig = null,
+				togg = null;
+		
+			beforeEach(function(){
+			
+				trig = document.createElement('div');
+				togg = document.createElement('div');
+				test = new Toggle({
+					toggle: togg,
+					trigger: trig
+				});
+			
+			});
+		
+			afterEach(function(){
+				test.destroy();
+			});
+		
+			it('should call the toggle function once when clicking the trigger', function(){
+				spyOn(test, 'toggle');
+				bean.fire(trig, 'click');
+				expect(test.toggle).toHaveBeenCalled();
+				expect(test.toggle.calls.count()).toEqual(1);
+			});
+		
+			it('should call the show function once when clicking the trigger', function(){
+				spyOn(test, 'show');
+				bean.fire(trig, 'click');
+				expect(test.show).toHaveBeenCalled();
+				expect(test.show.calls.count()).toEqual(1);
+			});
+		
+			it('should update the state to true when clicking the trigger', function(){
+				bean.fire(trig, 'click');
+				expect(test.defaults.state).toBeTruthy();
+			});
+		
+			it('should call the hide function once when clicking the trigger', function(){
+				bean.fire(trig, 'click');
+				spyOn(test, 'hide');
+				bean.fire(trig, 'click');
+				expect(test.hide).toHaveBeenCalled();
+				expect(test.hide.calls.count()).toEqual(1);
+			});
+		
+			it('should update the state to false when clicking the trigger', function(){
+				bean.fire(trig, 'click');
+				bean.fire(trig, 'click');
+				expect(test.defaults.state).toBeFalsy();
+			});
+			
+		});
 
-		describe('click action without toggleclick', function(){
+		describe('click action without noPreventDefault true', function(){
 			
 			var test = null,
 				trig = null,
@@ -127,7 +183,8 @@ describe('Toggle Module', function() {
 				test = new Toggle({
 					toggle: togg,
 					trigger: trig,
-					toggleClick: false
+					toggleClick: false,
+					noPreventDefault: true
 				});
 			
 			});
