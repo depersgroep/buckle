@@ -117,7 +117,7 @@
  *
  *	Sometimes stuff has to cycle. Carousels, slideshows, etc...
  *	Look no further &#x27;cause this piece of code will do it all
- * 
+ *
  *
  *	@class Cycle
  *	@constructor
@@ -141,81 +141,84 @@
  *	@example
  *
  *		var slideshow = $(obj).data(&#x27;cycle&#x27;,
- *			new Cycle({
- *				cycle: $(obj),
- *				container: container,
- *				slides: items,
- *				navigation: (nav.length ? nav : false),
- *				bullets: (bullets.length ? bullets : false),
- *				loop: true,
- *				animation: animation,
- *				autoplay: autoplay,
- *				timer: timer,
- *				onSlideChange: function(args){ // callback function; }
- *			})
- *		);
+ *		new Cycle({
+ *			cycle: $(obj),
+ *			container: container,
+ *			slides: items,
+ *			navigation: (nav.length ? nav : false),
+ *			bullets: (bullets.length ? bullets : false),
+ *			loop: true,
+ *			animation: animation,
+ *			autoplay: autoplay,
+ *			timer: timer,
+ *			onSlideChange: function(args){
+ * 				// callback function
+ *			}
+ *		})
+ *	);
  *
  */
 function Cycle(args) {
 
 	var _this = this;
-
-	_this.defaults = {
-		cycle: (args.cycle ? args.cycle : null),
-		container: (args.container ? args.container : null),
-		containerwidth: (args.containerwidth ? args.containerwidth : false),
-		slides: {
-			collection: (args.slides ? args.slides : null),
-			min: 0,
-			max: args.slidesLimit ? args.slidesLimit : (args.slides ? args.slides.length : 0),
-			cur: args.initialSlide ? args.initialSlide : 0,
-			step: args.step ? args.step : 1,
-			slideWidth: args.slideWidth ? args.slideWidth : 0
-		},
-		callback: {
-			onSlideChange: (args.onSlideChange ? args.onSlideChange : function(){})
-		},
-		settings: {
-			/*
-					do we need navigation? Pass array with next / previous /
-					play / pause html objects */
-			nav: (args.navigation ? args.navigation : false),
-			/*
-					do we need numbers? If so pass an array with the number
-					html objects
-				*/
-			numbers: (args.numbers ? args.numbers : false),
-			/*
-					do we need bullets? If so pass an array with the bullets
-					html objects
-				*/
-			bullets: (args.bullets ? args.bullets : false),
-			/*
-					if it should move to the next slide automaticly
-				*/
-			autoplay: (args.autoplay ? args.autoplay : false),
-			/*
-					time between slides on autoplay
-				*/
-			timer: (args.timer ? args.timer : 3000),
-			/*
-					continuous loop 1 - 2 - 3 -4 -1 -2 -3 -4 - 1 ...
-				*/
-			infinite: (args.loop ? args.loop : false),
-			/*
-					animation can be false, slide or fade
-				*/
-			animation: (args.animation ? args.animation : false),
-			/*
-					reference for the window.setInterval
-				*/
-			_interval: null,
-			/*
-					loop can be true or false
-				*/
-			loop: (args.loop ? args.loop : false)
-		}
-	};
+	if (args){
+		_this.defaults = {
+			cycle: (args.cycle ? args.cycle : null),
+			container: (args.container ? args.container : null),
+			containerwidth: (args.containerwidth ? args.containerwidth : false),
+			slides: {
+				collection: (args.slides ? args.slides : null),
+				min: 0,
+				max: args.slidesLimit ? args.slidesLimit : (args.slides ? args.slides.length : 0),
+				cur: args.initialSlide ? args.initialSlide : 0,
+				step: args.step ? args.step : 1,
+				slideWidth: args.slideWidth ? args.slideWidth : 0
+			},
+			callback: {
+				onSlideChange: (args.onSlideChange ? args.onSlideChange : function(){})
+			},
+			settings: {
+				/*
+						do we need navigation? Pass array with next / previous /
+						play / pause html objects */
+				nav: (args.navigation ? args.navigation : false),
+				/*
+						do we need numbers? If so pass an array with the number
+						html objects
+					*/
+				numbers: (args.numbers ? args.numbers : false),
+				/*
+						do we need bullets? If so pass an array with the bullets
+						html objects
+					*/
+				bullets: (args.bullets ? args.bullets : false),
+				/*
+						if it should move to the next slide automaticly
+					*/
+				autoplay: (args.autoplay ? args.autoplay : false),
+				/*
+						time between slides on autoplay
+					*/
+				timer: (args.timer ? args.timer : 3000),
+				/*
+						continuous loop 1 - 2 - 3 -4 -1 -2 -3 -4 - 1 ...
+					*/
+				infinite: (args.loop ? args.loop : false),
+				/*
+						animation can be false, slide or fade
+					*/
+				animation: (args.animation ? args.animation : false),
+				/*
+						reference for the window.setInterval
+					*/
+				_interval: null,
+				/*
+						loop can be true or false
+					*/
+				loop: (args.loop ? args.loop : false)
+			}
+		};
+	}
 
 	function setupCycle() {
 
@@ -275,7 +278,7 @@ function Cycle(args) {
 	}
 
 	// if we have a cycle object and there are slides
-	if (_this.defaults.cycle &amp;&amp; _this.defaults.slides.max) {
+	if (_this.defaults &amp;&amp; _this.defaults.cycle &amp;&amp; _this.defaults.slides.max) {
 		// setup Cycle options / events
 		setupCycle();
 	}
@@ -302,49 +305,52 @@ function Cycle(args) {
  */
 Cycle.prototype.show = function(slideNumber, direction) {
 
-	var showSlide = false,
-		animDirection = (direction ? direction : false);
 
-	// calculate if the number is possible
-	if (slideNumber !== &#x27;&#x27;) {
-		if (slideNumber &gt;= 0 &amp;&amp; slideNumber &lt; this.defaults.slides.max) {
-			showSlide = true;
-		} else if (slideNumber &lt; 0) {
-			if (this.defaults.settings.infinite) {
+	if (this.defaults){
+		var showSlide = false,
+			animDirection = (direction ? direction : false);
+
+		// calculate if the number is possible
+		if (slideNumber !== &#x27;&#x27;) {
+			if (slideNumber &gt;= 0 &amp;&amp; slideNumber &lt; this.defaults.slides.max) {
 				showSlide = true;
-				slideNumber = this.defaults.slides.max - this.defaults.slides.step;
-			}
-		} else if (slideNumber &gt;= this.defaults.slides.max) {
-			if (this.defaults.settings.infinite) {
-				showSlide = true;
-				slideNumber = 0;
-			}
-		}
-		if (showSlide) {
-			// if the direction is not passed AND we have a slide animation AND the loop isn&#x27;t infinite
-			if (!animDirection &amp;&amp; this.defaults.settings.animation === &#x27;slide&#x27;) {
-				animDirection = &#x27;left&#x27;;
-				if (slideNumber &lt; this.defaults.slides.cur) {
-					animDirection = &#x27;right&#x27;;
+			} else if (slideNumber &lt; 0) {
+				if (this.defaults.settings.infinite) {
+					showSlide = true;
+					slideNumber = this.defaults.slides.max - this.defaults.slides.step;
+				}
+			} else if (slideNumber &gt;= this.defaults.slides.max) {
+				if (this.defaults.settings.infinite) {
+					showSlide = true;
+					slideNumber = 0;
 				}
 			}
-			this.defaults.slides.cur = slideNumber;
-			// call the callback function
-			var args = {
-				container: this.defaults.container,
-				containerwidth: this.defaults.containerwidth,
-				slides: this.defaults.slides.collection,
-				slideWidth: this.defaults.slides.slideWidth,
-				slideNumber: this.defaults.slides.cur,
-				slideMax: this.defaults.slides.max,
-				slideStep: this.defaults.slides.step,
-				animation: this.defaults.settings.animation,
-				direction: animDirection,
-				bullets: this.defaults.settings.bullets,
-				infinite: this.defaults.settings.infinite,
-				navigation: this.defaults.settings.nav
-			};
-			this.defaults.callback.onSlideChange.call(this, args);
+			if (showSlide) {
+				// if the direction is not passed AND we have a slide animation AND the loop isn&#x27;t infinite
+				if (!animDirection &amp;&amp; this.defaults.settings.animation === &#x27;slide&#x27;) {
+					animDirection = &#x27;left&#x27;;
+					if (slideNumber &lt; this.defaults.slides.cur) {
+						animDirection = &#x27;right&#x27;;
+					}
+				}
+				this.defaults.slides.cur = slideNumber;
+				// call the callback function
+				var args = {
+					container: this.defaults.container,
+					containerwidth: this.defaults.containerwidth,
+					slides: this.defaults.slides.collection,
+					slideWidth: this.defaults.slides.slideWidth,
+					slideNumber: this.defaults.slides.cur,
+					slideMax: this.defaults.slides.max,
+					slideStep: this.defaults.slides.step,
+					animation: this.defaults.settings.animation,
+					direction: animDirection,
+					bullets: this.defaults.settings.bullets,
+					infinite: this.defaults.settings.infinite,
+					navigation: this.defaults.settings.nav
+				};
+				this.defaults.callback.onSlideChange.call(this, args);
+			}
 		}
 	}
 
@@ -367,18 +373,19 @@ Cycle.prototype.show = function(slideNumber, direction) {
  */
 Cycle.prototype.showNext = function(isAutoplay) {
 
-	var newPosition = 0;
-	this.stopAutoplay(isAutoplay);
+	if (this.defaults){
+		var newPosition = 0;
+		this.stopAutoplay(isAutoplay);
 
-	if(this.defaults.settings.loop || (
-		this.defaults.slides.cur + this.defaults.slides.step*2 &lt;= this.defaults.slides.max)) {
-		newPosition = this.defaults.slides.cur + this.defaults.slides.step;
-	} else {
-		newPosition = this.defaults.slides.cur + this.defaults.slides.max;
-		newPosition -= (this.defaults.slides.cur + this.defaults.slides.step);
+		if(this.defaults.settings.loop || (
+			this.defaults.slides.cur + this.defaults.slides.step*2 &lt;= this.defaults.slides.max)) {
+			newPosition = this.defaults.slides.cur + this.defaults.slides.step;
+		} else {
+			newPosition = this.defaults.slides.cur + this.defaults.slides.max;
+			newPosition -= (this.defaults.slides.cur + this.defaults.slides.step);
+		}
+		this.show(newPosition, &#x27;left&#x27;);
 	}
-	this.show(newPosition, &#x27;left&#x27;);
-
 	return this;
 
 };
@@ -397,16 +404,16 @@ Cycle.prototype.showNext = function(isAutoplay) {
  *
  */
 Cycle.prototype.showPrevious = function(isAutoplay) {
+	if (this.defaults){
+		var newPosition = 0;
+		this.stopAutoplay(isAutoplay);
 
-	var newPosition = 0;
-	this.stopAutoplay(isAutoplay);
+		if(this.defaults.settings.loop || (this.defaults.slides.cur - this.defaults.slides.step &gt; -1)) {
+			newPosition = this.defaults.slides.cur - this.defaults.slides.step;
+		}
 
-	if(this.defaults.settings.loop || (this.defaults.slides.cur - this.defaults.slides.step &gt; -1)) {
-		newPosition = this.defaults.slides.cur - this.defaults.slides.step;
+		this.show(newPosition, &#x27;right&#x27;);
 	}
-
-	this.show(newPosition, &#x27;right&#x27;);
-
 	return this;
 
 };
@@ -425,21 +432,24 @@ Cycle.prototype.showPrevious = function(isAutoplay) {
  *
  */
 Cycle.prototype.startAutoplay = function(timer) {
+	if (this.defaults){
+		var that = this;
+		this.isPlaying = true;
 
-	var that = this;
-	this.isPlaying = true;
+		//set a default value if needed
+		timer = timer || this.defaults.settings.timer;
+		if(timer &amp;&amp; !this.defaults.settings.autoplay) {
 
-	//set a default value if needed
-	timer = timer || this.defaults.settings.timer;
-	if(timer &amp;&amp; !this.defaults.settings.autoplay) {
+			//if there isn&#x27;t any autoplay going on right now, start one
+			this.defaults.settings.autoplay = true;
+			this.defaults.settings._interval = window.setInterval(function() {
+				that.showNext(true);
+			}, this.defaults.settings.timer);
 
-		//if there isn&#x27;t any autoplay going on right now, start one
-		this.defaults.settings.autoplay = true;
-		this.defaults.settings._interval = window.setInterval(function() {
-			that.showNext(true);
-		}, this.defaults.settings.timer);
-
+		}
 	}
+
+	return this;
 
 };
 
@@ -457,12 +467,21 @@ Cycle.prototype.startAutoplay = function(timer) {
  *
  */
 Cycle.prototype.stopAutoplay = function(isAutoplay) {
-	this.isPlaying = false;
-	if (!isAutoplay &amp;&amp; this.defaults.settings.autoplay &amp;&amp; this.defaults.settings._interval) {
-		var theTimer = this.defaults.settings._interval;
-		window.clearInterval(theTimer);
-		this.defaults.settings.autoplay = false;
+	if (this.defaults){
+		this.isPlaying = false;
+		if (!isAutoplay &amp;&amp; this.defaults.settings.autoplay &amp;&amp; this.defaults.settings._interval) {
+			var theTimer = this.defaults.settings._interval;
+			window.clearInterval(theTimer);
+			this.defaults.settings.autoplay = false;
+		}
 	}
+	return this;
+};
+
+Cycle.prototype.destroy = function(){
+
+	return this;
+
 };
 
     </pre>

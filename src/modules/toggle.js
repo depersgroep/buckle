@@ -3,7 +3,7 @@
  *
  *	Our toggle module is used to toggle stuff (classes, whatever)
  *	Each toggle consists of a trigger and a object to toggle.
- * 
+ *
  *
  *	@class Toggle
  *	@constructor
@@ -24,8 +24,12 @@
  *		new Toggle({
  *		toggle: $('.toggle'),
  *		trigger: $('.trigger'),
- *		onshow: function(args){ // add a class; },
- *		onhide: function(args){ // remove a class}
+ *		onshow: function(args){
+ *			// add a class
+ *		},
+ *		onhide: function(args){
+ *			// remove a class
+ *		}
  *	});
  *
  *

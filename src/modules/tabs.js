@@ -1,9 +1,9 @@
 'use strict';
 /**
  *
- *	Our tabs module is used to have multiple toggle items as 
+ *	Our tabs module is used to have multiple toggle items as
  *	tabbed behaviour items
- * 
+ *
  *
  *	@class Tabs
  *	@constructor
@@ -18,7 +18,9 @@
  *
  *		new Tabs({
  *		tabs: $('.tab-block'),
- *		onTabChange: function(args){ // do stuff; },
+ *		onTabChange: function(args){
+ * 			// do stuff
+ *		}
  *	});
  *
  *

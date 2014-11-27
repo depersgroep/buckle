@@ -1,9 +1,9 @@
 'use strict';
 /**
  *
- *	Validating forms like a boss! On submit it automatically 
- *	validates the form with 
- * 
+ *	Validating forms like a boss! On submit it automatically
+ *	validates the form with
+ *
  *
  *	@class Validate
  *	@constructor
@@ -14,7 +14,7 @@
  *	@example
  *
  *		new Validate({
- *	frm: $('.form-to-validate'),
+ *		frm: $('.form-to-validate'),
  *	});
  *
  *
@@ -141,12 +141,12 @@ Validate.prototype.checkValidation = function(){
 
 /**
  *
- *	@method checkValidation
+ *	@method checkValue
  *	@for Validate
  *
  *	@description
  *	check if an input / textarea value is valid
- *	
+ *
  *	@return {boolean} validation
  *
  *	@example

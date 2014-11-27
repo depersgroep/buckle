@@ -117,7 +117,7 @@
  *
  *	Modals you say? Lightboxes? What&#x27;s in a name. This thing uses
  *	the WAI ARIA specced items to create modals
- * 
+ *
  *
  *	@class Dialog
  *	@constructor
@@ -134,59 +134,61 @@
  *	@example
  *
  *		new Dialog({
- *	trigger: $(&#x27;.modal-trigger&#x27;),
- *	closer: &#x27;.close&#x27;
+ *		trigger: $(&#x27;.modal-trigger&#x27;),
+ *		closer: &#x27;.close&#x27;
  *	});
  *
  *
  */
 function Dialog(args){
 
-	var _this = this;
+	if (args){
+		var _this = this;
 
-	_this.defaults = {
-			trigger: (args.trigger ? args.trigger : null),
-			overlay: (args.overlay === false ? args.overlay : true),
-			closer: (args.close ? args.close : false),
-			position: (args.position ? args.position : {x: &#x27;50%&#x27;, y: &#x27;50%&#x27;}),
-			onShow: (args.onShow ? args.onShow : $.noop),
-			onHide: (args.onHide ? args.onHide : $.noop),
-		};
+		_this.defaults = {
+				trigger: (args.trigger ? args.trigger : null),
+				overlay: (args.overlay === false ? args.overlay : true),
+				closer: (args.close ? args.close : false),
+				position: (args.position ? args.position : {x: &#x27;50%&#x27;, y: &#x27;50%&#x27;}),
+				onShow: (args.onShow ? args.onShow : function(){}),
+				onHide: (args.onHide ? args.onHide : function(){}),
+			};
 
-	// console.log(&#x27;we have to create a dialog&#x27;);
+		// console.log(&#x27;we have to create a dialog&#x27;);
 
-	// create toggle modules without global close
-	$(_this.defaults.trigger).each(function(){
-		// if we have a panel create a toggle
-		var trigger = $(this),
-			id = trigger.attr(&#x27;data-trigger&#x27;),
-			modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
-		if (id &amp;&amp; modal.length){
-			trigger.data(&#x27;toggle&#x27;,
-				new Toggle({
-					trigger: this,
-					toggle: modal,
-					globalClose: false,
-					onShow: function(){
-						_this.show(trigger, modal);
-					},
-					onHide: function(){
-						_this.hide(trigger, modal);
-					}
-				})
-			);
-			if (_this.defaults.closer){
-				$(_this.defaults.closer, modal).on(&#x27;click.dialog.close&#x27;, function(){
-					var tgl = $(_this.defaults.trigger).data(&#x27;toggle&#x27;);
-					if (tgl){
-						tgl.hide.call(tgl);
-					}
-				});
+		// create toggle modules without global close
+		$(_this.defaults.trigger).each(function(){
+			// if we have a panel create a toggle
+			var trigger = $(this),
+				id = trigger.attr(&#x27;data-trigger&#x27;),
+				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
+			if (id &amp;&amp; modal.length){
+				trigger.data(&#x27;toggle&#x27;,
+					new Toggle({
+						trigger: this,
+						toggle: modal,
+						globalClose: false,
+						onShow: function(){
+							_this.show(trigger, modal);
+						},
+						onHide: function(){
+							_this.hide(trigger, modal);
+						}
+					})
+				);
+				if (_this.defaults.closer){
+					$(_this.defaults.closer, modal).on(&#x27;click.dialog.close&#x27;, function(){
+						var tgl = $(_this.defaults.trigger).data(&#x27;toggle&#x27;);
+						if (tgl){
+							tgl.hide.call(tgl);
+						}
+					});
+				}
 			}
-		}
-	});
+		});
+	}
 
-	return _this;
+	return this;
 
 }
 
@@ -209,14 +211,18 @@ function Dialog(args){
  */
 Dialog.prototype.show = function(trigger, modal){
 
-	App.views.dialog.unshift($(this.defaults.trigger).data(&#x27;toggle&#x27;));
+	if (this.defaults &amp;&amp; trigger &amp;&amp; modal){
+		App.views.dialog.unshift($(this.defaults.trigger).data(&#x27;toggle&#x27;));
 
-	this.defaults.onShow.call(this, {
-		overlay: this.defaults.overlay,
-		modal: modal,
-		trigger: trigger,
-		position: this.defaults.position
-	});
+		this.defaults.onShow.call(this, {
+			overlay: this.defaults.overlay,
+			modal: modal,
+			trigger: trigger,
+			position: this.defaults.position
+		});
+	}
+
+	return this;
 
 };
 
@@ -239,16 +245,45 @@ Dialog.prototype.show = function(trigger, modal){
  */
 Dialog.prototype.hide = function(trigger, modal){
 
-	if (App.views.dialog.length){
-		App.views.dialog.shift();
+	if (this.defaults){
+		if (App.views.dialog.length){
+			App.views.dialog.shift();
+		}
+
+		this.defaults.onHide.call(this, {
+			overlay: this.defaults.overlay,
+			modal: modal,
+			trigger: trigger,
+			position: this.defaults.position
+		});
 	}
 
-	this.defaults.onHide.call(this, {
-		overlay: this.defaults.overlay,
-		modal: modal,
-		trigger: trigger,
-		position: this.defaults.position
-	});
+	return this;
+
+};
+
+Dialog.prototype.destroy = function(){
+
+	var _this = this;
+	if (this.defaults){
+		$(this.defaults.trigger).each(function(){
+			if ($(this).data(&#x27;toggle&#x27;)){
+				$(this).data(&#x27;toggle&#x27;).destroy();
+				$(this).data(&#x27;toggle&#x27;, &#x27;&#x27;);
+			}
+			var trigger = $(this),
+				id = trigger.attr(&#x27;data-trigger&#x27;),
+				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
+			if (_this.defaults.closer){
+				$(_this.defaults.closer, modal).each(function(){
+					bean.off(this, &#x27;click.dialog&#x27;);
+				});
+			}
+		});
+
+	}
+
+	return this;
 
 };
 

@@ -111,7 +111,7 @@
             "itemtype": "property",
             "type": "Bonzo",
             "example": [
-                "\n\tvar slideshow = $(obj).data('cycle',\n\t\t\tnew Cycle({\n\t\t\t\tcycle: $(obj),\n\t\t\t\tcontainer: container,\n\t\t\t\tslides: items,\n\t\t\t\tnavigation: (nav.length ? nav : false),\n\t\t\t\tbullets: (bullets.length ? bullets : false),\n\t\t\t\tloop: true,\n\t\t\t\tanimation: animation,\n\t\t\t\tautoplay: autoplay,\n\t\t\t\ttimer: timer,\n\t\t\t\tonSlideChange: function(args){ // callback function; }\n\t\t\t})\n\t\t);\n"
+                "\n\tvar slideshow = $(obj).data('cycle',\n\t\tnew Cycle({\n\t\t\tcycle: $(obj),\n\t\t\tcontainer: container,\n\t\t\tslides: items,\n\t\t\tnavigation: (nav.length ? nav : false),\n\t\t\tbullets: (bullets.length ? bullets : false),\n\t\t\tloop: true,\n\t\t\tanimation: animation,\n\t\t\tautoplay: autoplay,\n\t\t\ttimer: timer,\n\t\t\tonSlideChange: function(args){\n \t\t\t\t// callback function\n\t\t\t}\n\t\t})\n\t);\n"
             ]
         },
         "Dialog": {
@@ -133,7 +133,7 @@
             "itemtype": "property",
             "type": "Bonzo",
             "example": [
-                "\n\tnew Dialog({\n\ttrigger: $('.modal-trigger'),\n\tcloser: '.close'\n\t});\n\n"
+                "\n\tnew Dialog({\n\t\ttrigger: $('.modal-trigger'),\n\t\tcloser: '.close'\n\t});\n\n"
             ]
         },
         "Tabs": {
@@ -147,7 +147,7 @@
             "module": "Persgroep",
             "file": "src\\modules\\tabs.js",
             "line": 2,
-            "description": "Our tabs module is used to have multiple toggle items as \n\ttabbed behaviour items",
+            "description": "Our tabs module is used to have multiple toggle items as\n\ttabbed behaviour items",
             "is_constructor": 1,
             "requires": [
                 "Toggle"
@@ -155,7 +155,7 @@
             "itemtype": "property",
             "type": "Bonzo",
             "example": [
-                "\n\tnew Tabs({\n\t\ttabs: $('.tab-block'),\n\t\tonTabChange: function(args){ // do stuff; },\n\t});\n\n"
+                "\n\tnew Tabs({\n\t\ttabs: $('.tab-block'),\n\t\tonTabChange: function(args){\n \t\t\t// do stuff\n\t\t}\n\t});\n\n"
             ]
         },
         "Toggle": {
@@ -174,7 +174,7 @@
             "itemtype": "property",
             "type": "Bonzo",
             "example": [
-                "\n\tnew Toggle({\n\t\ttoggle: $('.toggle'),\n\t\ttrigger: $('.trigger'),\n\t\tonshow: function(args){ // add a class; },\n\t\tonhide: function(args){ // remove a class}\n\t});\n\n"
+                "\n\tnew Toggle({\n\t\ttoggle: $('.toggle'),\n\t\ttrigger: $('.trigger'),\n\t\tonshow: function(args){\n\t\t\t// add a class\n\t\t},\n\t\tonhide: function(args){\n\t\t\t// remove a class\n\t\t}\n\t});\n\n"
             ]
         },
         "Validate": {
@@ -188,12 +188,12 @@
             "module": "Persgroep",
             "file": "src\\modules\\validate.js",
             "line": 2,
-            "description": "Validating forms like a boss! On submit it automatically \n\tvalidates the form with",
+            "description": "Validating forms like a boss! On submit it automatically\n\tvalidates the form with",
             "is_constructor": 1,
             "itemtype": "property",
             "type": "Bonzo",
             "example": [
-                "\n\tnew Validate({\n\tfrm: $('.form-to-validate'),\n\t});\n\n"
+                "\n\tnew Validate({\n\t\tfrm: $('.form-to-validate'),\n\t});\n\n"
             ]
         },
         "$": {
@@ -211,7 +211,7 @@
     "classitems": [
         {
             "file": "src\\modules\\cycle.js",
-            "line": 173,
+            "line": 176,
             "itemtype": "method",
             "name": "show",
             "description": "Show a specific slide",
@@ -235,7 +235,7 @@
         },
         {
             "file": "src\\modules\\cycle.js",
-            "line": 241,
+            "line": 247,
             "itemtype": "method",
             "name": "showNext",
             "description": "Shorthand to show the next slide",
@@ -246,7 +246,7 @@
         },
         {
             "file": "src\\modules\\cycle.js",
-            "line": 272,
+            "line": 279,
             "itemtype": "method",
             "name": "showPrevious",
             "description": "Shorthand to show the previous slide",
@@ -257,7 +257,7 @@
         },
         {
             "file": "src\\modules\\cycle.js",
-            "line": 300,
+            "line": 307,
             "itemtype": "method",
             "name": "startAutoplay",
             "description": "start the autoplay",
@@ -268,7 +268,7 @@
         },
         {
             "file": "src\\modules\\cycle.js",
-            "line": 332,
+            "line": 342,
             "itemtype": "method",
             "name": "stopAutoplay",
             "description": "stop the autoplay",
@@ -279,7 +279,7 @@
         },
         {
             "file": "src\\modules\\dialog.js",
-            "line": 79,
+            "line": 81,
             "itemtype": "method",
             "name": "show",
             "description": "calls the show callback function",
@@ -290,7 +290,7 @@
         },
         {
             "file": "src\\modules\\dialog.js",
-            "line": 109,
+            "line": 115,
             "itemtype": "method",
             "name": "hide",
             "description": "calls the hide callback function",
@@ -301,7 +301,7 @@
         },
         {
             "file": "src\\modules\\tabs.js",
-            "line": 65,
+            "line": 67,
             "itemtype": "method",
             "name": "show",
             "description": "calls the show callback function",
@@ -312,7 +312,7 @@
         },
         {
             "file": "src\\modules\\tabs.js",
-            "line": 104,
+            "line": 106,
             "itemtype": "method",
             "name": "hide",
             "description": "calls the hide callback function",
@@ -323,7 +323,7 @@
         },
         {
             "file": "src\\modules\\tabs.js",
-            "line": 137,
+            "line": 139,
             "itemtype": "method",
             "name": "destroy",
             "description": "destroys the tabs instance",
@@ -334,7 +334,7 @@
         },
         {
             "file": "src\\modules\\toggle.js",
-            "line": 76,
+            "line": 80,
             "itemtype": "method",
             "name": "toggle",
             "description": "fires the show or hide function",
@@ -345,7 +345,7 @@
         },
         {
             "file": "src\\modules\\toggle.js",
-            "line": 114,
+            "line": 118,
             "itemtype": "method",
             "name": "show",
             "description": "calls the show callback function",
@@ -356,7 +356,7 @@
         },
         {
             "file": "src\\modules\\toggle.js",
-            "line": 165,
+            "line": 169,
             "itemtype": "method",
             "name": "hide",
             "description": "calls the hide callback function",
@@ -367,7 +367,7 @@
         },
         {
             "file": "src\\modules\\toggle.js",
-            "line": 204,
+            "line": 208,
             "itemtype": "method",
             "name": "destroy",
             "description": "destroys the toggle instance",
@@ -391,7 +391,7 @@
             "file": "src\\modules\\validate.js",
             "line": 142,
             "itemtype": "method",
-            "name": "checkValidation",
+            "name": "checkValue",
             "description": "check if an input / textarea value is valid",
             "return": {
                 "description": "validation",

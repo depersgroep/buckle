@@ -3,7 +3,7 @@
  *
  *	Sometimes stuff has to cycle. Carousels, slideshows, etc...
  *	Look no further 'cause this piece of code will do it all
- * 
+ *
  *
  *	@class Cycle
  *	@constructor
@@ -27,19 +27,21 @@
  *	@example
  *
  *		var slideshow = $(obj).data('cycle',
- *			new Cycle({
- *				cycle: $(obj),
- *				container: container,
- *				slides: items,
- *				navigation: (nav.length ? nav : false),
- *				bullets: (bullets.length ? bullets : false),
- *				loop: true,
- *				animation: animation,
- *				autoplay: autoplay,
- *				timer: timer,
- *				onSlideChange: function(args){ // callback function; }
- *			})
- *		);
+ *		new Cycle({
+ *			cycle: $(obj),
+ *			container: container,
+ *			slides: items,
+ *			navigation: (nav.length ? nav : false),
+ *			bullets: (bullets.length ? bullets : false),
+ *			loop: true,
+ *			animation: animation,
+ *			autoplay: autoplay,
+ *			timer: timer,
+ *			onSlideChange: function(args){
+ * 				// callback function
+ *			}
+ *		})
+ *	);
  *
  */
 function Cycle(args) {
@@ -237,7 +239,7 @@ Cycle.prototype.show = function(slideNumber, direction) {
 			}
 		}
 	}
-	
+
 	return this;
 
 };
@@ -332,7 +334,7 @@ Cycle.prototype.startAutoplay = function(timer) {
 
 		}
 	}
-	
+
 	return this;
 
 };
@@ -363,7 +365,7 @@ Cycle.prototype.stopAutoplay = function(isAutoplay) {
 };
 
 Cycle.prototype.destroy = function(){
-	
+
 	return this;
-	
+
 };

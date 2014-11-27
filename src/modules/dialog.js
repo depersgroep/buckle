@@ -3,7 +3,7 @@
  *
  *	Modals you say? Lightboxes? What's in a name. This thing uses
  *	the WAI ARIA specced items to create modals
- * 
+ *
  *
  *	@class Dialog
  *	@constructor
@@ -20,8 +20,8 @@
  *	@example
  *
  *		new Dialog({
- *	trigger: $('.modal-trigger'),
- *	closer: '.close'
+ *		trigger: $('.modal-trigger'),
+ *		closer: '.close'
  *	});
  *
  *
@@ -30,7 +30,7 @@ function Dialog(args){
 
 	if (args){
 		var _this = this;
-		
+
 		_this.defaults = {
 				trigger: (args.trigger ? args.trigger : null),
 				overlay: (args.overlay === false ? args.overlay : true),
@@ -41,7 +41,7 @@ function Dialog(args){
 			};
 
 		// console.log('we have to create a dialog');
-		
+
 		// create toggle modules without global close
 		$(_this.defaults.trigger).each(function(){
 			// if we have a panel create a toggle
@@ -96,7 +96,7 @@ function Dialog(args){
  *
  */
 Dialog.prototype.show = function(trigger, modal){
-	
+
 	if (this.defaults && trigger && modal){
 		App.views.dialog.unshift($(this.defaults.trigger).data('toggle'));
 
@@ -107,7 +107,7 @@ Dialog.prototype.show = function(trigger, modal){
 			position: this.defaults.position
 		});
 	}
-	
+
 	return this;
 
 };
@@ -143,7 +143,7 @@ Dialog.prototype.hide = function(trigger, modal){
 			position: this.defaults.position
 		});
 	}
-	
+
 	return this;
 
 };
