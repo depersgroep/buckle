@@ -6,6 +6,7 @@ module.exports = {
 		tasks: [
 			'jshint',
 			'yuidoc',
+			'uglify',
 			'notify:changes'
 		]
 	}
