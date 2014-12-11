@@ -1,3 +1,9 @@
+/**
+*
+*   Dialog
+*
+**/
+
 'use strict';
 
 App.modules.dialog = (function() {
@@ -7,9 +13,12 @@ App.modules.dialog = (function() {
 
     function _init() {
 
-        _createOverlay('overlay');
-
         $('*[data-modal-trigger]').each(function() {
+
+            if ($(this).data('overlay')) {
+
+                _createOverlay('overlay');
+            }
 
             var tid = $(this).attr('data-trigger');
 
@@ -17,6 +26,7 @@ App.modules.dialog = (function() {
 
                 trigger: this,
                 close: '.fjs-close',
+                overlay: $(this).data('overlay'),
                 onShow: _show,
                 onHide: _hide
 
@@ -36,7 +46,12 @@ App.modules.dialog = (function() {
                 args.modal.appendTo(overlayDiv[0]);
             }
         }
+        else {
 
+            $('body').append(args.modal);
+        }
+
+        $(args.modal).addClass('js-is-active');
         $('body').addClass('js-has-dialog');
     }
 
@@ -44,11 +59,19 @@ App.modules.dialog = (function() {
 
         if (App.views.dialog.length <= 1) {
 
-            var overlayDiv = $('#overlay');
+            if (args.overlay) {
+
+                var overlayDiv = $('#overlay');
                 overlayDiv.removeClass('js-is-active');
                 overlayDiv.off('click');
+            }
+            else {
+
+                $(args.modal).removeClass('js-is-active');
+            }
         }
 
+        $(args.modal).removeClass('js-is-active');
         $('body').removeClass('js-has-dialog');
     }
 

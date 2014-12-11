@@ -1,3 +1,9 @@
+/**
+*
+*   Tab
+*
+**/
+
 'use strict';
 
 (function() {
@@ -11,7 +17,8 @@
 
             $(this).data('tabs', new Tabs({
 
-                tabs: $('.fjs-tabs_nav li', $(this))
+                tabs: $('.fjs-tabs_nav li', $(this)),
+                mouseEvent: $(this).data('event')
 
             }));
 

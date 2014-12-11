@@ -1,3 +1,9 @@
+/**
+*
+*   Toggle
+*
+**/
+
 'use strict';
 
 App.modules.toggle = (function() {

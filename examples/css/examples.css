@@ -1,0 +1,240 @@
+/**
+*
+*   Common
+*
+**/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body, div, span, p, h1, h2, h3, a, img, ul, li, header, footer {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	line-height: 1;
+    background: #f2f2f2;
+    font-family: 'Lato', sans-serif;
+}
+
+a {
+    color: #00BFFF;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 1.6em;
+    color: #6B6B6B;
+}
+
+h3 {
+    margin: 20px 0 10px 0;
+    font-size: 1.3em;
+    color: #6B6B6B;
+}
+
+ul {
+	list-style: none;
+}
+
+.container {
+    padding: 10px;
+}
+
+.example {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #d1d1d1;
+    background: #fff;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.error {
+    color: darkred;
+    font-weight: bold;
+}
+
+/**
+*
+*   Example 1
+*
+**/
+
+#overlay.js-is-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+}
+
+#overlay.js-is-active .modal {
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal .modal__wrapper {
+    width: 768px;
+    background: #FFF;
+    margin: 40px auto;
+    padding: 10px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, .5);
+}
+
+.modal .close {
+    float: right;
+}
+
+/**
+*
+*   Example 2
+*
+**/
+
+.tabs_nav:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.tabs_nav li {
+    float: left;
+    border: 1px solid transparent;
+    border-bottom: 0;
+}
+
+.tabs_nav li a {
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 25px;
+}
+
+.tabs_nav li[aria-selected="true"] {
+    border-color: #d1d1d1;
+    background: #f2f2f2;
+}
+
+.tabpanels {
+    margin-top: -1px;
+}
+
+.tabpanel {
+    display: none;
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+}
+
+.tabpanel[aria-expanded="true"] {
+    background: #f2f2f2;
+    display: block;
+}
+
+/**
+*
+*   Example 3
+*
+**/
+
+.cycle {
+    position: relative;
+}
+
+.cycle_clipper {
+    overflow: hidden;
+    position: relative;
+    height: 180px;
+    margin: 0 25px;
+}
+
+.cycle_container {
+    position: absolute;
+    transition: .5s ease-out left;
+}
+
+.cycle_container li {
+    float: left;
+    display: block;
+    width: 360px;
+    padding: 0 5px;
+}
+
+.cycle_nav li {
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+}
+
+.cycle_nav li:hover {
+    cursor: pointer;
+}
+
+.cycle_nav li.next {
+    right: 0;
+}
+
+/**
+*
+*   Example 4
+*
+**/
+
+.bold {
+    font-weight: bold;
+}
+
+/**
+*
+*   Example 5
+*
+**/
+
+.form label {
+    display: block;
+    height: 30px;
+}
+
+form label span {
+    float: left;
+    width: 80px;
+}
+
+form label input {
+    float: left;
+    margin: 0 10px;
+}
+
+.form label .error {
+
+}

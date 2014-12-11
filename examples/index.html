@@ -1,140 +1,70 @@
-
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Examples</title>
+    <title>Web JavaScript Libraries: Examples</title>
     <link href="css/style.css" rel="stylesheet">
-    <script src="../src/3rdparty/bean.js"></script>
-    <script src="../src/3rdparty/qwery.js"></script>
-    <script src="../src/3rdparty/bonzo.js"></script>
-    <script src="../src/3rdparty/arbiter.js"></script>
-    <script src="../src/persgroep.js"></script>
-    <script src="../src/classes/tabs.js"></script>
-    <script src="../src/classes/toggle.js"></script>
-    <script src="../src/classes/cycle.js"></script>
-    <script src="../src/classes/dialog.js"></script>
-    <script src="../src/classes/validate.js"></script>
-    <script src="js/main.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Web JavaScript Libraries: Examples</h1>
-        <div class="example example1">
-            <script src="js/modules/dialog.js"></script>
-            <h2>Example: Dialog</h2>
-            <a href="#" data-trigger="example1-modal" data-modal-trigger="true">
-                <span>Click to open a Dialog</span>
-                <div class="modal" data-modal="example1-modal" role="dialog" aria-hidden="true">
-                    <div class="modal__wrapper">
-                        <a href="#" class="close fjs-close">Close</a>
-                        <h4>Modal Header</h4>
-                        <p>Quisque dapibus dolor ut posuere suscipit. Sed blandit mauris ante, vel mattis dolor sodales eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas auctor molestie eleifend. Vivamus dolor quam, convallis a malesuada sagittis, malesuada vel mauris. Vivamus quis risus finibus, molestie turpis quis, dictum leo. Aenean eget nunc nisi. Morbi venenatis risus purus, sit amet euismod leo feugiat sed. Sed ac tellus mauris. Sed nisi quam, gravida id viverra eu, volutpat ac nisi. Vivamus vitae ullamcorper purus, sed aliquet tortor. Vestibulum laoreet ac neque in aliquam. Cras vitae arcu sit amet purus consectetur iaculis eu nec leo. Ut fringilla facilisis aliquet. Praesent sollicitudin mi sed placerat eleifend. </p>
-                    </div>
-                </div>
-            </a>
-            <h3>Code:</h2>
-            <a href="js/modules/dialog.js">View Javascript</a>
-        </div>
-        <div class="example example2">
-            <script src="js/modules/tab.js"></script>
-            <h2>Example: Tabs</h2>
-            <div class="tabs fjs-tabs">
-                <ul role="tablist" class="tabs_nav fjs-tabs_nav">
-                    <li class="first" aria-labelledby="tab1-tab" aria-controls="tab1" aria-selected="true" role="tab">
-                        <a id="tab1-tab" href="#tab1" data-toggle="tab" role="presentation">Tab 1</a>
+        <header>
+            <h1><a href="index.html">Web JavaScript Libraries</a> | Examples</h1>
+        </header>
+        <div class="main">
+            <div class="example">
+                <ul class="nav">
+                    <li class="title">Dialog</li>
+                    <li>
+                        <a href="dialog.html">Examples</a>
                     </li>
-                    <li aria-labelledby="tab2-tab" aria-controls="tab2" aria-selected="false" role="tab">
-                        <a id="tab2-tab" href="#tab2" role="presentation" data-toggle="tab">Tab 1</a>
+                    <li>
+                        <a href="js/modules/dialog.js">Javascript</a>
                     </li>
-                    <li class="last" aria-labelledby="tab3-tab" aria-controls="tab3" aria-selected="false" role="tab">
-                        <a id="tab3-tab" href="#tab3" role="presentation" data-toggle="tab">Tab 3</a>
+                    <li>
+                        <a href="css/dialog.css">CSS</a>
                     </li>
-                </ul>
-                <div class="tabpanels">
-                    <div class="tabpanel" id="tab1" aria-hidden="false" aria-expanded="true" aria-labelledby="tab1-tab" role="tabpanel">
-                        <p>First Tab</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin nisi turpis, non auctor nisl consectetur non. Nam posuere at lacus non euismod. Suspendisse quis dignissim orci, ut lacinia mauris. Fusce magna est, porttitor eu eros et, rutrum sodales nulla. Praesent feugiat lacus at facilisis lacinia. In pretium placerat viverra. In augue risus, aliquet at scelerisque ac, molestie tristique nibh. Curabitur lobortis iaculis mollis. </p>
-                    </div>
-
-                    <div class="tabpanel" id="tab2" aria-hidden="true" aria-expanded="false" aria-labelledby="tab2-tab" role="tabanel">
-                        <p>Second Tab</p>
-                        <p>Mauris nec fermentum sapien, quis lobortis orci. Nulla cursus, turpis eu accumsan tincidunt, nulla mauris fermentum diam, ut accumsan nisl dolor ac libero. Donec vitae neque risus. Sed dictum libero et venenatis sodales. In ut magna ac sapien finibus sodales eu sit amet justo. Aenean in accumsan mi, non cursus tellus. Proin ultrices auctor purus sed gravida.</p>
-                    </div>
-
-                    <div class="tabpanel" id="tab3" aria-hidden="true" aria-expanded="false" aria-labelledby="tab3-tab" role="tabanel">
-                        <p>Third Tab</p>
-                        <p>Nunc nisl lectus, pulvinar id feugiat id, vestibulum sit amet sapien. Donec venenatis faucibus iaculis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras tempor massa enim, eleifend pellentesque augue tempor sit amet. Morbi a orci pharetra, suscipit odio et, lobortis est. Praesent ac condimentum felis. Aliquam at dolor turpis. Phasellus ullamcorper mauris quis diam rhoncus, et aliquet est commodo. Suspendisse vehicula tellus vel dolor condimentum tristique. Aenean et placerat ipsum. Phasellus lobortis nisl sed diam malesuada, quis aliquet orci consectetur. Sed nibh nibh, laoreet quis faucibus in, volutpat et magna. Nunc bibendum lectus risus, quis lobortis felis pretium sit amet. </p>
-                    </div>
-                </div>
-            </div>
-            <h3>Code:</h2>
-            <a href="js/modules/tab.js">View Javascript</a>
-        </div>
-        <div class="example example3">
-            <script src="js/modules/cycle.js"></script>
-            <h2>Example: Cycle</h2>
-            <div class="cycle fjs-cycle">
-                <div class="cycle_clipper fjs-cycle_clipper">
-                    <ul class="cycle_container fjs-cycle_container">
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?123" alt="">
-                        </li>
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?456" alt="">
-                        </li>
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?789" alt="">
-                        </li>
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?101112" alt="">
-                        </li>
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?121415" alt="">
-                        </li>
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?161718" alt="">
-                        </li>
-                        <li class="fjs-cycle_slide">
-                            <img src="http://lorempixel.com/350/150/?192021" alt="">
-                        </li>
-                    </ul>
-                </div>
-                <ul class="cycle_nav fjs-cycle_nav">
-                    <li class="previous fjs-previous">
-                        <span>&lt;</span>
+                    <li class="title">Tabs</li>
+                    <li>
+                        <a href="tabs.html">Examples</a>
                     </li>
-                    <li class="next fjs-next">
-                        <span>&gt;</span>
+                    <li>
+                        <a href="js/modules/tab.js">Javascript</a>
+                    </li>
+                    <li>
+                        <a href="css/tab.css">CSS</a>
+                    </li>
+                    <li class="title">Cycle</li>
+                    <li>
+                        <a href="cycle.html">Examples</a>
+                    </li>
+                    <li>
+                        <a href="js/modules/cycle.js">Javascript</a>
+                    </li>
+                    <li>
+                        <a href="css/cycle.css">CSS</a>
+                    </li>
+                    <li class="title">Toggle</li>
+                    <li>
+                        <a href="toggle.html">Examples</a>
+                    </li>
+                    <li>
+                        <a href="js/modules/toggle.js">Javascript</a>
+                    </li>
+                    <li>
+                        <a href="css/toggle.css">CSS</a>
+                    </li>
+                    <li class="title">Validate</li>
+                    <li>
+                        <a href="validate.html">Example</a>
+                    </li>
+                    <li>
+                        <a href="js/modules/validate.js">Javascript</a>
+                    </li>
+                    <li>
+                        <a href="css/validate.css">CSS</a>
                     </li>
                 </ul>
             </div>
-            <h3>Code:</h2>
-            <a href="js/modules/cycle.js">View Javascript</a>
-        </div>
-        <div class="example example4">
-            <script src="js/modules/toggle.js"></script>
-            <h2>Example: Toggle</h2>
-            <a href="#" class="fjs-toggle">Click here to toggle normal/bold..</a>
-            <p class="fjs-toggle2">Hover here to toggle normal/bold..</p>
-            <h3>Code:</h2>
-            <a href="js/modules/toggle.js">View Javascript</a>
-        </div>
-        <div class="example example5">
-            <script src="js/modules/validate.js"></script>
-            <h2>Example: Validate</h2>
-            <form class="form fjs-form" action="#" method="post" data-validate="true" novalidate>
-                <label>
-                    <span>Email:</span>
-                    <input type="email" name="field1" placeHolder="Email" data-error="A valid email is required!" required>
-                </label>
-                <label>
-                    <span>Submit:</span>
-                    <input type="submit" name="submit" value="Submit Form">
-                </label>
-            </form>
-            <h3>Code:</h2>
-            <a href="js/modules/validate.js">View Javascript</a>
         </div>
     </div>
 </body>

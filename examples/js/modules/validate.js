@@ -1,3 +1,10 @@
+/**
+*
+*   Validate
+*
+**/
+
+
 'use strict';
 
 App.modules.validate = (function() {
@@ -23,8 +30,6 @@ App.modules.validate = (function() {
 
 					var errors = false;
 					errors = form.checkValidation();
-
-					console.log(errors);
 				});
 			}
 		});

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Web JavaScript Libraries: Tabs</title>
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/tab.css" rel="stylesheet">
+	<script src="../dist/3rdparty/bean.js"></script>
+	<script src="../dist/3rdparty/qwery.js"></script>
+	<script src="../dist/3rdparty/bonzo.js"></script>
+	<script src="../dist/3rdparty/arbiter.js"></script>
+	<script src="../dist/persgroep.js"></script>
+	<script src="../dist/classes/tabs.js"></script>
+	<script src="../dist/classes/toggle.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1><a href="index.html">Web JavaScript Libraries</a> | <a class="dark" href="../docs/classes/Tabs.html">Tabs</a></h1>
+		</header>
+		<div class="main">
+			<div class="example">
+				<script src="js/modules/tab.js"></script>
+				<h2>Tabs on click</h2>
+				<div class="tabs fjs-tabs">
+					<ul role="tablist" class="tabs_nav fjs-tabs_nav">
+						<li class="first" aria-labelledby="example1-tab1-tab" aria-controls="example1-tab1" aria-selected="true" role="tab">
+							<a id="tab1-tab" href="#example1-tab1" data-toggle="tab" role="presentation">Tab 1</a>
+						</li>
+						<li aria-labelledby="example1-tab2-tab" aria-controls="example1-tab2" aria-selected="false" role="tab">
+							<a id="tab2-tab" href="#example1-tab2" role="presentation" data-toggle="tab">Tab 1</a>
+						</li>
+						<li class="last" aria-labelledby="example1-tab3-tab" aria-controls="example1-tab3" aria-selected="false" role="tab">
+							<a id="tab3-tab" href="#example1-tab3" role="presentation" data-toggle="tab">Tab 3</a>
+						</li>
+					</ul>
+					<div class="tabpanels">
+						<div class="tabpanel" id="example1-tab1" aria-hidden="false" aria-expanded="true" aria-labelledby="example1-tab1-tab" role="tabpanel">
+							<p>First Tab</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin nisi turpis, non auctor nisl consectetur non. Nam posuere at lacus non euismod. Suspendisse quis dignissim orci, ut lacinia mauris. Fusce magna est, porttitor eu eros et, rutrum sodales nulla. Praesent feugiat lacus at facilisis lacinia. In pretium placerat viverra. In augue risus, aliquet at scelerisque ac, molestie tristique nibh. Curabitur lobortis iaculis mollis. </p>
+						</div>
+
+						<div class="tabpanel" id="example1-tab2" aria-hidden="true" aria-expanded="false" aria-labelledby="example1-tab2-tab" role="tabanel">
+							<p>Second Tab</p>
+							<p>Mauris nec fermentum sapien, quis lobortis orci. Nulla cursus, turpis eu accumsan tincidunt, nulla mauris fermentum diam, ut accumsan nisl dolor ac libero. Donec vitae neque risus. Sed dictum libero et venenatis sodales. In ut magna ac sapien finibus sodales eu sit amet justo. Aenean in accumsan mi, non cursus tellus. Proin ultrices auctor purus sed gravida.</p>
+						</div>
+
+						<div class="tabpanel" id="example1-tab3" aria-hidden="true" aria-expanded="false" aria-labelledby="example1-tab3-tab" role="tabanel">
+							<p>Third Tab</p>
+							<p>Nunc nisl lectus, pulvinar id feugiat id, vestibulum sit amet sapien. Donec venenatis faucibus iaculis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras tempor massa enim, eleifend pellentesque augue tempor sit amet. Morbi a orci pharetra, suscipit odio et, lobortis est. Praesent ac condimentum felis. Aliquam at dolor turpis. Phasellus ullamcorper mauris quis diam rhoncus, et aliquet est commodo. Suspendisse vehicula tellus vel dolor condimentum tristique. Aenean et placerat ipsum. Phasellus lobortis nisl sed diam malesuada, quis aliquet orci consectetur. Sed nibh nibh, laoreet quis faucibus in, volutpat et magna. Nunc bibendum lectus risus, quis lobortis felis pretium sit amet. </p>
+						</div>
+					</div>
+				</div>
+				<h3>Code:</h2>
+				<p><a href="js/modules/tab.js">View Javascript</a></p>
+				<p><a href="css/tab.css">View CSS</a></p>
+			</div>
+			<div class="example">
+				<h2>Tabs on hover</h2>
+				<div class="tabs fjs-tabs" data-event="hover">
+					<ul role="tablist" class="tabs_nav fjs-tabs_nav">
+						<li class="first" aria-labelledby="example2-tab1-tab" aria-controls="example2-tab1" aria-selected="true" role="tab">
+							<a id="tab1-tab" href="#example2-tab1" data-toggle="tab" role="presentation">Tab 1</a>
+						</li>
+						<li aria-labelledby="example2-tab2-tab" aria-controls="example2-tab2" aria-selected="false" role="tab">
+							<a id="tab2-tab" href="#example2-tab2" role="presentation" data-toggle="tab">Tab 1</a>
+						</li>
+						<li class="last" aria-labelledby="example2-tab3-tab" aria-controls="example2-tab3" aria-selected="false" role="tab">
+							<a id="tab3-tab" href="#example2-tab3" role="presentation" data-toggle="tab">Tab 3</a>
+						</li>
+					</ul>
+					<div class="tabpanels">
+						<div class="tabpanel" id="example2-tab1" aria-hidden="false" aria-expanded="true" aria-labelledby="example2-tab1-tab" role="tabpanel">
+							<p>First Tab</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin nisi turpis, non auctor nisl consectetur non. Nam posuere at lacus non euismod. Suspendisse quis dignissim orci, ut lacinia mauris. Fusce magna est, porttitor eu eros et, rutrum sodales nulla. Praesent feugiat lacus at facilisis lacinia. In pretium placerat viverra. In augue risus, aliquet at scelerisque ac, molestie tristique nibh. Curabitur lobortis iaculis mollis. </p>
+						</div>
+
+						<div class="tabpanel" id="example2-tab2" aria-hidden="true" aria-expanded="false" aria-labelledby="example2-tab2-tab" role="tabanel">
+							<p>Second Tab</p>
+							<p>Mauris nec fermentum sapien, quis lobortis orci. Nulla cursus, turpis eu accumsan tincidunt, nulla mauris fermentum diam, ut accumsan nisl dolor ac libero. Donec vitae neque risus. Sed dictum libero et venenatis sodales. In ut magna ac sapien finibus sodales eu sit amet justo. Aenean in accumsan mi, non cursus tellus. Proin ultrices auctor purus sed gravida.</p>
+						</div>
+
+						<div class="tabpanel" id="example2-tab3" aria-hidden="true" aria-expanded="false" aria-labelledby="example2-tab3-tab" role="tabanel">
+							<p>Third Tab</p>
+							<p>Nunc nisl lectus, pulvinar id feugiat id, vestibulum sit amet sapien. Donec venenatis faucibus iaculis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras tempor massa enim, eleifend pellentesque augue tempor sit amet. Morbi a orci pharetra, suscipit odio et, lobortis est. Praesent ac condimentum felis. Aliquam at dolor turpis. Phasellus ullamcorper mauris quis diam rhoncus, et aliquet est commodo. Suspendisse vehicula tellus vel dolor condimentum tristique. Aenean et placerat ipsum. Phasellus lobortis nisl sed diam malesuada, quis aliquet orci consectetur. Sed nibh nibh, laoreet quis faucibus in, volutpat et magna. Nunc bibendum lectus risus, quis lobortis felis pretium sit amet. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<h3>Code:</h2>
+				<p><a href="js/modules/tab.js">View Javascript</a></p>
+				<p><a href="css/tab.css">View CSS</a></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

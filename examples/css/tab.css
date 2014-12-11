@@ -1,0 +1,44 @@
+/**
+*
+*   Tab
+*
+**/
+
+.tabs_nav:after {
+	content: " ";
+	display: table;
+	clear: both;
+}
+
+.tabs_nav li {
+	float: left;
+	border: 1px solid transparent;
+	border-bottom: 0;
+}
+
+.tabs_nav li a {
+	float: left;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 10px 25px;
+}
+
+.tabs_nav li[aria-selected="true"] {
+	border-color: #d1d1d1;
+	background: #f2f2f2;
+}
+
+.tabpanels {
+	margin-top: -1px;
+}
+
+.tabpanel {
+	display: none;
+	border: 1px solid #d1d1d1;
+	padding: 10px;
+}
+
+.tabpanel[aria-expanded="true"] {
+	background: #f2f2f2;
+	display: block;
+}

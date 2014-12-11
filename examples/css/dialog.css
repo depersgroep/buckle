@@ -1,0 +1,39 @@
+/**
+*
+*   Dialog
+*
+**/
+
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.modal.js-is-active {
+	display: block;
+}
+
+.modal .modal__wrapper {
+	width: 768px;
+	background: #FFF;
+	margin: 40px auto;
+	padding: 10px;
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, .5);
+}
+
+.modal .close {
+	float: right;
+}
+
+#overlay.js-is-active {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .8);
+}
