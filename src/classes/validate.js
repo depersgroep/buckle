@@ -10,11 +10,13 @@
  *
  *
  *	@property {Bonzo} form The dom element form
+ *	@property {Boolean} noFormevents Don't catch submit / reset events
  *
  *	@example
  *
  *		new Validate({
  *		frm: $('.form-to-validate'),
+ *		noFormevents: false, 
  *	});
  *
  *
@@ -25,7 +27,8 @@ function Validate(args){
 		var _this = this;
 		_this.defaults = {
 				frm: (args.frm ? args.frm : false),
-				fields: []
+				fields: [],
+				noFormevents: (args.noFormevents ? true : false)
 			};
 
 		if (_this.defaults.frm){
@@ -40,17 +43,19 @@ function Validate(args){
 				});
 			});
 
-			// hijack the form submit
-			bean.on(_this.defaults.frm, 'submit', function(e){
-				if (_this.checkValidation()){
-					e.preventDefault();
-				}else{
-					$('[type="submit"]', this).attr('disabled', 'disabled');
-				}
-			});
-			bean.on(_this.defaults.frm, 'reset', function(){
-				_this.removeAllErrors();
-			});
+			if (!_this.defaults.noFormevents){
+				// hijack the form submit
+				bean.on(_this.defaults.frm, 'submit', function(e){
+					if (_this.checkValidation()){
+						e.preventDefault();
+					}else{
+						$('[type="submit"]', this).attr('disabled', 'disabled');
+					}
+				});
+				bean.on(_this.defaults.frm, 'reset', function(){
+					_this.removeAllErrors();
+				});
+			}
 		}
 	}
 
@@ -78,6 +83,26 @@ function Validate(args){
 Validate.prototype.checkValidation = function(){
 
 	var error = false;
+	
+	// private function to check Regex
+	function validateRegex(pattern) {
+		var parts = pattern.split('/'),
+			regex = pattern,
+			options = "";
+		if (parts.length > 1) {
+			regex = parts[1];
+			options = parts[2];
+		}
+		
+		try {
+			new RegExp(regex, options);
+			return true;
+		}
+		catch(e) {
+				return false;
+		}
+	}
+	
 	if (this.defaults){
 		for(var k in this.defaults.fields){
 			//IE looping over every arg protection
@@ -90,8 +115,20 @@ Validate.prototype.checkValidation = function(){
 				// check the type
 				switch (this.defaults.fields[k].htmlObj.nodeName.toLowerCase()){
 				case 'textarea':
+					// check if we have a data-regex, if so check if it is valid
+					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex') && validateRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'))){
+						var regexp = new RegEx(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
+						if (regexp.test(this.defaults.fields[k].htmlObj.value)){
+							this.triggerError(k, 'invalid');
+							error = true;
+						}
+					}
 					break;
 				case 'select':
+					if (!this.defaults.fields[k].htmlObj.options[this.defaults.fields[k].htmlObj.selectedIndex].value){
+						this.triggerError(k, 'invalid');
+						error = true;
+					}
 					break;
 				default:
 					switch(this.defaults.fields[k].htmlObj.getAttribute('type')){
@@ -112,6 +149,10 @@ Validate.prototype.checkValidation = function(){
 						break;
 					case 'tel':
 						// must be regex
+						if (!/^\d+(\.\d+)*$/.test(this.defaults.fields[k].htmlObj.value)){
+							this.triggerError(k, 'invalidTelephone');
+							error = true;
+						}
 						break;
 					case 'email':
 						// new regex by Sven
@@ -121,6 +162,14 @@ Validate.prototype.checkValidation = function(){
 						}
 						break;
 					default:
+						// check if we have a data-regex, if so check if it is valid
+						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex') && validateRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'))){
+							var regexp = new RegEx(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
+							if (regexp.test(this.defaults.fields[k].htmlObj.value)){
+								this.triggerError(k, 'invalid');
+								error = true;
+							}
+						}
 					}
 				}
 			}else{
