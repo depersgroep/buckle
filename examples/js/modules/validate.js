@@ -19,19 +19,11 @@ App.modules.validate = (function() {
 
 			if ($(this).data('validate')) {
 
-				$(this).on('submit', function(event) {
-
-					event.preventDefault();
-
 					var form = new Validate({
-
 						frm: this
 					});
-
-					var errors = false;
-					errors = form.checkValidation();
-				});
 			}
+			
 		});
 	}
 
