@@ -1,8 +1,8 @@
 /**
-*
-*   Toggle
-*
-**/
+ *
+ *   Toggle
+ *
+ **/
 
 'use strict';
 

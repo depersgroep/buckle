@@ -1,8 +1,8 @@
 /**
-*
-*   Validate
-*
-**/
+ *
+ *   Validate
+ *
+ **/
 
 
 'use strict';
@@ -19,11 +19,11 @@ App.modules.validate = (function() {
 
 			if ($(this).data('validate')) {
 
-					var form = new Validate({
-						frm: this
-					});
+				var form = new Validate({
+					frm: this
+				});
 			}
-			
+
 		});
 	}
 
@@ -35,8 +35,7 @@ App.modules.validate = (function() {
 		if ($(args.field).attr('data-error')) {
 
 			div.innerHTML = $(args.field).attr('data-error');
-		}
-		else {
+		} else {
 
 			div.innerHTML = args.message;
 		}

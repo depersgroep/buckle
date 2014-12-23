@@ -2,38 +2,38 @@
 
 var App = {
 
-    config: {
+	config: {
 
-        formErrors: {
+		formErrors: {
 			empty: 'Dit veld mag niet leeg zijn',
 			unchecked: 'U moet dit veld aanvinken',
 			invalidEmail: 'Gelieve een bestaand email adres in te voeren'
 		}
-    },
-    modules: [],
-    views: {
+	},
+	modules: [],
+	views: {
 
-        dialog: []
-    }
+		dialog: []
+	}
 };
 
 App.main = (function() {
 
-    function _init() {
+	function _init() {
 
-        $.publish('APP/bootstrap');
-    }
+		$.publish('APP/bootstrap');
+	}
 
-    function _load() {
+	function _load() {
 
-        $.publish('APP/load');
-    }
+		$.publish('APP/load');
+	}
 
-    return {
+	return {
 
-        init: _init,
-        load: _load
-    }
+		init: _init,
+		load: _load
+	}
 
 }());
 
