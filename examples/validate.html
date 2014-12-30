@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" />
 	<title>Web JavaScript Libraries: Validate</title>
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/validate.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/validate.css" rel="stylesheet" />
 	<script src="../dist/3rdparty/bean.js"></script>
 	<script src="../dist/3rdparty/qwery.js"></script>
 	<script src="../dist/3rdparty/bonzo.js"></script>
@@ -22,14 +22,22 @@
 			<div class="example">
 				<script src="js/modules/validate.js"></script>
 				<h2>Validate</h2>
-				<form class="form fjs-form" action="#" method="post" data-validate="true" novalidate>
+				<form class="form fjs-form" action="#" method="post" data-validate="true">
 					<label>
 						<span>Email:</span>
-						<input type="email" name="field1" placeHolder="Email" data-error="A valid email is required!" required>
+						<input type="email" name="field1" placeholder="jan@example.com" data-error="A valid email is required!" required="true" />
+					</label>
+					<label>
+						<span>Telephone:</span>
+						<input type="tel" name="field2" placeholder="+32 123/45.67 89" data-error="A valid telephone is required if entered!" data-validate="true" />
+					</label>
+					<label>
+						<span>Random Number:</span>
+						<input type="text" name="field3" placeholder="" data-error="A valid number [0-9] is required!" required="true" data-regex="/^\d$/" />
 					</label>
 					<label>
 						<span>Submit:</span>
-						<input type="submit" name="submit" value="Submit Form">
+						<input type="submit" name="submit" value="Submit Form" />
 					</label>
 				</form>
 			</div>

@@ -15,16 +15,12 @@ App.modules.validate = (function() {
 
 	function _init() {
 
-		$('form[data-validate]').each(function() {
-
-			if ($(this).data('validate')) {
-
-					var form = new Validate({
-						frm: this
-					});
-			}
-			
+		$('form[data-validate="true"]').each(function() {
+			var form = new Validate({
+				frm: this
+			});
 		});
+
 	}
 
 	function _showError(args) {
