@@ -69,6 +69,13 @@ function Cycle(args) {
 						play / pause html objects */
 				nav: (args.navigation ? args.navigation : false),
 				/*
+					Object representing the classnames
+				*/
+				navclasses: {
+					navNext: (args.next ? args.next : '.next'),
+					navPrevious: (args.previous ? args.previous : '.previous')
+				},
+				/*
 						do we need numbers? If so pass an array with the number
 						html objects
 					*/
@@ -78,6 +85,7 @@ function Cycle(args) {
 						html objects
 					*/
 				bullets: (args.bullets ? args.bullets : false),
+				bulletClass: (args.bulletClass ? args.bulletClass : '.slider__bullet'),
 				/*
 						if it should move to the next slide automaticly
 					*/
@@ -138,12 +146,12 @@ function Cycle(args) {
 
 	function navEvents() {
 
-		bean.on($('.next', _this.defaults.settings.nav)[0], 'click', function(e) {
+		bean.on($(_this.defaults.settings.navClasses.navNext, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showNext();
 		});
 
-		bean.on($('.previous', _this.defaults.settings.nav)[0], 'click', function(e) {
+		bean.on($(_this.defaults.settings.navClasses.navPrevious, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showPrevious();
 		});
@@ -152,7 +160,7 @@ function Cycle(args) {
 
 	function bulletEvents() {
 
-		$('.slider__bullet', _this.defaults.settings.bullets).each(function() {
+		$(_this.defaults.settings.bulletClass, _this.defaults.settings.bullets).each(function() {
 			var ind = arguments[1]; // index
 			bean.on(this, 'click', function(e) {
 				e.preventDefault();
@@ -233,7 +241,8 @@ Cycle.prototype.show = function(slideNumber, direction) {
 					direction: animDirection,
 					bullets: this.defaults.settings.bullets,
 					infinite: this.defaults.settings.infinite,
-					navigation: this.defaults.settings.nav
+					navigation: this.defaults.settings.nav,
+					loop: this.defaults.settings.loop
 				};
 				this.defaults.callback.onSlideChange.call(this, args);
 			}

@@ -211,7 +211,7 @@
     "classitems": [
         {
             "file": "src/classes/cycle.js",
-            "line": 176,
+            "line": 184,
             "itemtype": "method",
             "name": "show",
             "description": "Show a specific slide",
@@ -235,7 +235,7 @@
         },
         {
             "file": "src/classes/cycle.js",
-            "line": 247,
+            "line": 256,
             "itemtype": "method",
             "name": "showNext",
             "description": "Shorthand to show the next slide",
@@ -246,7 +246,7 @@
         },
         {
             "file": "src/classes/cycle.js",
-            "line": 279,
+            "line": 288,
             "itemtype": "method",
             "name": "showPrevious",
             "description": "Shorthand to show the previous slide",
@@ -257,7 +257,7 @@
         },
         {
             "file": "src/classes/cycle.js",
-            "line": 307,
+            "line": 316,
             "itemtype": "method",
             "name": "startAutoplay",
             "description": "start the autoplay",
@@ -268,7 +268,7 @@
         },
         {
             "file": "src/classes/cycle.js",
-            "line": 342,
+            "line": 351,
             "itemtype": "method",
             "name": "stopAutoplay",
             "description": "stop the autoplay",
