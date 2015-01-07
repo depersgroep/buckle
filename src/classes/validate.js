@@ -16,7 +16,7 @@
  *
  *		new Validate({
  *		frm: $('.form-to-validate'),
- *		noFormevents: false, 
+ *		noFormevents: false,
  *	});
  *
  *
@@ -36,7 +36,7 @@ function Validate(args){
 			_this.defaults.frm.setAttribute('novalidate', '');
 
 			// get all the input / textarea stuff and check if it's required
-			$('input[required], textarea[required], select[required]', _this.defaults.frm).each(function(){
+			$('input[required], textarea[required], select[required], input[data-validate="true"], textarea[data-validate="true"], select[data-validate="true"]', _this.defaults.frm).each(function(){
 				_this.defaults.fields.push({
 					hasError: false,
 					htmlObj: this
@@ -83,26 +83,26 @@ function Validate(args){
 Validate.prototype.checkValidation = function(){
 
 	var error = false;
-	
+
 	// private function to check Regex
-	function validateRegex(pattern) {
-		var parts = pattern.split('/'),
-			regex = pattern,
-			options = "";
-		if (parts.length > 1) {
-			regex = parts[1];
-			options = parts[2];
-		}
-		
+	function validateAndReturnRegex(pattern) {
+		// find last slash
+		var last = pattern.lastIndexOf('/'),
+			regex = pattern.substring(1, last),
+			flags = pattern.substring(last + 1);
+
 		try {
-			new RegExp(regex, options);
-			return true;
+			new RegExp(regex, flags);
+			return {
+				'regex': regex,
+				'flags': flags
+			};
 		}
 		catch(e) {
-				return false;
+			return {};
 		}
 	}
-	
+
 	if (this.defaults){
 		for(var k in this.defaults.fields){
 			//IE looping over every arg protection
@@ -111,16 +111,20 @@ Validate.prototype.checkValidation = function(){
 			}
 			this.removeError(k);
 			// check if there is a value
+
 			if (this.checkValue(this.defaults.fields[k].htmlObj)){
 				// check the type
 				switch (this.defaults.fields[k].htmlObj.nodeName.toLowerCase()){
 				case 'textarea':
 					// check if we have a data-regex, if so check if it is valid
-					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex') && validateRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'))){
-						var regexp = new RegEx(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
-						if (regexp.test(this.defaults.fields[k].htmlObj.value)){
-							this.triggerError(k, 'invalid');
-							error = true;
+					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')){
+						var regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
+						if (regexData.regex){
+							var regexp = new RegExp(regexData.regex, regexData.flags);
+							if (!regexp.test(this.defaults.fields[k].htmlObj.value)){
+								this.triggerError(k, 'invalid');
+								error = true;
+							}
 						}
 					}
 					break;
@@ -149,7 +153,9 @@ Validate.prototype.checkValidation = function(){
 						break;
 					case 'tel':
 						// must be regex
-						if (!/^\d+(\.\d+)*$/.test(this.defaults.fields[k].htmlObj.value)){
+						// added leading +-sign
+						// added spaces and slashes to the regex
+						if (!/^(\+?\d+)(\/?[\s\.]?\d+)*$/.test(this.defaults.fields[k].htmlObj.value)){
 							this.triggerError(k, 'invalidTelephone');
 							error = true;
 						}
@@ -163,16 +169,19 @@ Validate.prototype.checkValidation = function(){
 						break;
 					default:
 						// check if we have a data-regex, if so check if it is valid
-						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex') && validateRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'))){
-							var regexp = new RegEx(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
-							if (regexp.test(this.defaults.fields[k].htmlObj.value)){
-								this.triggerError(k, 'invalid');
-								error = true;
+						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')){
+							var regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
+							if(regexData.regex){
+								var regexp = new RegExp(regexData.regex, regexData.flags);
+								if (!regexp.test(this.defaults.fields[k].htmlObj.value)){
+									this.triggerError(k, 'invalid');
+									error = true;
+								}
 							}
 						}
 					}
 				}
-			}else{
+			} else if (!this.defaults.fields[k].htmlObj.getAttribute('data-validate')) {
 				this.triggerError(k, 'empty');
 				error = true;
 			}
