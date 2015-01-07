@@ -146,12 +146,12 @@ function Cycle(args) {
 
 	function navEvents() {
 
-		bean.on($(_this.defaults.settings.navClasses.navNext, _this.defaults.settings.nav)[0], 'click', function(e) {
+		bean.on($(_this.defaults.settings.navclasses.navNext, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showNext();
 		});
 
-		bean.on($(_this.defaults.settings.navClasses.navPrevious, _this.defaults.settings.nav)[0], 'click', function(e) {
+		bean.on($(_this.defaults.settings.navclasses.navPrevious, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showPrevious();
 		});
