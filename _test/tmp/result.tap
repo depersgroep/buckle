@@ -1,4 +1,4 @@
-# Using testem 0.6.23
+# Using testem 0.6.24
 # Whole list of tests
 ok 1 _SpecRunner.html - Chrome 39.0 - Toggle Module should exist
 ok 2 _SpecRunner.html - Chrome 39.0 - Toggle Module Method access should have a toggle method

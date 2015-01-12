@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for classes/cycle.js</title>
+    <title>Code coverage report for classes\cycle.js</title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="../prettify.css">
@@ -154,7 +154,7 @@
             margin-left: 0.5em;
         }
         div.coverage-summary .yui3-datatable-sort-indicator {
-            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
         }
         div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
             background-position: 0 -20px;
@@ -196,13 +196,13 @@
 </head>
 <body>
 <div class="header high">
-    <h1>Code coverage report for <span class="entity">classes/cycle.js</span></h1>
+    <h1>Code coverage report for <span class="entity">classes\cycle.js</span></h1>
     <h2>
         
         Statements: <span class="metric">88.54% <small>(85 / 96)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">80.77% <small>(84 / 104)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">79.09% <small>(87 / 110)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">88.89% <small>(16 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -212,7 +212,7 @@
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">classes/</a> &#187; cycle.js</div>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">classes\</a> &#187; cycle.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
@@ -587,7 +587,16 @@
 369
 370
 371
-372</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -638,6 +647,14 @@
 <span class="cline-any cline-yes">44</span>
 <span class="cline-any cline-yes">44</span>
 <span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -811,6 +828,7 @@
 <span class="cline-any cline-yes">103</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">103</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1029,6 +1047,13 @@ function Cycle(args) {
 						play / pause html objects */
 				nav: (args.navigation ? args.navigation : false),
 				/*
+					Object representing the classnames
+				*/
+				navclasses: {
+					navNext: (args.next ? <span class="branch-0 cbranch-no" title="branch not covered" >args.next </span>: '.next'),
+					navPrevious: (args.previous ? <span class="branch-0 cbranch-no" title="branch not covered" >args.previous </span>: '.previous')
+				},
+				/*
 						do we need numbers? If so pass an array with the number
 						html objects
 					*/
@@ -1038,6 +1063,7 @@ function Cycle(args) {
 						html objects
 					*/
 				bullets: (args.bullets ? args.bullets : false),
+				bulletClass: (args.bulletClass ? <span class="branch-0 cbranch-no" title="branch not covered" >args.bulletClass </span>: '.slider__bullet'),
 				/*
 						if it should move to the next slide automaticly
 					*/
@@ -1098,12 +1124,12 @@ function Cycle(args) {
 &nbsp;
 	function navEvents() {
 &nbsp;
-		bean.on($('.next', _this.defaults.settings.nav)[0], 'click', function(e) {
+		bean.on($(_this.defaults.settings.navclasses.navNext, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showNext();
 		});
 &nbsp;
-		bean.on($('.previous', _this.defaults.settings.nav)[0], 'click', function(e) {
+		bean.on($(_this.defaults.settings.navclasses.navPrevious, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showPrevious();
 		});
@@ -1112,7 +1138,7 @@ function Cycle(args) {
 &nbsp;
 	function bulletEvents() {
 &nbsp;
-		$('.slider__bullet', _this.defaults.settings.bullets).each(function() {
+		$(_this.defaults.settings.bulletClass, _this.defaults.settings.bullets).each(function() {
 			var ind = arguments[1]; // index
 			bean.on(this, 'click', function(e) {
 				e.preventDefault();
@@ -1193,7 +1219,8 @@ Cycle.prototype.show = function(slideNumber, direction) {
 					direction: animDirection,
 					bullets: this.defaults.settings.bullets,
 					infinite: this.defaults.settings.infinite,
-					navigation: this.defaults.settings.nav
+					navigation: this.defaults.settings.nav,
+					loop: this.defaults.settings.loop
 				};
 				this.defaults.callback.onSlideChange.call(this, args);
 			}
@@ -1334,12 +1361,12 @@ Cycle.prototype.destroy = function(){
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Dec 22 2014 15:48:07 GMT+0100 (CET)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jan 12 2015 16:35:21 GMT+0100 (Romance Standard Time)</div>
 </div>
 
 <script src="../prettify.js"></script>
 
-<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
     YUI().use('datatable', function (Y) {

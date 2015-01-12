@@ -5,8 +5,8 @@
         "version": "0.1"
     },
     "files": {
-        "src/classes/cycle.js": {
-            "name": "src/classes/cycle.js",
+        "src\\classes\\cycle.js": {
+            "name": "src\\classes\\cycle.js",
             "modules": {},
             "classes": {
                 "Cycle": 1
@@ -16,8 +16,8 @@
             },
             "namespaces": {}
         },
-        "src/classes/dialog.js": {
-            "name": "src/classes/dialog.js",
+        "src\\classes\\dialog.js": {
+            "name": "src\\classes\\dialog.js",
             "modules": {},
             "classes": {
                 "Dialog": 1
@@ -27,8 +27,8 @@
             },
             "namespaces": {}
         },
-        "src/classes/tabs.js": {
-            "name": "src/classes/tabs.js",
+        "src\\classes\\tabs.js": {
+            "name": "src\\classes\\tabs.js",
             "modules": {},
             "classes": {
                 "Tabs": 1
@@ -38,8 +38,8 @@
             },
             "namespaces": {}
         },
-        "src/classes/toggle.js": {
-            "name": "src/classes/toggle.js",
+        "src\\classes\\toggle.js": {
+            "name": "src\\classes\\toggle.js",
             "modules": {},
             "classes": {
                 "Toggle": 1
@@ -49,8 +49,8 @@
             },
             "namespaces": {}
         },
-        "src/classes/validate.js": {
-            "name": "src/classes/validate.js",
+        "src\\classes\\validate.js": {
+            "name": "src\\classes\\validate.js",
             "modules": {},
             "classes": {
                 "Validate": 1
@@ -60,8 +60,8 @@
             },
             "namespaces": {}
         },
-        "src/persgroep.js": {
-            "name": "src/persgroep.js",
+        "src\\persgroep.js": {
+            "name": "src\\persgroep.js",
             "modules": {
                 "Persgroep": 1
             },
@@ -89,7 +89,7 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "src/classes/validate.js",
+            "file": "src\\classes\\validate.js",
             "line": 2,
             "description": "'De persgroep' library can be used just like jQuery but\n our $ function is a layer to communicate with  minimalistic\n 3rd party libraries:\n\n [Arbiter](http://arbiterjs.com)\n  -------------------------------------\n  A light-weight, library-agnostic javascript implementation of\n  the pub/sub pattern\n [Bonzo](https://github.com/ded/bonzo)\n  -------------------------------------\n  A library agnostic extensible DOM utility. Nothing else.\n [Qwuery](https://github.com/ded/qwery)\n  -------------------------------------\n  Qwery is a modern selector engine built on top of querySelectorAll\n  giving you practical utility.\n [Bean](https://github.com/fat/bean)\n  -------------------------------------\n  A small, fast, cross-platform, framework-agnostic event manager\n  designed for desktop, mobile, and touch-based browsers.\n [Reqwest](https://github.com/ded/reqwest)\n  -------------------------------------\n  Ajax all over again! Includes support for xmlHttpRequest, JSONP,\n  CORS and CommonJS Promises A."
         }
@@ -104,7 +104,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Persgroep",
-            "file": "src/classes/cycle.js",
+            "file": "src\\classes\\cycle.js",
             "line": 2,
             "description": "Sometimes stuff has to cycle. Carousels, slideshows, etc...\n\tLook no further 'cause this piece of code will do it all",
             "is_constructor": 1,
@@ -123,7 +123,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Persgroep",
-            "file": "src/classes/dialog.js",
+            "file": "src\\classes\\dialog.js",
             "line": 2,
             "description": "Modals you say? Lightboxes? What's in a name. This thing uses\n\tthe WAI ARIA specced items to create modals",
             "is_constructor": 1,
@@ -145,7 +145,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Persgroep",
-            "file": "src/classes/tabs.js",
+            "file": "src\\classes\\tabs.js",
             "line": 2,
             "description": "Our tabs module is used to have multiple toggle items as\n\ttabbed behaviour items",
             "is_constructor": 1,
@@ -167,7 +167,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Persgroep",
-            "file": "src/classes/toggle.js",
+            "file": "src\\classes\\toggle.js",
             "line": 2,
             "description": "Our toggle module is used to toggle stuff (classes, whatever)\n\tEach toggle consists of a trigger and a object to toggle.",
             "is_constructor": 1,
@@ -186,7 +186,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Persgroep",
-            "file": "src/classes/validate.js",
+            "file": "src\\classes\\validate.js",
             "line": 2,
             "description": "Validating forms like a boss! On submit it automatically\n\tvalidates the form with",
             "is_constructor": 1,
@@ -210,7 +210,7 @@
     },
     "classitems": [
         {
-            "file": "src/classes/cycle.js",
+            "file": "src\\classes\\cycle.js",
             "line": 184,
             "itemtype": "method",
             "name": "show",
@@ -234,7 +234,7 @@
             "class": "Cycle"
         },
         {
-            "file": "src/classes/cycle.js",
+            "file": "src\\classes\\cycle.js",
             "line": 256,
             "itemtype": "method",
             "name": "showNext",
@@ -245,7 +245,7 @@
             "class": "Cycle"
         },
         {
-            "file": "src/classes/cycle.js",
+            "file": "src\\classes\\cycle.js",
             "line": 288,
             "itemtype": "method",
             "name": "showPrevious",
@@ -256,7 +256,7 @@
             "class": "Cycle"
         },
         {
-            "file": "src/classes/cycle.js",
+            "file": "src\\classes\\cycle.js",
             "line": 316,
             "itemtype": "method",
             "name": "startAutoplay",
@@ -267,7 +267,7 @@
             "class": "Cycle"
         },
         {
-            "file": "src/classes/cycle.js",
+            "file": "src\\classes\\cycle.js",
             "line": 351,
             "itemtype": "method",
             "name": "stopAutoplay",
@@ -278,7 +278,7 @@
             "class": "Cycle"
         },
         {
-            "file": "src/classes/dialog.js",
+            "file": "src\\classes\\dialog.js",
             "line": 81,
             "itemtype": "method",
             "name": "show",
@@ -289,7 +289,7 @@
             "class": "Dialog"
         },
         {
-            "file": "src/classes/dialog.js",
+            "file": "src\\classes\\dialog.js",
             "line": 115,
             "itemtype": "method",
             "name": "hide",
@@ -300,7 +300,7 @@
             "class": "Dialog"
         },
         {
-            "file": "src/classes/tabs.js",
+            "file": "src\\classes\\tabs.js",
             "line": 67,
             "itemtype": "method",
             "name": "show",
@@ -311,7 +311,7 @@
             "class": "Tabs"
         },
         {
-            "file": "src/classes/tabs.js",
+            "file": "src\\classes\\tabs.js",
             "line": 106,
             "itemtype": "method",
             "name": "hide",
@@ -322,7 +322,7 @@
             "class": "Tabs"
         },
         {
-            "file": "src/classes/tabs.js",
+            "file": "src\\classes\\tabs.js",
             "line": 139,
             "itemtype": "method",
             "name": "destroy",
@@ -333,7 +333,7 @@
             "class": "Tabs"
         },
         {
-            "file": "src/classes/toggle.js",
+            "file": "src\\classes\\toggle.js",
             "line": 80,
             "itemtype": "method",
             "name": "toggle",
@@ -344,7 +344,7 @@
             "class": "Toggle"
         },
         {
-            "file": "src/classes/toggle.js",
+            "file": "src\\classes\\toggle.js",
             "line": 118,
             "itemtype": "method",
             "name": "show",
@@ -355,7 +355,7 @@
             "class": "Toggle"
         },
         {
-            "file": "src/classes/toggle.js",
+            "file": "src\\classes\\toggle.js",
             "line": 169,
             "itemtype": "method",
             "name": "hide",
@@ -366,7 +366,7 @@
             "class": "Toggle"
         },
         {
-            "file": "src/classes/toggle.js",
+            "file": "src\\classes\\toggle.js",
             "line": 208,
             "itemtype": "method",
             "name": "destroy",
@@ -377,7 +377,7 @@
             "class": "Toggle"
         },
         {
-            "file": "src/classes/validate.js",
+            "file": "src\\classes\\validate.js",
             "line": 66,
             "itemtype": "method",
             "name": "checkValidation",
@@ -388,7 +388,7 @@
             "class": "Validate"
         },
         {
-            "file": "src/classes/validate.js",
+            "file": "src\\classes\\validate.js",
             "line": 200,
             "itemtype": "method",
             "name": "checkValue",
@@ -403,7 +403,7 @@
             "class": "Validate"
         },
         {
-            "file": "src/classes/validate.js",
+            "file": "src\\classes\\validate.js",
             "line": 300,
             "itemtype": "method",
             "name": "removeAllErrors",
@@ -414,7 +414,7 @@
             "class": "Validate"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 46,
             "description": "Return a collection of matched elements either found in the DOM based\n  on passed argument(s) or created by passing an HTML string.",
             "params": [
@@ -438,7 +438,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 76,
             "itemtype": "method",
             "name": "on",
@@ -475,7 +475,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 111,
             "itemtype": "method",
             "name": "one",
@@ -485,7 +485,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 130,
             "itemtype": "method",
             "name": "off",
@@ -508,7 +508,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 153,
             "itemtype": "method",
             "name": "fire",
@@ -531,7 +531,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 175,
             "itemtype": "method",
             "name": "find",
@@ -548,7 +548,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 199,
             "itemtype": "method",
             "name": "parents",
@@ -565,7 +565,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 233,
             "itemtype": "method",
             "name": "children",
@@ -582,7 +582,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 281,
             "itemtype": "method",
             "name": "closest",
@@ -599,7 +599,7 @@
             "module": "Persgroep"
         },
         {
-            "file": "src/persgroep.js",
+            "file": "src\\persgroep.js",
             "line": 429,
             "description": "$.browser('ie6') to check for current client bowser.",
             "params": [
@@ -620,11 +620,11 @@
     "warnings": [
         {
             "message": "Missing item type\nReturn a collection of matched elements either found in the DOM based\n  on passed argument(s) or created by passing an HTML string.",
-            "line": " src/persgroep.js:46"
+            "line": " src\\persgroep.js:46"
         },
         {
             "message": "Missing item type\n$.browser('ie6') to check for current client bowser.",
-            "line": " src/persgroep.js:429"
+            "line": " src\\persgroep.js:429"
         }
     ]
 }
