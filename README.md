@@ -11,3 +11,10 @@ Examples can be found in the "examples"-folder.
 npm install
 grunt
 ```
+
+Run tests:
+```
+npm install
+npm install -g istanbul
+grunt test
+```

@@ -6,7 +6,7 @@
 
   <link rel="stylesheet" type="text/css" href="test/utils/jasmine/jasmine.css">
 
-  
+
   <script src="test/utils/jasmine/jasmine.js"></script>
   <script src="test/utils/jasmine/jasmine-html.js"></script>
   <script src="test/utils/jasmine/boot.js"></script>
@@ -18,48 +18,50 @@
   <script src="src/3rdparty/qwery.js"></script>
   <script src="src/3rdparty/reqwest.js"></script>
   <script src="src/persgroep.js"></script>
-  
+
   <script src="instrumented/cycle.js"></script>
   <script src="instrumented/toggle.js"></script>
   <script src="instrumented/dialog.js"></script>
   <script src="instrumented/tabs.js"></script>
   <script src="instrumented/validate.js"></script>
-  
+
   <script src="test/spec/toggle.test.js"></script>
   <script src="test/spec/tabs.test.js"></script>
   <script src="test/spec/tooltip.test.js"></script>
   <script src="test/spec/dialog.test.js"></script>
   <script src="test/spec/cycle.test.js"></script>
   <script src="test/spec/validate.test.js"></script>
-  
+
   <script>
 	var App = {
 		config: {
-			formErrors: {
-				empty: 'Dit veld mag niet leeg zijn',
-				unchecked: 'U moet dit veld aanvinken',
-				invalidEmail: 'Gelieve een bestaand email adres in te voeren'
-			}
 		},
 		jsdata:{},
 		modules: {},
 		views: {
 			dialog: []
+		},
+		i18n: {
+			formErrors: {
+				empty: 'Dit veld mag niet leeg zijn',
+				unchecked: 'U moet dit veld aanvinken',
+				invalidEmail: 'Gelieve een bestaand email adres in te voeren'
+			}
 		}
 	};
 
-  	
+
   </script>
 
 </head>
 <body>
-	
+
 	<div id="fauxtab"></div>
-	
+
 	<div data-modal="fauxmodal">
 		<div class="close"></div>
 	</div>
-	
+
 	<!-- slideshow.html -->
 	<div class="cycle slider" role="widget" data-type="cycle" data-transition="slide" data-adjustheight="false" data-navigation="true" data-bullets="true">
 		<ul class="cycle__container">
@@ -86,8 +88,8 @@
 		</ul>
 	</div>
 	<!-- / slideshow.html -->
-	
-	
+
+
 	<!-- Form validate -->
 	<form id="testform">
 	    <input type="text" id="inpName" placeholder="Enter your full name" data-error="Gelieve uw naam in te vullen" required />
@@ -103,18 +105,18 @@
 		</select>
 		<input type="radio" value="a" name="inpRadio" id="inpRadioA" required />
 		<input type="radio" value="b" name="inpRadio" id="inpRadioB" required />
-		
+
 		<input type="hidden" value="" id="inpHidden" />
 		<input type="text" id="inpNotRequired" />
 	    <input type="submit" id="inpSubmit" value="Send message" />
 	</form>
-	
+
 	<!-- / Form validate -->
-	
+
       <script>
     if (location.hash === '#testem')
         document.write('<script src="/testem.js"></'+'script>')
     </script>
-	
+
 </body>
 </html>

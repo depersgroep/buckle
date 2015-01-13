@@ -263,7 +263,7 @@ Validate.prototype.triggerError = function(field, msg){
 
 		Arbiter.publish('/validate/error/show', {
 			field: this.defaults.fields[field].htmlObj,
-			message: App.config.formErrors[msg]
+			message: App.i18n.formErrors[msg]
 		});
 	}
 
