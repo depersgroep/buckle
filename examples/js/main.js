@@ -7,14 +7,8 @@ var App = {
 	views: {
 
 		dialog: []
-	},
-	i18n: {
-		formErrors: {
-			empty: 'Dit veld mag niet leeg zijn',
-			unchecked: 'U moet dit veld aanvinken',
-			invalidEmail: 'Gelieve een bestaand email adres in te voeren'
-		}
 	}
+
 };
 
 App.main = (function() {

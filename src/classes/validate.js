@@ -28,7 +28,13 @@ function Validate(args){
 		_this.defaults = {
 				frm: (args.frm ? args.frm : false),
 				fields: [],
-				noFormevents: (args.noFormevents ? true : false)
+				noFormevents: (args.noFormevents ? true : false),
+				i18n: {
+					empty: (args.i18n && args.i18n.empty ? args.i18n.empty : 'This field is required.'),
+					unchecked: (args.i18n && args.i18n.unchecked ? args.i18n.unchecked : 'This field is required.'),
+					invalidEmail: (args.i18n && args.i18n.invalidEmail ? args.i18n.invalidEmail : 'Please enter a valid email address.'),
+					invalidTelephone: (args.i18n && args.i18n.invalidTelephone ? args.i18n.invalidTelephone : 'Please enter a valid telephone number.')
+				}
 			};
 
 		if (_this.defaults.frm){
@@ -263,8 +269,9 @@ Validate.prototype.triggerError = function(field, msg){
 
 		Arbiter.publish('/validate/error/show', {
 			field: this.defaults.fields[field].htmlObj,
-			message: App.i18n.formErrors[msg]
+			message: this.defaults.i18n[msg]
 		});
+
 	}
 
 	return this;
