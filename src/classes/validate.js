@@ -30,12 +30,10 @@ function Validate(args){
 				fields: [],
 				noFormevents: (args.noFormevents ? true : false),
 				i18n: {
-					formErrors: {
-						empty: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.empty ? args.i18n.formErrors.empty : 'Dit veld mag niet leeg zijn'),
-						unchecked: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.unchecked ? args.i18n.formErrors.unchecked : 'U moet dit veld aanvinken'),
-						invalidEmail: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.invalidEmail ? args.i18n.formErrors.invalidEmail : 'Gelieve een bestaand email adres in te voeren'),
-						invalidTelephone: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.invalidTelephone ? args.i18n.formErrors.invalidTelephone : 'Gelieve een correct telefoon nummer in te voeren')
-					}
+					empty: (args.i18n && args.i18n.empty ? args.i18n.empty : 'This field is required.'),
+					unchecked: (args.i18n && args.i18n.unchecked ? args.i18n.unchecked : 'This field is required.'),
+					invalidEmail: (args.i18n && args.i18n.invalidEmail ? args.i18n.invalidEmail : 'Please enter a valid email address.'),
+					invalidTelephone: (args.i18n && args.i18n.invalidTelephone ? args.i18n.invalidTelephone : 'Please enter a valid telephone number.')
 				}
 			};
 
@@ -271,7 +269,7 @@ Validate.prototype.triggerError = function(field, msg){
 
 		Arbiter.publish('/validate/error/show', {
 			field: this.defaults.fields[field].htmlObj,
-			message: this.defaults.i18n.formErrors[msg]
+			message: this.defaults.i18n[msg]
 		});
 
 	}
