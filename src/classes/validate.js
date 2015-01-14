@@ -28,7 +28,15 @@ function Validate(args){
 		_this.defaults = {
 				frm: (args.frm ? args.frm : false),
 				fields: [],
-				noFormevents: (args.noFormevents ? true : false)
+				noFormevents: (args.noFormevents ? true : false),
+				i18n: {
+					formErrors: {
+						empty: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.empty ? args.i18n.formErrors.empty : 'Dit veld mag niet leeg zijn'),
+						unchecked: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.unchecked ? args.i18n.formErrors.unchecked : 'U moet dit veld aanvinken'),
+						invalidEmail: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.invalidEmail ? args.i18n.formErrors.invalidEmail : 'Gelieve een bestaand email adres in te voeren'),
+						invalidTelephone: (args.i18n && args.i18n.formErrors && args.i18n.formErrors.invalidTelephone ? args.i18n.formErrors.invalidTelephone : 'Gelieve een correct telefoon nummer in te voeren')
+					}
+				}
 			};
 
 		if (_this.defaults.frm){
@@ -263,8 +271,9 @@ Validate.prototype.triggerError = function(field, msg){
 
 		Arbiter.publish('/validate/error/show', {
 			field: this.defaults.fields[field].htmlObj,
-			message: App.i18n.formErrors[msg]
+			message: this.defaults.i18n.formErrors[msg]
 		});
+
 	}
 
 	return this;

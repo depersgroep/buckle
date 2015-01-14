@@ -20,7 +20,15 @@ App.modules.validate = (function() {
 			if ($(this).data('validate')) {
 
 				var form = new Validate({
-					frm: this
+					frm: this,
+					i18n: {
+						formErrors: {
+							empty: 'Dit veld mag niet leeg zijn (custom i18n)',
+							unchecked: 'U moet dit veld aanvinken (custom i18n)',
+							invalidEmail: 'Gelieve een bestaand email adres in te voeren (custom i18n)',
+							invalidTelephone: 'Geldig nummer aub (custom i18n)'
+						}
+					}
 				});
 			}
 

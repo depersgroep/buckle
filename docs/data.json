@@ -378,7 +378,7 @@
         },
         {
             "file": "src\\classes\\validate.js",
-            "line": 66,
+            "line": 74,
             "itemtype": "method",
             "name": "checkValidation",
             "description": "check the form validation",
@@ -389,7 +389,7 @@
         },
         {
             "file": "src\\classes\\validate.js",
-            "line": 200,
+            "line": 208,
             "itemtype": "method",
             "name": "checkValue",
             "description": "check if an input / textarea value is valid",
@@ -404,7 +404,7 @@
         },
         {
             "file": "src\\classes\\validate.js",
-            "line": 300,
+            "line": 309,
             "itemtype": "method",
             "name": "removeAllErrors",
             "description": "Remove all errors",

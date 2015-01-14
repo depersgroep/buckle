@@ -142,7 +142,15 @@ function Validate(args){
 		_this.defaults = {
 				frm: (args.frm ? args.frm : false),
 				fields: [],
-				noFormevents: (args.noFormevents ? true : false)
+				noFormevents: (args.noFormevents ? true : false),
+				i18n: {
+					formErrors: {
+						empty: (args.i18n &amp;&amp; args.i18n.formErrors &amp;&amp; args.i18n.formErrors.empty ? args.i18n.formErrors.empty : &#x27;Dit veld mag niet leeg zijn&#x27;),
+						unchecked: (args.i18n &amp;&amp; args.i18n.formErrors &amp;&amp; args.i18n.formErrors.unchecked ? args.i18n.formErrors.unchecked : &#x27;U moet dit veld aanvinken&#x27;),
+						invalidEmail: (args.i18n &amp;&amp; args.i18n.formErrors &amp;&amp; args.i18n.formErrors.invalidEmail ? args.i18n.formErrors.invalidEmail : &#x27;Gelieve een bestaand email adres in te voeren&#x27;),
+						invalidTelephone: (args.i18n &amp;&amp; args.i18n.formErrors &amp;&amp; args.i18n.formErrors.invalidTelephone ? args.i18n.formErrors.invalidTelephone : &#x27;Gelieve een correct telefoon nummer in te voeren&#x27;)
+					}
+				}
 			};
 
 		if (_this.defaults.frm){
@@ -377,8 +385,9 @@ Validate.prototype.triggerError = function(field, msg){
 
 		Arbiter.publish(&#x27;/validate/error/show&#x27;, {
 			field: this.defaults.fields[field].htmlObj,
-			message: App.i18n.formErrors[msg]
+			message: this.defaults.i18n.formErrors[msg]
 		});
+
 	}
 
 	return this;
