@@ -243,41 +243,53 @@ bonzo.setQueryEngine(qwery);
 		 *	@param {String} Selector A string containing a selector expression to match elements against.
 		 *
 		 */
-		children: function() {
-			var i, l, r = [];
+		children: function(selector) {
+			var collection = $(selector),
+				i, l, k, r = [];
 			for (i = 0; i < this.length; i++) {
 				if (this[i].childNodes){
 					for (l = 0; l < this[i].childNodes.length;l++){
 						if (this[i].childNodes[l].nodeType === 1){
-							r.push(this[i].childNodes[l]);
+							k = this[i].childNodes[l];
+							if(!selector || (selector && indexOf(collection, k) !== -1)){
+								r.push(k);
+							}
 						}
 					}
 				}
 			}
 			return $(qwery.uniq(r));
 		},
-		// siblings: function() {
-		//     var i, l, p, r = [];
-		//     for (i = 0; i < this.length; i++) {
-		//         p = this[i];
-		//         l = p.previousSibling;
-		//         while (l){
-		//             if (l.nodeType === 1){
-		//                 r.push(p);
-		//             }
-		//             l = l.previousSibling;
-		//         }
-		//         p = this[i];
-		//         l = p.nextSibling;
-		//         while (l){
-		//             if (l.nodeType === 1){
-		//                 r.push(l);
-		//             }
-		//             l = l.nextSibling;
-		//         }
-		//     }
-		//     return $(r);
-		// },
+		/**
+		 *
+		 *	@method siblings
+		 *	@for $
+		 *  @chainable
+		 *
+		 *	@description
+		 *	Get the siblings of each element in the set of matched elements, optionally
+		 *	filtered by a selector.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		siblings: function(selector) {
+			var i, j, k, p, children = [], r = [], elm;
+			for (i = 0; i < this.length; i++) {
+				p = this[i];
+				k = p.parentNode;
+				children = $(k).children(selector);
+
+				for (j = 0; j < children.length;j++){
+					elm = children[j];
+					if(elm !== p){
+						r.push(elm);
+					}
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
 		/**
 		 *
 		 *	@method closest
