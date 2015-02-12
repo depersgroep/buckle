@@ -262,6 +262,35 @@ bonzo.setQueryEngine(qwery);
 		},
 		/**
 		 *
+		 *	@method filter
+		 *	@for $
+		 *  @chainable
+		 *
+		 *	@description
+		 *	Filter the set of matched elements, optionally
+		 *	filtered by a selector.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		filter: function(selector) {
+			var collection = $(selector),
+				i, k, r = [];
+
+			for (i = 0; i < this.length; i++) {
+				k = this[i];
+
+				if (k.nodeType === 1){
+					if(!selector || (selector && indexOf(collection, k) !== -1)){
+						r.push(k);
+					}
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		/**
+		 *
 		 *	@method siblings
 		 *	@for $
 		 *  @chainable

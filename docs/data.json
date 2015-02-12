@@ -585,6 +585,23 @@
             "file": "src\\persgroep.js",
             "line": 263,
             "itemtype": "method",
+            "name": "filter",
+            "chainable": 1,
+            "description": "Filter the set of matched elements, optionally\n\tfiltered by a selector.",
+            "params": [
+                {
+                    "name": "Selector",
+                    "description": "A string containing a selector expression to match elements against.",
+                    "type": "String"
+                }
+            ],
+            "class": "$",
+            "module": "Persgroep"
+        },
+        {
+            "file": "src\\persgroep.js",
+            "line": 292,
+            "itemtype": "method",
             "name": "siblings",
             "chainable": 1,
             "description": "Get the siblings of each element in the set of matched elements, optionally\n\tfiltered by a selector.",
@@ -600,7 +617,7 @@
         },
         {
             "file": "src\\persgroep.js",
-            "line": 293,
+            "line": 322,
             "itemtype": "method",
             "name": "closest",
             "chainable": 1,
@@ -617,7 +634,7 @@
         },
         {
             "file": "src\\persgroep.js",
-            "line": 441,
+            "line": 470,
             "description": "$.browser('ie6') to check for current client bowser.",
             "params": [
                 {
@@ -641,7 +658,7 @@
         },
         {
             "message": "Missing item type\n$.browser('ie6') to check for current client bowser.",
-            "line": " src\\persgroep.js:441"
+            "line": " src\\persgroep.js:470"
         }
     ]
 }
