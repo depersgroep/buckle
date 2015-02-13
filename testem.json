@@ -1,0 +1,15 @@
+{
+	"test_page": "_SpecRunner.html",
+	"output": {
+		"coverage": "_test/tmp/coverage/from_browsers/"
+	},
+	"routes": {
+		"/instrumented": "_test/instrumented"
+	},
+	"launch_in_dev": [
+		"Chrome"
+	],
+	"launch_in_ci": [
+		"Chrome"
+	]
+}

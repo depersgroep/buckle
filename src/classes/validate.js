@@ -120,13 +120,17 @@ Validate.prototype.checkValidation = function(){
 
 			if (this.checkValue(this.defaults.fields[k].htmlObj)){
 				// check the type
+				var regexData,
+					regexp,
+					radiogroup;
+
 				switch (this.defaults.fields[k].htmlObj.nodeName.toLowerCase()){
 				case 'textarea':
 					// check if we have a data-regex, if so check if it is valid
 					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')){
-						var regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
+						regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
 						if (regexData.regex){
-							var regexp = new RegExp(regexData.regex, regexData.flags);
+							regexp = new RegExp(regexData.regex, regexData.flags);
 							if (!regexp.test(this.defaults.fields[k].htmlObj.value)){
 								this.triggerError(k, 'invalid');
 								error = true;
@@ -151,7 +155,7 @@ Validate.prototype.checkValidation = function(){
 						}
 						break;
 					case 'radio':
-						var radiogroup = $('input[name="' + this.defaults.fields[k].htmlObj.name + '"]:checked');
+						radiogroup = $('input[name="' + this.defaults.fields[k].htmlObj.name + '"]:checked');
 						if (radiogroup.length < 1 || !radiogroup[0].value){
 							this.triggerError(k, 'unchecked');
 							error = true;
@@ -176,9 +180,9 @@ Validate.prototype.checkValidation = function(){
 					default:
 						// check if we have a data-regex, if so check if it is valid
 						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')){
-							var regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
+							regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
 							if(regexData.regex){
-								var regexp = new RegExp(regexData.regex, regexData.flags);
+								regexp = new RegExp(regexData.regex, regexData.flags);
 								if (!regexp.test(this.defaults.fields[k].htmlObj.value)){
 									this.triggerError(k, 'invalid');
 									error = true;

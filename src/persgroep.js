@@ -6,29 +6,29 @@
  * 3rd party libraries:
  *
  *
- *  [Arbiter](http://arbiterjs.com)
- *  -------------------------------------
- *  A light-weight, library-agnostic javascript implementation of
- *  the pub/sub pattern
+ *	[Arbiter](http://arbiterjs.com)
+ *	-------------------------------------
+ *	A light-weight, library-agnostic javascript implementation of
+ *	the pub/sub pattern
  *
- *  [Bonzo](https://github.com/ded/bonzo)
- *  -------------------------------------
- *  A library agnostic extensible DOM utility. Nothing else.
+ *	[Bonzo](https://github.com/ded/bonzo)
+ *	-------------------------------------
+ *	A library agnostic extensible DOM utility. Nothing else.
  *
- *  [Qwuery](https://github.com/ded/qwery)
- *  -------------------------------------
- *  Qwery is a modern selector engine built on top of querySelectorAll
- *  giving you practical utility.
+ *	[Qwery](https://github.com/ded/qwery)
+ *	-------------------------------------
+ *	Qwery is a modern selector engine built on top of querySelectorAll
+ *	giving you practical utility.
  *
- *  [Bean](https://github.com/fat/bean)
- *  -------------------------------------
- *  A small, fast, cross-platform, framework-agnostic event manager
- *  designed for desktop, mobile, and touch-based browsers.
+ *	[Bean](https://github.com/fat/bean)
+ *	-------------------------------------
+ *	A small, fast, cross-platform, framework-agnostic event manager
+ *	designed for desktop, mobile, and touch-based browsers.
  *
- *  [Reqwest](https://github.com/ded/reqwest)
- *  -------------------------------------
- *  Ajax all over again! Includes support for xmlHttpRequest, JSONP,
- *  CORS and CommonJS Promises A.
+ *	[Reqwest](https://github.com/ded/reqwest)
+ *	-------------------------------------
+ *	Ajax all over again! Includes support for xmlHttpRequest, JSONP,
+ *	CORS and CommonJS Promises A.
  *
  * @module Persgroep
  *
@@ -41,19 +41,19 @@ bean.setSelectorEngine(qwery);
 bonzo.setQueryEngine(qwery);
 
 (function() {
-
-
-/**
- *
- *  Return a collection of matched elements either found in the DOM based
- *  on passed argument(s) or created by passing an HTML string.
- *
- *	@param {String} selector A string containing a selector expression
- *  @param {Element,Bonzo} [context] A DOM Element, Document, or Bonzo object to use as context
- *
- *	@return {Bonzo} Bonzo An array of elements found matching the selector string
- *
- */
+	/**
+	 *	@class $
+	 *
+	 *	@description
+	 *	Return a collection of matched elements either found in the DOM based
+	 *	on passed argument(s) or created by passing an HTML string.
+	 *
+	 *	@param {String} selector A string containing a selector expression
+	 *	@param {Element,Bonzo} [context] A DOM Element, Document, or Bonzo object to use as context
+	 *
+	 *	@return {Bonzo} Bonzo An array of elements found matching the selector string
+	 *
+	 */
 	$ = function (selector, node) {
 		if (node) {
 			return bonzo(qwery(selector, node));
@@ -77,13 +77,13 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method on
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	lets you attach event listeners to both elements and objects.
 		 *
 		 *	@param {String} eventType An event (or multiple events, space separated) to listen to
-		 *  @param {String} [selector] A CC DOM Element selector string to bind the listener to child elements matching the selector
+		 *	@param {String} [selector] A CC DOM Element selector string to bind the listener to child elements matching the selector
 		 *	@param {function} handler The callback function
 		 *	@param {arguments} [args] Additional arguments to pass to the callback function
 		 *
@@ -112,7 +112,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method one
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	one() is an alias for bean.on() except that the handler will only be executed once
@@ -131,7 +131,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method off
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	off() is how you get rid of handlers once you no longer want them active.
@@ -154,7 +154,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method fire
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	fire() gives you the ability to trigger events.
@@ -171,12 +171,11 @@ bonzo.setQueryEngine(qwery);
 				return bean.fire.apply(elem, args);
 			});
 		},
-		// extra functionality
 		/**
 		 *
 		 *	@method find
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	Get the descendants of each element in the current set of matched elements, filtered
@@ -200,7 +199,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method parents
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	Get the ancestors of each element in the current set of matched elements, optionally
@@ -234,7 +233,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method children
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	Get the children of each element in the set of matched elements, optionally
@@ -264,7 +263,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method filter
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	Filter the set of matched elements, optionally
@@ -293,7 +292,7 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method siblings
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	Get the siblings of each element in the set of matched elements, optionally
@@ -323,11 +322,11 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@method closest
 		 *	@for $
-		 *  @chainable
+		 *	@chainable
 		 *
 		 *	@description
 		 *	For each element in the set, get the first element that matches the selector by testing the
-		 *  element itself and traversing up through its ancestors in the DOM tree.
+		 *	element itself and traversing up through its ancestors in the DOM tree.
 		 *
 		 *	@param {String} Selector A string containing a selector expression to match elements against.
 		 *
@@ -467,12 +466,11 @@ bonzo.setQueryEngine(qwery);
 		return q;
 	};
 
-	/**
-	* $.browser('ie6') to check for current client bowser.
-	*
-	* @param {String} browser Can be [ie | ie6 | ie7 | ie8 | ie9 | lte7 | lte8 | lte9] or non of them.
-	* @return {Boolean} Returns true if browser matches current client browser
-	*/
+	// Standard comments, it's not generated by Yuidoc anyway!
+	// @description
+	// $.browser('ie6') to check for current client bowser.
+	// @param {String} browser Can be [ie | ie6 | ie7 | ie8 | ie9 | lte7 | lte8 | lte9] or non of them.
+	// @return {Boolean} Returns true if browser matches current client browser
 	$.browser = function(browser) {
 		var browserMetaTag = $('meta[name=browser]'),
 			browserIdentifiers = [];
