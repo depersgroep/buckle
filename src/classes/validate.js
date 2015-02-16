@@ -21,9 +21,8 @@
  *
  *
  */
-function Validate(args){
-
-	if (args){
+function Validate(args) {
+	if (args) {
 		var _this = this;
 		_this.defaults = {
 				frm: (args.frm ? args.frm : false),
@@ -37,28 +36,28 @@ function Validate(args){
 				}
 			};
 
-		if (_this.defaults.frm){
-
+		if (_this.defaults.frm) {
 			_this.defaults.frm.setAttribute('novalidate', '');
 
 			// get all the input / textarea stuff and check if it's required
-			$('input[required], textarea[required], select[required], input[data-validate="true"], textarea[data-validate="true"], select[data-validate="true"]', _this.defaults.frm).each(function(){
+			$('input[required], textarea[required], select[required], input[data-validate="true"], textarea[data-validate="true"], select[data-validate="true"]', _this.defaults.frm).each(function() {
 				_this.defaults.fields.push({
 					hasError: false,
 					htmlObj: this
 				});
 			});
 
-			if (!_this.defaults.noFormevents){
+			if (!_this.defaults.noFormevents) {
 				// hijack the form submit
-				bean.on(_this.defaults.frm, 'submit', function(e){
-					if (_this.checkValidation()){
+				bean.on(_this.defaults.frm, 'submit', function(e) {
+					if (_this.checkValidation()) {
 						e.preventDefault();
-					}else{
+					} else {
 						$('[type="submit"]', this).attr('disabled', 'disabled');
 					}
 				});
-				bean.on(_this.defaults.frm, 'reset', function(){
+
+				bean.on(_this.defaults.frm, 'reset', function() {
 					_this.removeAllErrors();
 				});
 			}
@@ -66,7 +65,6 @@ function Validate(args){
 	}
 
 	return this;
-
 }
 
 /**
@@ -86,8 +84,7 @@ function Validate(args){
  *
  *
  */
-Validate.prototype.checkValidation = function(){
-
+Validate.prototype.checkValidation = function() {
 	var error = false;
 
 	// private function to check Regex
@@ -99,39 +96,41 @@ Validate.prototype.checkValidation = function(){
 
 		try {
 			new RegExp(regex, flags);
+
 			return {
 				'regex': regex,
 				'flags': flags
 			};
-		}
-		catch(e) {
+		} catch (e) {
 			return {};
 		}
 	}
 
-	if (this.defaults){
-		for(var k in this.defaults.fields){
-			//IE looping over every arg protection
-			if(!this.defaults.fields[k] || !this.defaults.fields[k].htmlObj) {
+	if (this.defaults) {
+		for (var k in this.defaults.fields) {
+			// IE looping over every arg protection
+			if (!this.defaults.fields[k] || !this.defaults.fields[k].htmlObj) {
 				continue;
 			}
 			this.removeError(k);
 			// check if there is a value
 
-			if (this.checkValue(this.defaults.fields[k].htmlObj)){
+			if (this.checkValue(this.defaults.fields[k].htmlObj)) {
 				// check the type
 				var regexData,
 					regexp,
 					radiogroup;
 
-				switch (this.defaults.fields[k].htmlObj.nodeName.toLowerCase()){
+				switch (this.defaults.fields[k].htmlObj.nodeName.toLowerCase()) {
 				case 'textarea':
 					// check if we have a data-regex, if so check if it is valid
-					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')){
+					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')) {
 						regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
-						if (regexData.regex){
+
+						if (regexData.regex) {
 							regexp = new RegExp(regexData.regex, regexData.flags);
-							if (!regexp.test(this.defaults.fields[k].htmlObj.value)){
+
+							if (!regexp.test(this.defaults.fields[k].htmlObj.value)) {
 								this.triggerError(k, 'invalid');
 								error = true;
 							}
@@ -139,24 +138,25 @@ Validate.prototype.checkValidation = function(){
 					}
 					break;
 				case 'select':
-					if (!this.defaults.fields[k].htmlObj.options[this.defaults.fields[k].htmlObj.selectedIndex].value){
+					if (!this.defaults.fields[k].htmlObj.options[this.defaults.fields[k].htmlObj.selectedIndex].value) {
 						this.triggerError(k, 'invalid');
 						error = true;
 					}
 					break;
 				default:
-					switch(this.defaults.fields[k].htmlObj.getAttribute('type')){
+					switch (this.defaults.fields[k].htmlObj.getAttribute('type')) {
 					case 'checkbox':
-						if (!this.defaults.fields[k].htmlObj.checked){
+						if (!this.defaults.fields[k].htmlObj.checked) {
 							this.triggerError(k, 'unchecked');
 							error = true;
-						}else{
+						} else {
 							bean.off(this);
 						}
 						break;
 					case 'radio':
 						radiogroup = $('input[name="' + this.defaults.fields[k].htmlObj.name + '"]:checked');
-						if (radiogroup.length < 1 || !radiogroup[0].value){
+
+						if (radiogroup.length < 1 || !radiogroup[0].value) {
 							this.triggerError(k, 'unchecked');
 							error = true;
 						}
@@ -165,25 +165,27 @@ Validate.prototype.checkValidation = function(){
 						// must be regex
 						// added leading +-sign
 						// added spaces and slashes to the regex
-						if (!/^(\+?\d+)(\/?[\s\.]?\d+)*$/.test(this.defaults.fields[k].htmlObj.value)){
+						if (!/^(\+?\d+)(\/?[\s\.]?\d+)*$/.test(this.defaults.fields[k].htmlObj.value)) {
 							this.triggerError(k, 'invalidTelephone');
 							error = true;
 						}
 						break;
 					case 'email':
 						// new regex by Sven
-						if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.defaults.fields[k].htmlObj.value)){
+						if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.defaults.fields[k].htmlObj.value)) {
 							this.triggerError(k, 'invalidEmail');
 							error = true;
 						}
 						break;
 					default:
 						// check if we have a data-regex, if so check if it is valid
-						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')){
+						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')) {
 							regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
-							if(regexData.regex){
+
+							if (regexData.regex) {
 								regexp = new RegExp(regexData.regex, regexData.flags);
-								if (!regexp.test(this.defaults.fields[k].htmlObj.value)){
+
+								if (!regexp.test(this.defaults.fields[k].htmlObj.value)) {
 									this.triggerError(k, 'invalid');
 									error = true;
 								}
@@ -203,8 +205,8 @@ Validate.prototype.checkValidation = function(){
 			frm: this.defaults.frm
 		});
 	}
-	return error;
 
+	return error;
 };
 
 /**
@@ -227,37 +229,36 @@ Validate.prototype.checkValidation = function(){
  *
  *
  */
-Validate.prototype.checkValue = function(htmlObj){
-
+Validate.prototype.checkValue = function(htmlObj) {
 	var r = false;
-	if (htmlObj){
-		if (htmlObj.value && htmlObj.value !== htmlObj.getAttribute('placeholder')){
-			if (htmlObj.getAttribute('minlength')){
-				if (htmlObj.value.length >= parseInt(htmlObj.getAttribute('minlength'), 10)){
+
+	if (htmlObj) {
+		if (htmlObj.value && htmlObj.value !== htmlObj.getAttribute('placeholder')) {
+			if (htmlObj.getAttribute('minlength')) {
+				if (htmlObj.value.length >= parseInt(htmlObj.getAttribute('minlength'), 10)) {
 					r = true;
 				}
-			}else{
+			} else {
 				r = true;
 			}
 		}
 	}
 
 	return r;
-
 };
 
 // this is not a public function
-Validate.prototype.triggerError = function(field, msg){
-
-	if ((field || field === 0) && msg){
+Validate.prototype.triggerError = function(field, msg) {
+	if ((field || field === 0) && msg) {
 		var _this = this;
 
-		if('number' !== typeof field && !this.defaults.fields[field]) {
-			if('string' === typeof field) {
+		if (typeof field !== 'number' && !this.defaults.fields[field]) {
+			if (typeof field === 'string') {
 				field = $(field, _this.defaults.frm);
 			}
-			for(var i = 0; i < this.defaults.fields.length; i++) {
-				if(field[0] === this.defaults.fields[i].htmlObj) {
+
+			for (var i = 0; i < this.defaults.fields.length; i++) {
+				if (field[0] === this.defaults.fields[i].htmlObj) {
 					field = i;
 					break;
 				}
@@ -267,7 +268,7 @@ Validate.prototype.triggerError = function(field, msg){
 		this.defaults.fields[field].hasError = true;
 		// only attch the event once!
 		bean.off(_this.defaults.fields[field].htmlObj, 'keyup.validate');
-		bean.on(_this.defaults.fields[field].htmlObj, 'keyup.validate', function(){
+		bean.on(_this.defaults.fields[field].htmlObj, 'keyup.validate', function() {
 			_this.checkValidation();
 		});
 
@@ -275,24 +276,21 @@ Validate.prototype.triggerError = function(field, msg){
 			field: this.defaults.fields[field].htmlObj,
 			message: this.defaults.i18n[msg]
 		});
-
 	}
 
 	return this;
-
-
 };
 
 // neither is this
-Validate.prototype.removeError = function(field){
-
-	if (field){
-		if('number' !== typeof field && !this.defaults.fields[field]) {
-			if('string' === typeof field) {
+Validate.prototype.removeError = function(field) {
+	if (field) {
+		if (typeof field !== 'number' && !this.defaults.fields[field]) {
+			if (typeof field === 'string') {
 				field = $(field, this.defaults.frm);
 			}
-			for(var i = 0; i < this.defaults.fields.length; i++) {
-				if(field[0] === this.defaults.fields[i].htmlObj) {
+
+			for (var i = 0; i < this.defaults.fields.length; i++) {
+				if (field[0] === this.defaults.fields[i].htmlObj) {
 					field = i;
 					break;
 				}
@@ -305,7 +303,6 @@ Validate.prototype.removeError = function(field){
 	}
 
 	return this;
-
 };
 
 /**
@@ -326,8 +323,8 @@ Validate.prototype.removeError = function(field){
  *
  */
 Validate.prototype.removeAllErrors = function() {
-	for(var k in this.defaults.fields) {
-		if(!this.defaults.fields[k] || !this.defaults.fields[k].htmlObj) {
+	for (var k in this.defaults.fields) {
+		if (!this.defaults.fields[k] || !this.defaults.fields[k].htmlObj) {
 			continue;
 		}
 		bean.off(this.defaults.fields[k].htmlObj, 'keyup.validate');

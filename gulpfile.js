@@ -90,7 +90,7 @@ gulp.task('jshint', function() {
 });
 
 // JS ALL
-gulp.task('js', ['jshint', /*'jscs',*/ 'yuidoc'], function() {
+gulp.task('js', ['jshint', 'jscs', 'yuidoc'], function() {
 	return gulp.src('./src/**/*.js')
 	.pipe(uglify({
 		compress: {

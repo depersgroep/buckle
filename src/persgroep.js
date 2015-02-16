@@ -54,19 +54,21 @@ bonzo.setQueryEngine(qwery);
 	 *	@return {Bonzo} Bonzo An array of elements found matching the selector string
 	 *
 	 */
-	$ = function (selector, node) {
+	$ = function(selector, node) {
 		if (node) {
 			return bonzo(qwery(selector, node));
 		}
+
 		return bonzo(qwery(selector));
 	};
 
-	function indexOf (collection, item) {
+	function indexOf(collection, item) {
 		for (var i = 0; i < collection.length; i++) {
 			if (collection[i] === item) {
 				return i;
 			}
 		}
+
 		return -1;
 	}
 
@@ -89,22 +91,24 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 *	@example
 		 *
-		 *		$('.selector').on('click', function(){
+		 *		$('.selector').on('click', function() {
 		 *		// do something
 		 *	});
 		 *
 		 *
-		 *		$('.selector').on('click.action', function(e){
+		 *		$('.selector').on('click.action', function(e) {
 		 *		e.preventDefault();
 		 *		// do other stuff
 		 *	});
 		 *
 		 */
-		on: function () {
+		on: function() {
 			var args = [].slice.call(arguments);
 			args.unshift('');
-			return this.each(function (elem) {
+
+			return this.each(function(elem) {
 				args[0] = elem;
+
 				return bean.on.apply(this, args);
 			});
 		},
@@ -119,11 +123,13 @@ bonzo.setQueryEngine(qwery);
 		 *	and then removed for the event type(s).
 		 *
 		 */
-		one: function () {
+		one: function() {
 			var args = [].slice.call(arguments);
 			args.unshift('');
-			return this.each(function (elem) {
+
+			return this.each(function(elem) {
 				args[0] = elem;
+
 				return bean.one.apply(elem, args);
 			});
 		},
@@ -142,11 +148,13 @@ bonzo.setQueryEngine(qwery);
 		 *	@param {function} [args] the specific callback function to remove
 		 *
 		 */
-		off: function () {
+		off: function() {
 			var args = [].slice.call(arguments);
 			args.unshift('');
-			return this.each(function (elem) {
+
+			return this.each(function(elem) {
 				args[0] = elem;
+
 				return bean.off.apply(elem, args);
 			});
 		},
@@ -163,11 +171,13 @@ bonzo.setQueryEngine(qwery);
 		 *	@param {arguments} [handler] Additional arguments to pass to the callback function
 		 *
 		 */
-		fire: function () {
+		fire: function() {
 			var args = [].slice.call(arguments);
 			args.unshift('');
-			return this.each(function (elem) {
+
+			return this.each(function(elem) {
 				args[0] = elem;
+
 				return bean.fire.apply(elem, args);
 			});
 		},
@@ -187,12 +197,15 @@ bonzo.setQueryEngine(qwery);
 		find: function(s) {
 			var r = [],
 				i, l, j, k, els;
+
 			for (i = 0, l = this.length; i < l; i++) {
 				els = qwery(s, this[i]);
+
 				for (j = 0, k = els.length; j < k; j++) {
 					r.push(els[j]);
 				}
 			}
+
 			return $(qwery.uniq(r));
 		},
 		/**
@@ -211,22 +224,27 @@ bonzo.setQueryEngine(qwery);
 		parents: function(selector, closest) {
 			// console.log("collection: ",$(selector), selector);
 			var collection = $(selector),
-				j, k, p, r = [];
+				j, k, p,
+				r = [];
+
 			for (j = 0; j < this.length; j++) {
 				p = this[j];
 				k = p.parentNode;
+
 				while (k) {
 					if (selector && indexOf(collection, k) !== -1) {
 						r.push(k);
+
 						if (closest) {
 							break;
 						}
-					}else if (!selector){
+					} else if (!selector) {
 						r.push(k);
 					}
 					k = k.parentNode;
 				}
 			}
+
 			return $(qwery.uniq(r));
 		},
 		/**
@@ -245,18 +263,21 @@ bonzo.setQueryEngine(qwery);
 		children: function(selector) {
 			var collection = $(selector),
 				i, l, k, r = [];
+
 			for (i = 0; i < this.length; i++) {
-				if (this[i].childNodes){
-					for (l = 0; l < this[i].childNodes.length;l++){
-						if (this[i].childNodes[l].nodeType === 1){
+				if (this[i].childNodes) {
+					for (l = 0; l < this[i].childNodes.length; l++) {
+						if (this[i].childNodes[l].nodeType === 1) {
 							k = this[i].childNodes[l];
-							if(!selector || (selector && indexOf(collection, k) !== -1)){
+
+							if (!selector || (selector && indexOf(collection, k) !== -1)) {
 								r.push(k);
 							}
 						}
 					}
 				}
 			}
+
 			return $(qwery.uniq(r));
 		},
 		/**
@@ -279,8 +300,8 @@ bonzo.setQueryEngine(qwery);
 			for (i = 0; i < this.length; i++) {
 				k = this[i];
 
-				if (k.nodeType === 1){
-					if(!selector || (selector && indexOf(collection, k) !== -1)){
+				if (k.nodeType === 1) {
+					if (!selector || (selector && indexOf(collection, k) !== -1)) {
 						r.push(k);
 					}
 				}
@@ -302,15 +323,20 @@ bonzo.setQueryEngine(qwery);
 		 *
 		 */
 		siblings: function(selector) {
-			var i, j, k, p, children = [], r = [], elm;
+			var i, j, k, p,
+				children = [],
+				r = [],
+				elm;
+
 			for (i = 0; i < this.length; i++) {
 				p = this[i];
 				k = p.parentNode;
 				children = $(k).children(selector);
 
-				for (j = 0; j < children.length;j++){
+				for (j = 0; j < children.length; j++) {
 					elm = children[j];
-					if(elm !== p){
+
+					if (elm !== p) {
 						r.push(elm);
 					}
 				}
@@ -334,92 +360,100 @@ bonzo.setQueryEngine(qwery);
 		closest: function(selector) {
 			return this.parents(selector, true);
 		},
-		clone: function(deepClone){
+		clone: function(deepClone) {
 			var i = 0,
 				r = [],
 				div = document.createElement('div'),
 				supportsHTML5 = !!document.createElement('canvas').getContext;
 			deepClone = deepClone || false;
-			for (;i<this.length;i++){
-				if (supportsHTML5){
+
+			for (; i < this.length; i++) {
+				if (supportsHTML5) {
 					r.push(this[i].cloneNode(deepClone));
-				}else{
+				} else {
 					div.innerHTML = this[i].outerHTML;
 					r.push(div.firstChild);
 				}
 			}
+
 			return $(qwery.uniq(r));
 		},
-		index: function (haystack) {
+		index: function(haystack) {
 			haystack = haystack || this.parent().children();
 			var needle = this.get(0),
 				index = -1,
 				i = 0;
+
 			haystack.each(function(elem) {
-				if(elem === needle) {
+				if (elem === needle) {
 					index = i;
 				}
 				i++;
 			});
+
 			return index;
 		}
 	});
 
 	// reqwest
-	$.ajax = function(){
+	$.ajax = function() {
 		// use reqwest
 		reqwest.apply(this, arguments);
 	};
 
 	// Arbiter
-	$.publish = function(){
+	$.publish = function() {
 		return Arbiter.publish.apply(this, arguments);
 	};
 
-	$.subscribe = function(){
+	$.subscribe = function() {
 		return Arbiter.subscribe.apply(this, arguments);
 	};
 
-	$.unsubscribe = function(){
+	$.unsubscribe = function() {
 		return Arbiter.unsubscribe.apply(this, arguments);
 	};
 
-	$.resubscribe = function(){
+	$.resubscribe = function() {
 		return Arbiter.resubscribe.apply(this, arguments);
 	};
 
 	// custom code
 
-	$.parseHTML = function(htmlString){
+	$.parseHTML = function(htmlString) {
 		var h = document.createElement('div');
 		h.innerHTML = htmlString;
+
 		return $(h).children();
 	};
 
-	$.template = function(id){
-
-		var temp = $.parseHTML($('template#'+id).html());
-		$('[data-id]', temp).each(function(){
+	$.template = function(id) {
+		var temp = $.parseHTML($('template#' + id).html());
+		$('[data-id]', temp).each(function() {
 			this.id = this.getAttribute('data-id');
 		});
-		return temp;
 
+		return temp;
 	};
 
-	$.serialize = function (form) {
+	$.serialize = function(form) {
 		var q = $.serializeObject(form);
+
 		return q.join('&');
 	};
 
-	$.serializeObject = function (form){
+	$.serializeObject = function(form) {
 		if (!form || form.nodeName !== 'FORM') {
 			return;
 		}
+
 		var i, j, q = [];
+
 		for (i = form.elements.length - 1; i >= 0; i = i - 1) {
 			if (form.elements[i].name === '') {
 				continue;
 			}
+
 			switch (form.elements[i].nodeName) {
 			case 'INPUT':
 				switch (form.elements[i].type) {
@@ -463,6 +497,7 @@ bonzo.setQueryEngine(qwery);
 				break;
 			}
 		}
+
 		return q;
 	};
 
@@ -486,7 +521,6 @@ bonzo.setQueryEngine(qwery);
 	};
 
 	$.breakpoint = function() {
-
 		var width = util.getWindowWidth(),
 			breakpoints = App.config.breakpoints,
 			device;
@@ -503,5 +537,4 @@ bonzo.setQueryEngine(qwery);
 	};
 
 	return $;
-
 })();

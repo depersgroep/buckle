@@ -26,46 +26,49 @@
  *
  *
  */
-function Dialog(args){
-
-	if (args){
+function Dialog(args) {
+	if (args) {
 		var _this = this;
 
 		_this.defaults = {
 				trigger: (args.trigger ? args.trigger : null),
 				overlay: (args.overlay === false ? args.overlay : true),
 				closer: (args.close ? args.close : false),
-				position: (args.position ? args.position : {x: '50%', y: '50%'}),
-				onShow: (args.onShow ? args.onShow : function(){}),
-				onHide: (args.onHide ? args.onHide : function(){}),
+				position: (args.position ? args.position : {
+					x: '50%',
+					y: '50%'
+				}),
+				onShow: (args.onShow ? args.onShow : function() {}),
+				onHide: (args.onHide ? args.onHide : function() {})
 			};
 
-		// console.log('we have to create a dialog');
-
 		// create toggle modules without global close
-		$(_this.defaults.trigger).each(function(){
+		$(_this.defaults.trigger).each(function() {
 			// if we have a panel create a toggle
 			var trigger = $(this),
 				id = trigger.attr('data-trigger'),
 				modal = $('*[data-modal="' + id + '"]');
-			if (id && modal.length){
+
+			if (id && modal.length) {
 				trigger.data('toggle',
 					new Toggle({
 						trigger: this,
 						toggle: modal,
 						globalClose: false,
-						onShow: function(){
+						onShow: function() {
 							_this.show(trigger, modal);
 						},
-						onHide: function(){
+						onHide: function() {
 							_this.hide(trigger, modal);
 						}
 					})
 				);
-				if (_this.defaults.closer){
-					$(_this.defaults.closer, modal).on('click.dialog.close', function(){
+
+				if (_this.defaults.closer) {
+					$(_this.defaults.closer, modal).on('click.dialog.close', function() {
 						var tgl = $(_this.defaults.trigger).data('toggle');
-						if (tgl){
+
+						if (tgl) {
 							tgl.hide.call(tgl);
 						}
 					});
@@ -75,7 +78,6 @@ function Dialog(args){
 	}
 
 	return this;
-
 }
 
 /**
@@ -95,9 +97,8 @@ function Dialog(args){
  *	obj.show();
  *
  */
-Dialog.prototype.show = function(trigger, modal){
-
-	if (this.defaults && trigger && modal){
+Dialog.prototype.show = function(trigger, modal) {
+	if (this.defaults && trigger && modal) {
 		App.views.dialog.unshift($(this.defaults.trigger).data('toggle'));
 
 		this.defaults.onShow.call(this, {
@@ -109,7 +110,6 @@ Dialog.prototype.show = function(trigger, modal){
 	}
 
 	return this;
-
 };
 
 /**
@@ -129,10 +129,9 @@ Dialog.prototype.show = function(trigger, modal){
  *	obj.hide();
  *
  */
-Dialog.prototype.hide = function(trigger, modal){
-
-	if (this.defaults){
-		if (App.views.dialog.length){
+Dialog.prototype.hide = function(trigger, modal) {
+	if (this.defaults) {
+		if (App.views.dialog.length) {
 			App.views.dialog.shift();
 		}
 
@@ -145,30 +144,29 @@ Dialog.prototype.hide = function(trigger, modal){
 	}
 
 	return this;
-
 };
 
-Dialog.prototype.destroy = function(){
-
+Dialog.prototype.destroy = function() {
 	var _this = this;
-	if (this.defaults){
-		$(this.defaults.trigger).each(function(){
-			if ($(this).data('toggle')){
+
+	if (this.defaults) {
+		$(this.defaults.trigger).each(function() {
+			if ($(this).data('toggle')) {
 				$(this).data('toggle').destroy();
 				$(this).data('toggle', '');
 			}
+
 			var trigger = $(this),
 				id = trigger.attr('data-trigger'),
 				modal = $('*[data-modal="' + id + '"]');
-			if (_this.defaults.closer){
-				$(_this.defaults.closer, modal).each(function(){
+
+			if (_this.defaults.closer) {
+				$(_this.defaults.closer, modal).each(function() {
 					bean.off(this, 'click.dialog');
 				});
 			}
 		});
-
 	}
 
 	return this;
-
 };

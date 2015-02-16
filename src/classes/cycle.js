@@ -37,7 +37,7 @@
  *			animation: animation,
  *			autoplay: autoplay,
  *			timer: timer,
- *			onSlideChange: function(args){
+ *			onSlideChange: function(args) {
  * 				// callback function
  *			}
  *		})
@@ -45,9 +45,9 @@
  *
  */
 function Cycle(args) {
-
 	var _this = this;
-	if (args){
+
+	if (args) {
 		_this.defaults = {
 			cycle: (args.cycle ? args.cycle : null),
 			container: (args.container ? args.container : null),
@@ -61,7 +61,7 @@ function Cycle(args) {
 				slideWidth: args.slideWidth ? args.slideWidth : 0
 			},
 			callback: {
-				onSlideChange: (args.onSlideChange ? args.onSlideChange : function(){})
+				onSlideChange: (args.onSlideChange ? args.onSlideChange : function() {})
 			},
 			settings: {
 				/*
@@ -115,7 +115,6 @@ function Cycle(args) {
 	}
 
 	function setupCycle() {
-
 		// get the current active item
 		var current = 0;
 		_this.defaults.slides.collection.each(function() {
@@ -141,11 +140,9 @@ function Cycle(args) {
 				_this.showNext(true);
 			}, _this.defaults.settings.timer);
 		}
-
 	}
 
 	function navEvents() {
-
 		bean.on($(_this.defaults.settings.navclasses.navNext, _this.defaults.settings.nav)[0], 'click', function(e) {
 			e.preventDefault();
 			_this.showNext();
@@ -155,11 +152,9 @@ function Cycle(args) {
 			e.preventDefault();
 			_this.showPrevious();
 		});
-
 	}
 
 	function bulletEvents() {
-
 		$(_this.defaults.settings.bulletClass, _this.defaults.settings.bullets).each(function() {
 			var ind = arguments[1]; // index
 			bean.on(this, 'click', function(e) {
@@ -168,7 +163,6 @@ function Cycle(args) {
 				_this.show(ind);
 			});
 		});
-
 	}
 
 	// if we have a cycle object and there are slides
@@ -178,7 +172,6 @@ function Cycle(args) {
 	}
 
 	return _this;
-
 }
 
 /**
@@ -198,9 +191,7 @@ function Cycle(args) {
  *
  */
 Cycle.prototype.show = function(slideNumber, direction) {
-
-
-	if (this.defaults){
+	if (this.defaults) {
 		var showSlide = false,
 			animDirection = (direction ? direction : false);
 
@@ -219,15 +210,18 @@ Cycle.prototype.show = function(slideNumber, direction) {
 					slideNumber = 0;
 				}
 			}
+
 			if (showSlide) {
 				// if the direction is not passed AND we have a slide animation AND the loop isn't infinite
 				if (!animDirection && this.defaults.settings.animation === 'slide') {
 					animDirection = 'left';
+
 					if (slideNumber < this.defaults.slides.cur) {
 						animDirection = 'right';
 					}
 				}
 				this.defaults.slides.cur = slideNumber;
+
 				// call the callback function
 				var args = {
 					container: this.defaults.container,
@@ -244,13 +238,13 @@ Cycle.prototype.show = function(slideNumber, direction) {
 					navigation: this.defaults.settings.nav,
 					loop: this.defaults.settings.loop
 				};
+
 				this.defaults.callback.onSlideChange.call(this, args);
 			}
 		}
 	}
 
 	return this;
-
 };
 
 /**
@@ -267,22 +261,21 @@ Cycle.prototype.show = function(slideNumber, direction) {
  *
  */
 Cycle.prototype.showNext = function(isAutoplay) {
-
-	if (this.defaults){
+	if (this.defaults) {
 		var newPosition = 0;
 		this.stopAutoplay(isAutoplay);
 
-		if(this.defaults.settings.loop || (
-			this.defaults.slides.cur + this.defaults.slides.step*2 <= this.defaults.slides.max)) {
+		if (this.defaults.settings.loop || (this.defaults.slides.cur + this.defaults.slides.step * 2 <= this.defaults.slides.max)) {
 			newPosition = this.defaults.slides.cur + this.defaults.slides.step;
 		} else {
 			newPosition = this.defaults.slides.cur + this.defaults.slides.max;
 			newPosition -= (this.defaults.slides.cur + this.defaults.slides.step);
 		}
+
 		this.show(newPosition, 'left');
 	}
-	return this;
 
+	return this;
 };
 
 /**
@@ -299,18 +292,18 @@ Cycle.prototype.showNext = function(isAutoplay) {
  *
  */
 Cycle.prototype.showPrevious = function(isAutoplay) {
-	if (this.defaults){
+	if (this.defaults) {
 		var newPosition = 0;
 		this.stopAutoplay(isAutoplay);
 
-		if(this.defaults.settings.loop || (this.defaults.slides.cur - this.defaults.slides.step > -1)) {
+		if (this.defaults.settings.loop || (this.defaults.slides.cur - this.defaults.slides.step > -1)) {
 			newPosition = this.defaults.slides.cur - this.defaults.slides.step;
 		}
 
 		this.show(newPosition, 'right');
 	}
-	return this;
 
+	return this;
 };
 
 /**
@@ -327,25 +320,23 @@ Cycle.prototype.showPrevious = function(isAutoplay) {
  *
  */
 Cycle.prototype.startAutoplay = function(timer) {
-	if (this.defaults){
-		var that = this;
+	if (this.defaults) {
+		var _this = this;
 		this.isPlaying = true;
 
-		//set a default value if needed
+		// set a default value if needed
 		timer = timer || this.defaults.settings.timer;
-		if(timer && !this.defaults.settings.autoplay) {
 
-			//if there isn't any autoplay going on right now, start one
+		if (timer && !this.defaults.settings.autoplay) {
+			// if there isn't any autoplay going on right now, start one
 			this.defaults.settings.autoplay = true;
 			this.defaults.settings._interval = window.setInterval(function() {
-				that.showNext(true);
+				_this.showNext(true);
 			}, this.defaults.settings.timer);
-
 		}
 	}
 
 	return this;
-
 };
 
 /**
@@ -362,19 +353,19 @@ Cycle.prototype.startAutoplay = function(timer) {
  *
  */
 Cycle.prototype.stopAutoplay = function(isAutoplay) {
-	if (this.defaults){
+	if (this.defaults) {
 		this.isPlaying = false;
+
 		if (!isAutoplay && this.defaults.settings.autoplay && this.defaults.settings._interval) {
 			var theTimer = this.defaults.settings._interval;
 			window.clearInterval(theTimer);
 			this.defaults.settings.autoplay = false;
 		}
 	}
+
 	return this;
 };
 
-Cycle.prototype.destroy = function(){
-
+Cycle.prototype.destroy = function() {
 	return this;
-
 };
