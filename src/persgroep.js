@@ -1,15 +1,14 @@
 'use strict';
 /**
  *
- * 'De persgroep' library can be used just like jQuery but
- * our $ function is a layer to communicate with  minimalistic
- * 3rd party libraries:
+ *	'De Persgroep' library can be used just like jQuery but
+ *	our $ function is a layer to communicate with  minimalistic
+ *	3rd party libraries:
  *
  *
  *	[Arbiter](http://arbiterjs.com)
  *	-------------------------------------
- *	A light-weight, library-agnostic javascript implementation of
- *	the pub/sub pattern
+ *	A light-weight, library-agnostic javascript implementation of the pub/sub pattern
  *
  *	[Bonzo](https://github.com/ded/bonzo)
  *	-------------------------------------
@@ -17,18 +16,15 @@
  *
  *	[Qwery](https://github.com/ded/qwery)
  *	-------------------------------------
- *	Qwery is a modern selector engine built on top of querySelectorAll
- *	giving you practical utility.
+ *	Qwery is a modern selector engine built on top of querySelectorAll giving you practical utility.
  *
  *	[Bean](https://github.com/fat/bean)
  *	-------------------------------------
- *	A small, fast, cross-platform, framework-agnostic event manager
- *	designed for desktop, mobile, and touch-based browsers.
+ *	A small, fast, cross-platform, framework-agnostic event manager designed for desktop, mobile, and touch-based browsers.
  *
  *	[Reqwest](https://github.com/ded/reqwest)
  *	-------------------------------------
- *	Ajax all over again! Includes support for xmlHttpRequest, JSONP,
- *	CORS and CommonJS Promises A.
+ *	Ajax all over again! Includes support for xmlHttpRequest, JSONP, CORS and CommonJS Promises A.
  *
  * @module Persgroep
  *

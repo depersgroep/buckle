@@ -10,7 +10,7 @@
  *
  *	@property {Bonzo} toggle The dom element item that needs to be toggled
  *	@property {Bonzo} trigger The dom element item that will trigger the toggle
- *  @property {Boolean} [state] True or false, open or closed, active or disabled, ....
+ *	@property {Boolean} [state] True or false, open or closed, active or disabled, ....
  *	@property {boolean} [globalClose] does the item toggle when you click outside the toggle element, default true
  *	@property {boolean} [noPreventDefault] cancel the default action on the trigger, default false
  *	@property {boolean} [toggleClick] does the item keeps toggling when clicking the trigger, default true

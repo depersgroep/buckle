@@ -10,7 +10,7 @@
  *
  *	@property {Bonzo} cycle The dom element containing the items
  *	@property {Bonzo} [container] The container if left / right positioning is needed
- *  @property {Integer} [containerwidth] Width of the container
+ *	@property {Integer} [containerwidth] Width of the container
  *	@property {Integer} [slidesLimit] Limit of slides
  *	@property {Integer} [initialSlide] default 0 is used but if another slide is the current one
  *	@property {Integer} [step] how many slides should be changed at once
@@ -38,7 +38,7 @@
  *			autoplay: autoplay,
  *			timer: timer,
  *			onSlideChange: function(args) {
- * 				// callback function
+ *				// callback function
  *			}
  *		})
  *	);

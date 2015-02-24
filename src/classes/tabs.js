@@ -19,7 +19,7 @@
  *		new Tabs({
  *		tabs: $('.tab-block'),
  *		onTabChange: function(args) {
- * 			// do stuff
+ *			// do stuff
  *		}
  *	});
  *
