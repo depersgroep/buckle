@@ -236,7 +236,7 @@ Toggle.prototype.destroy = function() {
 	if (this.defaults){
 		Arbiter.publish('/toggle/destroy', this.defaults);
 		$(_this.defaults.trigger).off('click.toggle.trigger mouseover.toggle mouseout.toggle');
-		$(document).off('click.toggle.globalclose', this.hide);
+		$(document).off('click.toggle.globalclose');
 		// remove the defaults
 		this.defaults = null;
 	}
