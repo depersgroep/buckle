@@ -222,7 +222,9 @@ Toggle.prototype.toggle = function() {
 		}else{
 			this.show();
 		}
-		this.defaults.onToggle.call(this.defaults.toggle);
+		this.defaults.onToggle.call(this.defaults.toggle, {
+			toggle: this.defaults.toggle
+		});
 	}
 
 	return this;
@@ -273,7 +275,9 @@ Toggle.prototype.show = function(){
 
 		}
 
-		this.defaults.onShow.call(this.defaults.toggle);
+		this.defaults.onShow.call(this.defaults.toggle, {
+			toggle: this.defaults.toggle
+		});
 	}
 
 	return this;
@@ -307,7 +311,9 @@ Toggle.prototype.hide = function(){
 		Arbiter.publish(&#x27;/toggle/hide&#x27;, {
 			toggle: this.defaults.toggle
 		});
-		this.defaults.onHide.call(this.defaults.toggle);
+		this.defaults.onHide.call(this.defaults.toggle, {
+			toggle: this.defaults.toggle
+		});
 
 		if (this.defaults.globalClose){
 			$(document).off(&#x27;click.toggle.globalclose&#x27;, this.hide);
