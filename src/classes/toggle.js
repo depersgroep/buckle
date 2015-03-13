@@ -107,7 +107,9 @@ Toggle.prototype.toggle = function() {
 			this.show();
 		}
 
-		this.defaults.onToggle.call(this.defaults.toggle);
+		this.defaults.onToggle.call(this.defaults.toggle, {
+			toggle: this.defaults.toggle
+		});
 	}
 
 	return this;
@@ -154,7 +156,9 @@ Toggle.prototype.show = function() {
 			});
 		}
 
-		this.defaults.onShow.call(this.defaults.toggle);
+		this.defaults.onShow.call(this.defaults.toggle, {
+			toggle: this.defaults.toggle
+		});
 	}
 
 	return this;
@@ -187,7 +191,9 @@ Toggle.prototype.hide = function() {
 			toggle: this.defaults.toggle
 		});
 
-		this.defaults.onHide.call(this.defaults.toggle);
+		this.defaults.onHide.call(this.defaults.toggle, {
+			toggle: this.defaults.toggle
+		});
 
 		if (this.defaults.globalClose) {
 			$(document).off('click.toggle.globalclose', this.hide);
@@ -223,8 +229,8 @@ Toggle.prototype.destroy = function() {
 	if (this.defaults) {
 		Arbiter.publish('/toggle/destroy', this.defaults);
 
-		$(_this.defaults.trigger).off('click.toggle mouseover.toggle mouseout.toggle');
-		$(document).off('click.toggle', this.hide);
+		$(_this.defaults.trigger).off('click.toggle.trigger mouseover.toggle mouseout.toggle');
+		$(document).off('click.toggle.globalclose');
 
 		// remove the defaults
 		this.defaults = null;

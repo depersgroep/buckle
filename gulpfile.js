@@ -1,28 +1,17 @@
-// gulpfile.js for APM Frontend
-var banner = [
-	'/**',
-	' * <%= pkg.name %> - <%= pkg.description %>',
-	' * @version v<%= pkg.version %>',
-	' */',
-	''
-].join('\n');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var concat = require('gulp-concat');
-var del = require('del');
-var header = require('gulp-header');
-var jshint = require('gulp-jshint');
-var notify = require('gulp-notify');
-var pkg = require('./package.json');
-var rename = require("gulp-rename");
-var uglify = require('gulp-uglify');
-var watch = require('gulp-watch');
-var uglify = require('gulp-uglify');
-var yuidoc = require('gulp-yuidoc');
-var jscs = require('gulp-jscs');
-var shell = require('gulp-shell');
-var testem = require('gulp-testem');
+'use strict';
 
+// gulpfile.js for web-javascript-libraries
+var gulp = require('gulp'),
+	gutil = require('gulp-util'),
+	del = require('del'),
+	jshint = require('gulp-jshint'),
+	notify = require('gulp-notify'),
+	uglify = require('gulp-uglify'),
+	uglify = require('gulp-uglify'),
+	yuidoc = require('gulp-yuidoc'),
+	jscs = require('gulp-jscs'),
+	shell = require('gulp-shell'),
+	testem = require('gulp-testem');
 
 // Clean
 gulp.task('clean', function() {
@@ -56,13 +45,13 @@ gulp.task('yuidoc', function() {
 		}
 	}, {
 		themedir: 'grunt/yuidoc/bootstrap',
-		helpers : ['grunt/yuidoc/bootstrap/helpers/helpers.js']
+		helpers: ['grunt/yuidoc/bootstrap/helpers/helpers.js']
 	}))
 	.pipe(gulp.dest('./docs'))
 	.on('error', function() {
 		gutil.beep();
 		this.emit('end');
-	})
+	});
 });
 
 // JS jscs
@@ -94,7 +83,11 @@ gulp.task('js', ['jshint', 'jscs', 'yuidoc'], function() {
 	return gulp.src('./src/**/*.js')
 	.pipe(uglify({
 		compress: {
+			/* jshint camelcase: false */
+			// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 			hoist_funs: false // hoist function declarations - otherwise functions are alphabetized, which can cause errors
+			// jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+			/* jshint camelcase: true */
 		}
 	}))
 	.pipe(gulp.dest('./dist'))
