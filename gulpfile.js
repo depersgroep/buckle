@@ -9,15 +9,47 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	yuidoc = require('gulp-yuidoc'),
 	jscs = require('gulp-jscs'),
-	testem = require('testem');
+	testemMulti = require('testem-multi'),
+	fs = require('fs');
 
+// gulp-testem is not far as good as grunt-testem
+// copied the necessary code from grunt-testem and adjusted accordingly
 gulp.task('testem', ['jshint'], function() {
-	var testemOptions = {
-			file: 'testem.json'
-		},
-		t = new testem();
+	testemMulti.exec(null, 'testem.json');
 
-	t.startCI(testemOptions);
+	testemMulti.on('data', function(data) {
+		var matches = {};
+
+		data = '' + data;
+
+		matches.path = data.match(/^# Executing (.+)$/);
+		matches.fail = data.match(/^not ok ([\s\S]+)/);
+
+		if (matches.path) {
+			gutil.log(matches.path[0]);
+		}
+
+		if (matches.fail) {
+			gutil.log(matches.fail[0]);
+		}
+	});
+
+	testemMulti.on('exit', function(results, memo) {
+		var tests = memo.tests,
+			pass = memo.pass,
+			// not = memo.not,
+			fail = memo.fail;
+
+		fs.writeFileSync('_test/tmp/results.tap', results || '');
+
+		if (tests !== pass || fail) {
+			gutil.log(gutil.colors.red('' + fail + '/' + tests + ' assertions failed'));
+		} else {
+			gutil.log(gutil.colors.green('' + tests + ' assertions passed'));
+		}
+
+		process.exit();
+	});
 });
 
 // Yui doc

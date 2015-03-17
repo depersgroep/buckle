@@ -20,8 +20,6 @@
     "gulp-jscs": "^1.4.0",
     "gulp-yuidoc": "^0.1.2",
     "gulp-shell": "^0.3.0",
-    "gulp-testem": "^0.0.1",
-    "testem-multi": "^0.4.5",
-    "testem": "^0.7.5"
+    "testem-multi": "^0.4.5"
   }
 }
