@@ -79,6 +79,7 @@ gulp.task('yuidoc', function() {
 gulp.task('jscs', function() {
 	return gulp.src([
 		'./src/**/*.js',
+		'./gulpfile.js',
 		'!./src/3rdparty/*.js'
 	])
 	.pipe(jscs());
@@ -120,7 +121,10 @@ gulp.task('js', ['jshint', 'jscs', 'yuidoc'], function() {
 
 // Watch
 gulp.task('watch', function() {
-	gulp.watch('./src/**/*.js', ['js']);
+	gulp.watch([
+		'./src/**/*.js',
+		'./gulpfile.js'
+	], ['js']);
 });
 
 // Default tasks..
