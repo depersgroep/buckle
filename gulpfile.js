@@ -3,32 +3,21 @@
 // gulpfile.js for web-javascript-libraries
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
-	del = require('del'),
 	jshint = require('gulp-jshint'),
 	notify = require('gulp-notify'),
 	uglify = require('gulp-uglify'),
 	uglify = require('gulp-uglify'),
 	yuidoc = require('gulp-yuidoc'),
 	jscs = require('gulp-jscs'),
-	shell = require('gulp-shell'),
-	testem = require('gulp-testem');
+	testem = require('testem');
 
-// Clean
-gulp.task('clean', function() {
-	return del('./_test/tmp');
-});
+gulp.task('testem', ['jshint'], function() {
+	var testemOptions = {
+			file: 'testem.json'
+		},
+		t = new testem();
 
-gulp.task('instrument', shell.task('istanbul instrument --output _test/instrumented src/classes'));
-
-gulp.task('testem', function() {
-	return gulp.src('')
-	.pipe(testem({
-		configFile: 'testem.json'
-	}));
-});
-
-gulp.task('report', function() {
-	return shell.task('istanbul report --root _test/tmp/coverage/from_browsers --dir coverage lcov');
+	t.startCI(testemOptions);
 });
 
 // Yui doc
@@ -104,4 +93,4 @@ gulp.task('watch', function() {
 
 // Default tasks..
 gulp.task('default', ['js', 'watch']);
-gulp.task('test', ['jshint', 'clean', 'instrument', 'testem', 'report']);
+gulp.task('test', ['testem']);

@@ -1,110 +1,107 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Jasmine Spec Runner</title>
+	<head>
+		<meta charset="utf-8">
+		<title>Jasmine Spec Runner</title>
 
-  <link rel="stylesheet" type="text/css" href="test/utils/jasmine/jasmine.css">
-
-
-  <script src="test/utils/jasmine/jasmine.js"></script>
-  <script src="test/utils/jasmine/jasmine-html.js"></script>
-  <script src="test/utils/jasmine/boot.js"></script>
-
-  <script src="src/3rdparty/arbiter.js"></script>
-  <script src="src/3rdparty/bean.js"></script>
-  <script src="src/3rdparty/bonzo.js"></script>
-  <script src="src/3rdparty/moment.js"></script>
-  <script src="src/3rdparty/qwery.js"></script>
-  <script src="src/3rdparty/reqwest.js"></script>
-  <script src="src/persgroep.js"></script>
-
-  <script src="instrumented/cycle.js"></script>
-  <script src="instrumented/toggle.js"></script>
-  <script src="instrumented/dialog.js"></script>
-  <script src="instrumented/tabs.js"></script>
-  <script src="instrumented/validate.js"></script>
-
-  <script src="test/spec/toggle.test.js"></script>
-  <script src="test/spec/tabs.test.js"></script>
-  <script src="test/spec/dialog.test.js"></script>
-  <script src="test/spec/cycle.test.js"></script>
-  <script src="test/spec/validate.test.js"></script>
-
-  <script>
-	var App = {
-		config: {
-		},
-		jsdata:{},
-		modules: {},
-		views: {
-			dialog: []
-		}
-	};
+		<link rel="stylesheet" type="text/css" href="test/utils/jasmine/jasmine.css">
 
 
-  </script>
+		<script src="test/utils/jasmine/jasmine.js"></script>
+		<script src="test/utils/jasmine/jasmine-html.js"></script>
+		<script src="test/utils/jasmine/boot.js"></script>
 
-</head>
-<body>
+		<script src="src/3rdparty/arbiter.js"></script>
+		<script src="src/3rdparty/bean.js"></script>
+		<script src="src/3rdparty/bonzo.js"></script>
+		<script src="src/3rdparty/moment.js"></script>
+		<script src="src/3rdparty/qwery.js"></script>
+		<script src="src/3rdparty/reqwest.js"></script>
+		<script src="src/persgroep.js"></script>
 
-	<div id="fauxtab"></div>
+		<script src="instrumented/cycle.js"></script>
+		<script src="instrumented/toggle.js"></script>
+		<script src="instrumented/dialog.js"></script>
+		<script src="instrumented/tabs.js"></script>
+		<script src="instrumented/validate.js"></script>
 
-	<div data-modal="fauxmodal">
-		<div class="close"></div>
-	</div>
+		<script src="test/spec/toggle.test.js"></script>
+		<script src="test/spec/tabs.test.js"></script>
+		<script src="test/spec/dialog.test.js"></script>
+		<script src="test/spec/cycle.test.js"></script>
+		<script src="test/spec/validate.test.js"></script>
 
-	<!-- slideshow.html -->
-	<div class="cycle slider" role="widget" data-type="cycle" data-transition="slide" data-adjustheight="false" data-navigation="true" data-bullets="true">
-		<ul class="cycle__container">
-			<li class="cycle__slide active">
-				<div class="cycle__item"></div>
-			</li>
-			<li class="cycle__slide">
-				<div class="cycle__item"></div>
-			</li>
-			<li class="cycle__slide">
-				<div class="cycle__item"></div>
-			</li>
-		</ul>
-		<ul class="slider__nav">
-			<li class="cycle__nav previous"><span class="icon icon-chevron-invert-left"></span></li>
-			<li class="slider__bullets">
-				<ul class="bullets">
-					<li class="slider__bullet">1</li>
-					<li class="slider__bullet">2</li>
-					<li class="slider__bullet">3</li>
-				</ul>
-			</li>
-			<li class="cycle__nav next"><span class="icon icon-chevron-invert-right"></span></li>
-		</ul>
-	</div>
-	<!-- / slideshow.html -->
+		<script>
+			var App = {
+				config: {
+				},
+				jsdata: {},
+				modules: {},
+				views: {
+					dialog: []
+				}
+			};
+		</script>
+	</head>
+	<body>
+
+		<div id="fauxtab"></div>
+
+		<div data-modal="fauxmodal">
+			<div class="close"></div>
+		</div>
+
+		<!-- slideshow.html -->
+		<div class="cycle slider" role="widget" data-type="cycle" data-transition="slide" data-adjustheight="false" data-navigation="true" data-bullets="true">
+			<ul class="cycle__container">
+				<li class="cycle__slide active">
+					<div class="cycle__item"></div>
+				</li>
+				<li class="cycle__slide">
+					<div class="cycle__item"></div>
+				</li>
+				<li class="cycle__slide">
+					<div class="cycle__item"></div>
+				</li>
+			</ul>
+			<ul class="slider__nav">
+				<li class="cycle__nav previous"><span class="icon icon-chevron-invert-left"></span></li>
+				<li class="slider__bullets">
+					<ul class="bullets">
+						<li class="slider__bullet">1</li>
+						<li class="slider__bullet">2</li>
+						<li class="slider__bullet">3</li>
+					</ul>
+				</li>
+				<li class="cycle__nav next"><span class="icon icon-chevron-invert-right"></span></li>
+			</ul>
+		</div>
+		<!-- / slideshow.html -->
 
 
-	<!-- Form validate -->
-	<form id="testform">
-	    <input type="text" id="inpName" placeholder="Enter your full name" data-error="Gelieve uw naam in te vullen" required />
-		<input type="number" id="inpNumber" placeholder="enter a number" required />
-	    <input type="text" id="inpMinlength" minlength="3" placeholder="Enter your full name" required />
-	    <input type="tel" id="inpTel" placeholder="Enter your full name" required />
-	    <input type="email" id="inpEmail" placeholder="Enter your email address" required />
-		<input type="checkbox" value="yes" id="inpCheck" required />
-	    <textarea id="inpText" placeholder="What's on your mind?" required></textarea>
-		<select id="inpSelect" required>
-			<option value="0" selected>---</option>
-			<option value="test">test</option>
-		</select>
-		<input type="radio" value="a" name="inpRadio" id="inpRadioA" required />
-		<input type="radio" value="b" name="inpRadio" id="inpRadioB" required />
+		<!-- Form validate -->
+		<form id="testform">
+		    <input type="text" id="inpName" placeholder="Enter your full name" data-error="Gelieve uw naam in te vullen" required />
+			<input type="number" id="inpNumber" placeholder="enter a number" required />
+		    <input type="text" id="inpMinlength" minlength="3" placeholder="Enter your full name" required />
+		    <input type="tel" id="inpTel" placeholder="Enter your full name" required />
+		    <input type="email" id="inpEmail" placeholder="Enter your email address" required />
+			<input type="checkbox" value="yes" id="inpCheck" required />
+		    <textarea id="inpText" placeholder="What's on your mind?" required></textarea>
+			<select id="inpSelect" required>
+				<option value="0" selected>---</option>
+				<option value="test">test</option>
+			</select>
+			<input type="radio" value="a" name="inpRadio" id="inpRadioA" required />
+			<input type="radio" value="b" name="inpRadio" id="inpRadioB" required />
 
-		<input type="hidden" value="" id="inpHidden" />
-		<input type="text" id="inpNotRequired" />
-	    <input type="submit" id="inpSubmit" value="Send message" />
-	</form>
+			<input type="hidden" value="" id="inpHidden" />
+			<input type="text" id="inpNotRequired" />
+		    <input type="submit" id="inpSubmit" value="Send message" />
+		</form>
 
-	<!-- / Form validate -->
+		<!-- / Form validate -->
 
-    <script src="/testem.js"></script>
-</body>
+		<script src="/testem.js"></script>
+	</body>
 </html>
