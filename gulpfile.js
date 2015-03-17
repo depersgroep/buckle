@@ -65,8 +65,8 @@ gulp.task('yuidoc', function() {
 			version: '0.1'
 		}
 	}, {
-		themedir: 'grunt/yuidoc/bootstrap',
-		helpers: ['grunt/yuidoc/bootstrap/helpers/helpers.js']
+		themedir: 'gulp/yuidoc/bootstrap',
+		helpers: ['gulp/yuidoc/bootstrap/helpers/helpers.js']
 	}))
 	.pipe(gulp.dest('./docs'))
 	.on('error', function() {
@@ -77,7 +77,7 @@ gulp.task('yuidoc', function() {
 
 // JS jscs
 gulp.task('jscs', function() {
-	gulp.src([
+	return gulp.src([
 		'./src/**/*.js',
 		'!./src/3rdparty/*.js'
 	])

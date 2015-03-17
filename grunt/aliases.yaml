@@ -1,9 +1,0 @@
-default:
-  - 'concurrent:default'
-
-test:
-  - 'jshint'
-  - 'clean'
-  - 'shell:instrument'
-  - 'testem'
-  - 'shell:report'
