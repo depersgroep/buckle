@@ -193,7 +193,7 @@
             "itemtype": "property",
             "type": "Bonzo",
             "example": [
-                "\n\tnew Validate({\n\t\tfrm: $('.form-to-validate'),\n\t\tnoFormevents: false,\n\t});\n\n"
+                "\n\tnew Validate({\n\t\tfrm: $('.form-to-validate'),\n\t\tnoFormevents: false,\n\t\tonError: function(args) {\n\t\t\t// show error message somewhere\n \t\t},\n \t\tonRemoveError: function(args) {\n\t\t\t// remove errors\n\t\t},\n \t\tonValidationComplete: function(args) {\n\t\t\t// all fields are checked, do... something\n \t\t}\n\t});\n\n"
             ]
         },
         "$": {
@@ -378,7 +378,7 @@
         },
         {
             "file": "src/classes/validate.js",
-            "line": 72,
+            "line": 86,
             "itemtype": "method",
             "name": "checkValidation",
             "description": "check the form validation",
@@ -389,7 +389,7 @@
         },
         {
             "file": "src/classes/validate.js",
-            "line": 206,
+            "line": 221,
             "itemtype": "method",
             "name": "checkValue",
             "description": "check if an input / textarea value is valid",
@@ -404,7 +404,7 @@
         },
         {
             "file": "src/classes/validate.js",
-            "line": 307,
+            "line": 322,
             "itemtype": "method",
             "name": "removeAllErrors",
             "description": "Remove all errors",
