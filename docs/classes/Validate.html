@@ -199,6 +199,15 @@
                 <pre class="code prettyprint"><code>new Validate({
     frm: $(&#39;.form-to-validate&#39;),
     noFormevents: false,
+    onError: function(args) {
+        // show error message somewhere
+     },
+     onRemoveError: function(args) {
+        // remove errors
+    },
+     onValidationComplete: function(args) {
+        // all fields are checked, do... something
+     }
 });</code></pre>
 
             </div>
@@ -300,7 +309,7 @@
             
         
         
-        <a href="../files/src_classes_validate.js.html#l72"><code>src&#x2F;classes&#x2F;validate.js:72</code></a>
+        <a href="../files/src_classes_validate.js.html#l86"><code>src&#x2F;classes&#x2F;validate.js:86</code></a>
         
         </p>
 
@@ -371,7 +380,7 @@ theForm.checkValidation();</code></pre>
             
         
         
-        <a href="../files/src_classes_validate.js.html#l206"><code>src&#x2F;classes&#x2F;validate.js:206</code></a>
+        <a href="../files/src_classes_validate.js.html#l221"><code>src&#x2F;classes&#x2F;validate.js:221</code></a>
         
         </p>
 
@@ -453,7 +462,7 @@ theForm.checkValue(inp);</code></pre>
             
         
         
-        <a href="../files/src_classes_validate.js.html#l307"><code>src&#x2F;classes&#x2F;validate.js:307</code></a>
+        <a href="../files/src_classes_validate.js.html#l322"><code>src&#x2F;classes&#x2F;validate.js:322</code></a>
         
         </p>
 

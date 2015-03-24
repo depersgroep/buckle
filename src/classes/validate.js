@@ -11,18 +11,29 @@
  *
  *	@property {Bonzo} form The dom element form
  *	@property {Boolean} noFormevents Don't catch submit / reset events
+  *	@property {function} [onError] callback function a input field has an error
+ *	@property {function} [onRemoveError] callback function when an input field has no error and you should remove excisting errors
+ *	@property {function} [onValidationComplete] callback function when all input fields are checked
  *
  *	@example
  *
  *		new Validate({
  *		frm: $('.form-to-validate'),
  *		noFormevents: false,
+ *		onError: function(args) {
+ *			// show error message somewhere
+ * 		},
+ * 		onRemoveError: function(args) {
+ *			// remove errors
+ *		},
+ * 		onValidationComplete: function(args) {
+ *			// all fields are checked, do... something
+ * 		}
  *	});
  *
  *
  */
 function Validate(args){
-
 	if (args){
 		var _this = this;
 		_this.defaults = {
@@ -34,7 +45,10 @@ function Validate(args){
 					unchecked: (args.i18n && args.i18n.unchecked ? args.i18n.unchecked : 'This field is required.'),
 					invalidEmail: (args.i18n && args.i18n.invalidEmail ? args.i18n.invalidEmail : 'Please enter a valid email address.'),
 					invalidTelephone: (args.i18n && args.i18n.invalidTelephone ? args.i18n.invalidTelephone : 'Please enter a valid telephone number.')
-				}
+				},
+				onError: (args.onError ? args.onError : function(){}),
+				onRemoveError: (args.onRemoveError ? args.onRemoveError : function(){}),
+				onValidationComplete: (args.onValidationComplete ? args.onValidationComplete : function(){})
 			};
 
 		if (_this.defaults.frm){
@@ -193,11 +207,12 @@ Validate.prototype.checkValidation = function(){
 			}
 		}
 
-		Arbiter.publish('/validate/complete', {
+		this.defaults.onValidationComplete.call(this, {
 			error: error,
 			validate: this,
 			frm: this.defaults.frm
 		});
+
 	}
 	return error;
 
@@ -267,7 +282,7 @@ Validate.prototype.triggerError = function(field, msg){
 			_this.checkValidation();
 		});
 
-		Arbiter.publish('/validate/error/show', {
+		this.defaults.onError.call(this, {
 			field: this.defaults.fields[field].htmlObj,
 			message: this.defaults.i18n[msg]
 		});
@@ -295,7 +310,7 @@ Validate.prototype.removeError = function(field){
 			}
 		}
 
-		Arbiter.publish('/validate/error/remove', {
+		this.defaults.onRemoveError.call(this, {
 			field: this.defaults.fields[field].htmlObj
 		});
 	}

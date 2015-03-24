@@ -21,6 +21,9 @@ App.modules.validate = (function() {
 
 				var form = new Validate({
 					frm: this,
+					onError: _showError,
+					onRemoveError: _removeError,
+					onValidationComplete: _validationsAllDone,
 					i18n: {
 						empty: 'Dit veld mag niet leeg zijn (custom i18n)',
 						unchecked: 'U moet dit veld aanvinken (custom i18n)',
@@ -52,6 +55,10 @@ App.modules.validate = (function() {
 	function _removeError(args) {
 
 		$('.js-form__error', $(args.field).parent()).remove();
+	}
+
+	function _validationsAllDone(args) {
+		console.log('I checked everything for you!');
 	}
 
 }());
