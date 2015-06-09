@@ -48,10 +48,10 @@ function Dialog(args) {
 			var trigger = $(this),
 				id = trigger.attr('data-trigger'),
 				modal = $('*[data-modal="' + id + '"]'),
-				oRef;
+				tgl;
 
 			if (id && modal.length) {
-				oRef = new Toggle({
+				tgl = new Toggle({
 						trigger: this,
 						toggle: modal,
 						globalClose: false,
@@ -62,12 +62,12 @@ function Dialog(args) {
 							_this.hide(trigger, modal);
 						}
 					});
-				trigger.data('toggle', oRef);
+				trigger.data('toggle', tgl);
 
 				if (_this.defaults.closer) {
 					$(_this.defaults.closer, modal).on('click.dialog.close', function() {
-						if (oRef) {
-							oRef.hide.call(oRef);
+						if (tgl) {
+							tgl.hide.call(tgl);
 						}
 					});
 				}
