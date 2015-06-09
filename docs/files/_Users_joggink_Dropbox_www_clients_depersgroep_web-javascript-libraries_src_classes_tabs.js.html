@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Persgroep - De Persgroep Publishing</title>
+    <title>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/classes/tabs.js - De Persgroep Publishing</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -107,94 +107,178 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>Persgroep <small>Module</small></h1>
+    <h1>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/classes/tabs.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small">
-    
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	Our tabs module is used to have multiple toggle items as
+ *	tabbed behaviour items
+ *
+ *
+ *	@class Tabs
+ *	@constructor
+ *	@requires Toggle
+ *
+ *	@property {Bonzo} tabs The dom element item that needs to have tab functionality
+ *	@property {event} [mouseEvent] default &#x27;click&#x27;, can be changed to hover
+ *	@property {function} [onTabChange] callback function when the tab is changed
+ *	@property {boolean} [noPreventDefault] cancel the default action on the trigger, default false
+ *
+ *	@example
+ *
+ *		new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) {
+ *			// do stuff
+ *		}
+ *	});
+ *
+ *
+ */
+function Tabs(args) {
+	if (args) {
+		var _this = this;
 
-    
+		this.defaults = {
+				tabs: (args.tabs ? args.tabs : null),
+				mouseEvent: (args.mouseEvent ? args.mouseEvent : &#x27;click&#x27;),
+				onTabChange: (args.onTabChange ? args.onTabChange : function() {}),
+				noPreventDefault: (args.noPreventDefault ? args.noPreventDefault : false)
+			};
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/_Users_joggink_Dropbox_www_clients_depersgroep_web-javascript-libraries_src_classes_validate.js.html#l2"><code>&#x2F;Users&#x2F;joggink&#x2F;Dropbox&#x2F;www&#x2F;clients&#x2F;depersgroep&#x2F;web-javascript-libraries&#x2F;src&#x2F;classes&#x2F;validate.js:2</code></a>
-        </div>
-    
+		// create toggle modules without global close
+		$(this.defaults.tabs).each(function() {
+			// if we have a panel create a toggle
+			var tab = $(this),
+				id = tab.attr(&#x27;aria-controls&#x27;);
 
-    
-</div>
+			if (id) {
+				tab.data(&#x27;toggle&#x27;,
+					new Toggle({
+						trigger: tab,
+						toggle: $(&#x27;#&#x27; + id),
+						mouseEvent: _this.defaults.mouseEvent,
+						globalClose: false,
+						toggleClick: false,
+						onShow: function() {
+							_this.show(tab);
+						},
+						noPreventDefault: _this.defaults.noPreventDefault
+					})
+				);
+			}
+		});
+	}
 
+	return this;
+}
 
+/**
+ *
+ *	@method show
+ *	@for Tabs
+ *
+ *	@description
+ *	calls the show callback function
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) { // do stuff; },
+ *	});
+ *	obj.show();
+ *
+ */
+Tabs.prototype.show = function(tab) {
+	if (tab &amp;&amp; this.defaults) {
+		var _this = this;
 
-<div class="moduledesc well well-small">
-    <p>&#39;De Persgroep&#39; library can be used just like jQuery but
-    our $ function is a layer to communicate with  minimalistic
-    3rd party libraries:</p>
-<h2 id="-arbiter-http-arbiterjs-com-"><a href="http://arbiterjs.com">Arbiter</a></h2>
-<pre class="code prettyprint"><code>A light-weight, library-agnostic javascript implementation of the pub/sub pattern</code></pre>
-<h2 id="-bonzo-https-github-com-ded-bonzo-"><a href="https://github.com/ded/bonzo">Bonzo</a></h2>
-<pre class="code prettyprint"><code>A library agnostic extensible DOM utility. Nothing else.</code></pre>
-<h2 id="-qwery-https-github-com-ded-qwery-"><a href="https://github.com/ded/qwery">Qwery</a></h2>
-<pre class="code prettyprint"><code>Qwery is a modern selector engine built on top of querySelectorAll giving you practical utility.</code></pre>
-<h2 id="-bean-https-github-com-fat-bean-"><a href="https://github.com/fat/bean">Bean</a></h2>
-<pre class="code prettyprint"><code>A small, fast, cross-platform, framework-agnostic event manager designed for desktop, mobile, and touch-based browsers.</code></pre>
-<h2 id="-reqwest-https-github-com-ded-reqwest-"><a href="https://github.com/ded/reqwest">Reqwest</a></h2>
-<pre class="code prettyprint"><code>Ajax all over again! Includes support for xmlHttpRequest, JSONP, CORS and CommonJS Promises A.</code></pre>
+		// loop throug the tabs that are not the active one and hide them
+		$(this.defaults.tabs).each(function() {
+			_this.hide($(this));
+		});
 
-</div>
+		Arbiter.publish(&#x27;/tabs/show&#x27;, {
+			tab: tab,
+			pane: $(&#x27;#&#x27; + tab.attr(&#x27;aria-controls&#x27;))
+		});
 
+		_this.defaults.onTabChange.call(_this);
+	}
 
+	return this;
+};
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+/**
+ *
+ *	@method hide
+ *	@for Tabs
+ *
+ *	@description
+ *	calls the hide callback function
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) { // do stuff; },
+ *	});
+ *	obj.hide();
+ *
+ */
+Tabs.prototype.hide = function(tab) {
+	if (tab &amp;&amp; this.defaults) {
+		// hide the tab
+		tab.data(&#x27;toggle&#x27;).hide();
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/$.html">
-                        $
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Cycle.html">
-                        Cycle
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Dialog.html">
-                        Dialog
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Tabs.html">
-                        Tabs
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Toggle.html">
-                        Toggle
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Validate.html">
-                        Validate
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
+		Arbiter.publish(&#x27;/tabs/hide&#x27;, {
+			tab: tab,
+			pane: $(&#x27;#&#x27; + tab.attr(&#x27;aria-controls&#x27;))
+		});
+	}
 
-    <div class="yui3-u-1-2">
-        
-    </div>
+	return this;
+};
+
+/**
+ *
+ *	@method destroy
+ *	@for Tabs
+ *
+ *	@description
+ *	destroys the tabs instance
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) { // do stuff; },
+ *	});
+ *	obj.destroy();
+ *
+ */
+Tabs.prototype.destroy = function() {
+	if (this.defaults) {
+		$(this.defaults.tabs).each(function() {
+			// if we have a panel create a toggle
+			var tab = $(this);
+
+			if (tab.data(&#x27;toggle&#x27;)) {
+				tab.data(&#x27;toggle&#x27;).destroy();
+				tab.data(&#x27;toggle&#x27;, &#x27;&#x27;);
+			}
+		});
+	}
+
+	return this;
+};
+
+    </pre>
 </div>
 
                     </div>

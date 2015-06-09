@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/persgroep.js - De Persgroep Publishing</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="De Persgroep Publishing" src="../assets/css/logo.png" style="max-height: 65%;" title="De Persgroep Publishing">
+        
+            De Persgroep Publishing
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/$", "classes/Cycle", "classes/Dialog", "classes/Tabs", "classes/Toggle", "classes/Validate", "modules/Persgroep"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/$.html">$</a></li>
+                    
+                        <li><a href="../classes/Cycle.html">Cycle</a></li>
+                    
+                        <li><a href="../classes/Dialog.html">Dialog</a></li>
+                    
+                        <li><a href="../classes/Tabs.html">Tabs</a></li>
+                    
+                        <li><a href="../classes/Toggle.html">Toggle</a></li>
+                    
+                        <li><a href="../classes/Validate.html">Validate</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/Persgroep.html">Persgroep</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/persgroep.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	&#x27;De Persgroep&#x27; library can be used just like jQuery but
+ *	our $ function is a layer to communicate with  minimalistic
+ *	3rd party libraries:
+ *
+ *
+ *	[Arbiter](http://arbiterjs.com)
+ *	-------------------------------------
+ *	A light-weight, library-agnostic javascript implementation of the pub/sub pattern
+ *
+ *	[Bonzo](https://github.com/ded/bonzo)
+ *	-------------------------------------
+ *	A library agnostic extensible DOM utility. Nothing else.
+ *
+ *	[Qwery](https://github.com/ded/qwery)
+ *	-------------------------------------
+ *	Qwery is a modern selector engine built on top of querySelectorAll giving you practical utility.
+ *
+ *	[Bean](https://github.com/fat/bean)
+ *	-------------------------------------
+ *	A small, fast, cross-platform, framework-agnostic event manager designed for desktop, mobile, and touch-based browsers.
+ *
+ *	[Reqwest](https://github.com/ded/reqwest)
+ *	-------------------------------------
+ *	Ajax all over again! Includes support for xmlHttpRequest, JSONP, CORS and CommonJS Promises A.
+ *
+ * @module Persgroep
+ *
+ */
+window.$ = null;
+
+// make Bean and Bonzo use Qwery
+// as their internal selector engine
+bean.setSelectorEngine(qwery);
+bonzo.setQueryEngine(qwery);
+
+(function() {
+	/**
+	 *	@class $
+	 *
+	 *	@description
+	 *	Return a collection of matched elements either found in the DOM based
+	 *	on passed argument(s) or created by passing an HTML string.
+	 *
+	 *	@param {String} selector A string containing a selector expression
+	 *	@param {Element,Bonzo} [context] A DOM Element, Document, or Bonzo object to use as context
+	 *
+	 *	@return {Bonzo} Bonzo An array of elements found matching the selector string
+	 *
+	 */
+	$ = function(selector, node) {
+		if (node) {
+			return bonzo(qwery(selector, node));
+		}
+
+		return bonzo(qwery(selector));
+	};
+
+	function indexOf(collection, item) {
+		for (var i = 0; i &lt; collection.length; i++) {
+			if (collection[i] === item) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	// $() will return a bonzo object
+	// let&#x27;s extend bonzo :)
+	bonzo.aug({
+		/**
+		 *
+		 *	@method on
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	lets you attach event listeners to both elements and objects.
+		 *
+		 *	@param {String} eventType An event (or multiple events, space separated) to listen to
+		 *	@param {String} [selector] A CC DOM Element selector string to bind the listener to child elements matching the selector
+		 *	@param {function} handler The callback function
+		 *	@param {arguments} [args] Additional arguments to pass to the callback function
+		 *
+		 *	@example
+		 *
+		 *		$(&#x27;.selector&#x27;).on(&#x27;click&#x27;, function() {
+		 *		// do something
+		 *	});
+		 *
+		 *
+		 *		$(&#x27;.selector&#x27;).on(&#x27;click.action&#x27;, function(e) {
+		 *		e.preventDefault();
+		 *		// do other stuff
+		 *	});
+		 *
+		 */
+		on: function() {
+			var args = [].slice.call(arguments);
+			args.unshift(&#x27;&#x27;);
+
+			return this.each(function(elem) {
+				args[0] = elem;
+
+				return bean.on.apply(this, args);
+			});
+		},
+		/**
+		 *
+		 *	@method one
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	one() is an alias for bean.on() except that the handler will only be executed once
+		 *	and then removed for the event type(s).
+		 *
+		 */
+		one: function() {
+			var args = [].slice.call(arguments);
+			args.unshift(&#x27;&#x27;);
+
+			return this.each(function(elem) {
+				args[0] = elem;
+
+				return bean.one.apply(elem, args);
+			});
+		},
+		/**
+		 *
+		 *	@method off
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	off() is how you get rid of handlers once you no longer want them active.
+		 *	It&#x27;s also a good idea to call off on elements before you remove them from your DOM;
+		 *	this gives Bean a chance to clean up some things and prevents memory leaks.
+		 *
+		 *	@param {String} eventType An event (or multiple events, space separated) to listen to
+		 *	@param {function} [args] the specific callback function to remove
+		 *
+		 */
+		off: function() {
+			var args = [].slice.call(arguments);
+			args.unshift(&#x27;&#x27;);
+
+			return this.each(function(elem) {
+				args[0] = elem;
+
+				return bean.off.apply(elem, args);
+			});
+		},
+		/**
+		 *
+		 *	@method fire
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	fire() gives you the ability to trigger events.
+		 *
+		 *	@param {String} eventType An event (or multiple events, space separated) to listen to
+		 *	@param {arguments} [handler] Additional arguments to pass to the callback function
+		 *
+		 */
+		fire: function() {
+			var args = [].slice.call(arguments);
+			args.unshift(&#x27;&#x27;);
+
+			return this.each(function(elem) {
+				args[0] = elem;
+
+				return bean.fire.apply(elem, args);
+			});
+		},
+		/**
+		 *
+		 *	@method find
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	Get the descendants of each element in the current set of matched elements, filtered
+		 *	by a selector, Bonzo object, or element.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		find: function(s) {
+			var r = [],
+				i, l, j, k, els;
+
+			for (i = 0, l = this.length; i &lt; l; i++) {
+				els = qwery(s, this[i]);
+
+				for (j = 0, k = els.length; j &lt; k; j++) {
+					r.push(els[j]);
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		/**
+		 *
+		 *	@method parents
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	Get the ancestors of each element in the current set of matched elements, optionally
+		 *	filtered by a selector.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		parents: function(selector, closest) {
+			// console.log(&quot;collection: &quot;,$(selector), selector);
+			var collection = $(selector),
+				j, k, p,
+				r = [];
+
+			for (j = 0; j &lt; this.length; j++) {
+				p = this[j];
+				k = p.parentNode;
+
+				while (k) {
+					if (selector &amp;&amp; indexOf(collection, k) !== -1) {
+						r.push(k);
+
+						if (closest) {
+							break;
+						}
+					} else if (!selector) {
+						r.push(k);
+					}
+					k = k.parentNode;
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		/**
+		 *
+		 *	@method children
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	Get the children of each element in the set of matched elements, optionally
+		 *	filtered by a selector.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		children: function(selector) {
+			var collection = $(selector),
+				i, l, k, r = [];
+
+			for (i = 0; i &lt; this.length; i++) {
+				if (this[i].childNodes) {
+					for (l = 0; l &lt; this[i].childNodes.length; l++) {
+						if (this[i].childNodes[l].nodeType === 1) {
+							k = this[i].childNodes[l];
+
+							if (!selector || (selector &amp;&amp; indexOf(collection, k) !== -1)) {
+								r.push(k);
+							}
+						}
+					}
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		/**
+		 *
+		 *	@method filter
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	Filter the set of matched elements, optionally
+		 *	filtered by a selector.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		filter: function(selector) {
+			var collection = $(selector),
+				i, k, r = [];
+
+			for (i = 0; i &lt; this.length; i++) {
+				k = this[i];
+
+				if (k.nodeType === 1) {
+					if (!selector || (selector &amp;&amp; indexOf(collection, k) !== -1)) {
+						r.push(k);
+					}
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		/**
+		 *
+		 *	@method siblings
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	Get the siblings of each element in the set of matched elements, optionally
+		 *	filtered by a selector.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		siblings: function(selector) {
+			var i, j, k, p,
+				children = [],
+				r = [],
+				elm;
+
+			for (i = 0; i &lt; this.length; i++) {
+				p = this[i];
+				k = p.parentNode;
+				children = $(k).children(selector);
+
+				for (j = 0; j &lt; children.length; j++) {
+					elm = children[j];
+
+					if (elm !== p) {
+						r.push(elm);
+					}
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		/**
+		 *
+		 *	@method closest
+		 *	@for $
+		 *	@chainable
+		 *
+		 *	@description
+		 *	For each element in the set, get the first element that matches the selector by testing the
+		 *	element itself and traversing up through its ancestors in the DOM tree.
+		 *
+		 *	@param {String} Selector A string containing a selector expression to match elements against.
+		 *
+		 */
+		closest: function(selector) {
+			return this.parents(selector, true);
+		},
+		clone: function(deepClone) {
+			var i = 0,
+				r = [],
+				div = document.createElement(&#x27;div&#x27;),
+				supportsHTML5 = !!document.createElement(&#x27;canvas&#x27;).getContext;
+			deepClone = deepClone || false;
+
+			for (; i &lt; this.length; i++) {
+				if (supportsHTML5) {
+					r.push(this[i].cloneNode(deepClone));
+				} else {
+					div.innerHTML = this[i].outerHTML;
+					r.push(div.firstChild);
+				}
+			}
+
+			return $(qwery.uniq(r));
+		},
+		index: function(haystack) {
+			haystack = haystack || this.parent().children();
+			var needle = this.get(0),
+				index = -1,
+				i = 0;
+
+			haystack.each(function(elem) {
+				if (elem === needle) {
+					index = i;
+				}
+				i++;
+			});
+
+			return index;
+		}
+	});
+
+	// reqwest
+	$.ajax = function() {
+		// use reqwest
+		reqwest.apply(this, arguments);
+	};
+
+	// Arbiter
+	$.publish = function() {
+		return Arbiter.publish.apply(this, arguments);
+	};
+
+	$.subscribe = function() {
+		return Arbiter.subscribe.apply(this, arguments);
+	};
+
+	$.unsubscribe = function() {
+		return Arbiter.unsubscribe.apply(this, arguments);
+	};
+
+	$.resubscribe = function() {
+		return Arbiter.resubscribe.apply(this, arguments);
+	};
+
+	// custom code
+
+	$.parseHTML = function(htmlString) {
+		var h = document.createElement(&#x27;div&#x27;);
+		h.innerHTML = htmlString;
+
+		return $(h).children();
+	};
+
+	$.template = function(id) {
+		var temp = $.parseHTML($(&#x27;template#&#x27; + id).html());
+		$(&#x27;[data-id]&#x27;, temp).each(function() {
+			this.id = this.getAttribute(&#x27;data-id&#x27;);
+		});
+
+		return temp;
+	};
+
+	$.serialize = function(form) {
+		var q = $.serializeObject(form);
+
+		return q.join(&#x27;&amp;&#x27;);
+	};
+
+	$.serializeObject = function(form) {
+		if (!form || form.nodeName !== &#x27;FORM&#x27;) {
+			return;
+		}
+
+		var i, j, q = [];
+
+		for (i = form.elements.length - 1; i &gt;= 0; i = i - 1) {
+			if (form.elements[i].name === &#x27;&#x27;) {
+				continue;
+			}
+
+			switch (form.elements[i].nodeName) {
+			case &#x27;INPUT&#x27;:
+				switch (form.elements[i].type) {
+				case &#x27;checkbox&#x27;:
+				case &#x27;radio&#x27;:
+					if (form.elements[i].checked) {
+						q.push(form.elements[i].name + &#x27;=&#x27; + encodeURIComponent(form.elements[i].value));
+					}
+					break;
+				case &#x27;file&#x27;:
+					break;
+				default:
+					q.push(form.elements[i].name + &#x27;=&#x27; + encodeURIComponent(form.elements[i].value));
+				}
+				break;
+			case &#x27;TEXTAREA&#x27;:
+				q.push(form.elements[i].name + &#x27;=&#x27; + encodeURIComponent(form.elements[i].value));
+				break;
+			case &#x27;SELECT&#x27;:
+				switch (form.elements[i].type) {
+				case &#x27;select-one&#x27;:
+					q.push(form.elements[i].name + &#x27;=&#x27; + encodeURIComponent(form.elements[i].value));
+					break;
+				case &#x27;select-multiple&#x27;:
+					for (j = form.elements[i].options.length - 1; j &gt;= 0; j = j - 1) {
+						if (form.elements[i].options[j].selected) {
+							q.push(form.elements[i].name + &#x27;=&#x27; + encodeURIComponent(form.elements[i].options[j].value));
+						}
+					}
+					break;
+				}
+				break;
+			case &#x27;BUTTON&#x27;:
+				switch (form.elements[i].type) {
+				case &#x27;reset&#x27;:
+				case &#x27;submit&#x27;:
+				case &#x27;button&#x27;:
+					q.push(form.elements[i].name + &#x27;=&#x27; + encodeURIComponent(form.elements[i].value));
+					break;
+				}
+				break;
+			}
+		}
+
+		return q;
+	};
+
+	// Standard comments, it&#x27;s not generated by Yuidoc anyway!
+	// @description
+	// $.browser(&#x27;ie6&#x27;) to check for current client bowser.
+	// @param {String} browser Can be [ie | ie6 | ie7 | ie8 | ie9 | lte7 | lte8 | lte9] or non of them.
+	// @return {Boolean} Returns true if browser matches current client browser
+	$.browser = function(browser) {
+		var browserMetaTag = $(&#x27;meta[name=browser]&#x27;),
+			browserIdentifiers = [];
+
+		if (browserMetaTag.length) {
+			browserMetaTag = browserMetaTag[0];
+			browserIdentifiers = browserMetaTag.content.split(&#x27; &#x27;);
+
+			return indexOf(browserIdentifiers, browser) &gt; -1 ? true : false;
+		}
+
+		return false;
+	};
+
+	$.breakpoint = function() {
+		var width = util.getWindowWidth(),
+			breakpoints = App.config.breakpoints,
+			device;
+
+		if (width &lt; breakpoints.mobile) {
+			device = &#x27;small&#x27;;
+		} else if (width &lt; breakpoints.tablet) {
+			device = &#x27;medium&#x27;;
+		} else {
+			device = &#x27;large&#x27;;
+		}
+
+		return device;
+	};
+
+	return $;
+})();
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

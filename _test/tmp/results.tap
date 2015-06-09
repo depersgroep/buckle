@@ -1,130 +1,146 @@
 # Using testem 0.6.24
 # Whole list of tests
-ok 1  - Chrome 41.0 - Toggle Module should exist
-ok 2  - Chrome 41.0 - Toggle Module Method access should have a toggle method
-ok 3  - Chrome 41.0 - Toggle Module Method access should return the object when calling toggle
-ok 4  - Chrome 41.0 - Toggle Module Method access should have a show method
-ok 5  - Chrome 41.0 - Toggle Module Method access should return the object when calling show
-ok 6  - Chrome 41.0 - Toggle Module Method access should have a hide method
-ok 7  - Chrome 41.0 - Toggle Module Method access should return the object when calling hide
-ok 8  - Chrome 41.0 - Toggle Module Method access should have a destroy method
-ok 9  - Chrome 41.0 - Toggle Module Method access should return the object when calling destroy
-ok 10  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should call the toggle function once when clicking the trigger
-ok 11  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should call the show function once when clicking the trigger
-ok 12  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to true when clicking the trigger
-ok 13  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should call the hide function once when clicking the trigger
-ok 14  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to false when clicking the trigger
-ok 15  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should call the toggle function once when clicking the trigger
-ok 16  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should call the show function once when clicking the trigger
-ok 17  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to true when clicking the trigger
-ok 18  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should call the hide function once when clicking the trigger
-ok 19  - Chrome 41.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to false when clicking the trigger
-ok 20  - Chrome 41.0 - Toggle Module Toggle functionality click action without noPreventDefault true should call the toggle function once when clicking the trigger
-ok 21  - Chrome 41.0 - Toggle Module Toggle functionality click action without noPreventDefault true should call the show function once when clicking the trigger
-ok 22  - Chrome 41.0 - Toggle Module Toggle functionality click action without noPreventDefault true should update the state to true when clicking the trigger
-ok 23  - Chrome 41.0 - Toggle Module Toggle functionality click action without noPreventDefault true should not call the hide function once when clicking the trigger
-ok 24  - Chrome 41.0 - Toggle Module Toggle functionality click action without noPreventDefault true should not update the state to false when clicking the trigger
-ok 25  - Chrome 41.0 - Toggle Module Toggle functionality hover action with toggleclick should call the toggle function once when hovering the trigger
-ok 26  - Chrome 41.0 - Toggle Module Toggle functionality hover action with toggleclick should call the show function once when hovering the trigger
-ok 27  - Chrome 41.0 - Toggle Module Toggle functionality hover action with toggleclick should update the state to true when hovering the trigger
-ok 28  - Chrome 41.0 - Toggle Module Toggle functionality hover action with toggleclick should call the hide function once when the cursor leaves the trigger
-ok 29  - Chrome 41.0 - Toggle Module Toggle functionality hover action with toggleclick should update the state to false when the cursor leaves the trigger
-ok 30  - Chrome 41.0 - Toggle Module Toggle functionality hover action without toggleclick should call the toggle function once when hovering the trigger
-ok 31  - Chrome 41.0 - Toggle Module Toggle functionality hover action without toggleclick should call the show function once when hovering the trigger
-ok 32  - Chrome 41.0 - Toggle Module Toggle functionality hover action without toggleclick should update the state to true when hovering the trigger
-ok 33  - Chrome 41.0 - Toggle Module Toggle functionality hover action without toggleclick should not call the hide function once when the cursor leaves the trigger
-ok 34  - Chrome 41.0 - Toggle Module Toggle functionality hover action without toggleclick should not update the state to false when the cursor leaves the trigger
-ok 35  - Chrome 41.0 - Toggle Module Toggle functionality No globalclose functionality should not call the hide function when we click the document
-ok 36  - Chrome 41.0 - Toggle Module Toggle functionality No globalclose functionality should not update the state when we click the document
-ok 37  - Chrome 41.0 - Toggle Module Callback functionality should call the callback functions
-ok 38  - Chrome 41.0 - Tab Module should exist
-ok 39  - Chrome 41.0 - Tab Module Method access should have a show method
-ok 40  - Chrome 41.0 - Tab Module Method access should return the object when calling show
-ok 41  - Chrome 41.0 - Tab Module Method access should have a hide method
-ok 42  - Chrome 41.0 - Tab Module Method access should return the object when calling hide
-ok 43  - Chrome 41.0 - Tab Module Method access should have a destroy method
-ok 44  - Chrome 41.0 - Tab Module Method access should return the object when calling destroy
-ok 45  - Chrome 41.0 - Tab Module Tab functionality Withou WAI-ARIA attributes should be no toggle attribute
-ok 46  - Chrome 41.0 - Tab Module Tab functionality Click functionality should have a toggle attribute
-ok 47  - Chrome 41.0 - Tab Module Tab functionality Click functionality should call the tab show function when clicked
-ok 48  - Chrome 41.0 - Tab Module Tab functionality Click functionality should call the hide function on all tabs when clicked
-ok 49  - Chrome 41.0 - Tab Module Callback functionality should call the callback function
-ok 50  - Chrome 41.0 - Dialog Module should exist
-ok 51  - Chrome 41.0 - Dialog Module Method access should have a show method
-ok 52  - Chrome 41.0 - Dialog Module Method access should return the object when calling show
-ok 53  - Chrome 41.0 - Dialog Module Method access should have a hide method
-ok 54  - Chrome 41.0 - Dialog Module Method access should return the object when calling hide
-ok 55  - Chrome 41.0 - Dialog Module Method access should have a destroy method
-ok 56  - Chrome 41.0 - Dialog Module Method access should return the object when calling destroy
-ok 57  - Chrome 41.0 - Dialog Module Dialog functionality just a trigger and a modal should have a toggle attribute
-ok 58  - Chrome 41.0 - Dialog Module Dialog functionality just a trigger and a modal should call the show function when clicked
-ok 59  - Chrome 41.0 - Dialog Module Dialog functionality just a trigger, a modal and a closer should have a toggle attribute
-ok 60  - Chrome 41.0 - Dialog Module Dialog functionality just a trigger, a modal and a closer should call the show function when clicked
-ok 61  - Chrome 41.0 - Dialog Module Dialog functionality just a trigger, a modal and a closer should call the hide function when the closer is clicked
-ok 62  - Chrome 41.0 - Cycle Module should exist
-ok 63  - Chrome 41.0 - Cycle Module Method access should have a show method
-ok 64  - Chrome 41.0 - Cycle Module Method access should have a showPrevious method
-ok 65  - Chrome 41.0 - Cycle Module Method access should have a showNext method
-ok 66  - Chrome 41.0 - Cycle Module Method access should return the object when calling destroy
-ok 67  - Chrome 41.0 - Cycle Module Properties defaults should not have a cycle object
-ok 68  - Chrome 41.0 - Cycle Module Properties defaults should have a container object
-ok 69  - Chrome 41.0 - Cycle Module Properties defaults should have a slide collection object
-ok 70  - Chrome 41.0 - Cycle Module Properties defaults should have a min slide number
-ok 71  - Chrome 41.0 - Cycle Module Properties defaults should have a max slide number
-ok 72  - Chrome 41.0 - Cycle Module Properties defaults should have a cur slide number
-ok 73  - Chrome 41.0 - Cycle Module Properties defaults should have a default slide step
-ok 74  - Chrome 41.0 - Cycle Module Properties defaults should not have a navigation object
-ok 75  - Chrome 41.0 - Cycle Module Properties defaults should not have a numbers object
-ok 76  - Chrome 41.0 - Cycle Module Properties defaults should not have a bullets object
-ok 77  - Chrome 41.0 - Cycle Module Properties defaults should not have an autoplay object
-ok 78  - Chrome 41.0 - Cycle Module Properties defaults should have a default timer from 3000ms
-ok 79  - Chrome 41.0 - Cycle Module Properties defaults should not be infinite
-ok 80  - Chrome 41.0 - Cycle Module Properties defaults should not have an animation object
-ok 81  - Chrome 41.0 - Cycle Module Properties setters should have a cycle object
-ok 82  - Chrome 41.0 - Cycle Module Properties setters should have a container object
-ok 83  - Chrome 41.0 - Cycle Module Properties setters should have a slide collection object
-ok 84  - Chrome 41.0 - Cycle Module Properties setters should have a min slide number
-ok 85  - Chrome 41.0 - Cycle Module Properties setters should have a max slide number
-ok 86  - Chrome 41.0 - Cycle Module Properties setters should have a cur slide number
-ok 87  - Chrome 41.0 - Cycle Module Properties setters should have a default slide step
-ok 88  - Chrome 41.0 - Cycle Module Properties setters should have a navigation object
-ok 89  - Chrome 41.0 - Cycle Module Properties setters should have a numbers object
-ok 90  - Chrome 41.0 - Cycle Module Properties setters should have a bullets object
-ok 91  - Chrome 41.0 - Cycle Module Properties setters should not have an autoplay object
-ok 92  - Chrome 41.0 - Cycle Module Properties setters should have an altered timer from 4000ms
-ok 93  - Chrome 41.0 - Cycle Module Properties setters should be infinite
-ok 94  - Chrome 41.0 - Cycle Module Properties setters should have an animation object
-ok 95  - Chrome 41.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should have a show method
-ok 96  - Chrome 41.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the next slide when calling the showNext method
-ok 97  - Chrome 41.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the previous slide when calling the showPrevious method
-ok 98  - Chrome 41.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the last slide when calling the showPrevious method on the first slide
-ok 99  - Chrome 41.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the first slide when calling the showNext method 3 times
-ok 100  - Chrome 41.0 - Cycle Module Slideshow behaviour Slideshow with nav should change the slide each second
-ok 101  - Chrome 41.0 - Cycle Module Slideshow behaviour Slideshow with nav should show the next slide when clicking the next button
-ok 102  - Chrome 41.0 - Cycle Module Slideshow behaviour Slideshow with nav should show the previous slide when clicking the previous button
-ok 103  - Chrome 41.0 - Cycle Module Slideshow behaviour Slideshow with nav should show the first slide when we ask it to
-ok 104  - Chrome 41.0 - Cycle Module Slideshow behaviour Slideshow with bullets and no autoplay should show the slide according to the bullet
-ok 105  - Chrome 41.0 - Cycle Module Slideshow behaviour Slideshow with bullets and autoplay should show the slide according to the bullet and stop the autoplay
-ok 106  - Chrome 41.0 - Validate Module should exist
-ok 107  - Chrome 41.0 - Validate Module Method access should have a checkValidation method
-ok 108  - Chrome 41.0 - Validate Module Method access should have a checkValue method
-ok 109  - Chrome 41.0 - Validate Module Method access should have a triggerError method
-ok 110  - Chrome 41.0 - Validate Module Method access should have a removeError method
-ok 111  - Chrome 41.0 - Validate Module Form validation nothing filled in should throw an error when we nothing is filled in
-ok 112  - Chrome 41.0 - Validate Module Form validation nothing filled in should throw an error when we submit the form
-ok 113  - Chrome 41.0 - Validate Module Form validation everything filled in correct should not throw an error when we everything is filled in
-ok 114  - Chrome 41.0 - Validate Module Form validation everything filled in correct should not throw an error when we submit the form
-ok 115  - Chrome 41.0 - Validate Module Form validation some things not filled in correct should throw an error when a number is not a number
-ok 116  - Chrome 41.0 - Validate Module Form validation some things not filled in correct should throw an error when the email is invalid
-ok 117  - Chrome 41.0 - Validate Module Form validation some things not filled in correct should throw an error when a required checkbox is unchecked
-ok 118  - Chrome 41.0 - Validate Module Form validation some things not filled in correct should throw an error when a required radio is unchecked
-ok 119  - Chrome 41.0 - Validate Module Form validation some things not filled in correct should throw an error when the length is too short
-ok 120  - Chrome 41.0 - Validate Module Form validation keypress events should throw an error when the value is too short
-ok 121  - Chrome 41.0 - Validate Module Form validation keypress events should throw an error when we type 1 extra letter
-ok 122  - Chrome 41.0 - Validate Module Form validation custom field validation should trigger an error if our field is empty
-ok 123  - Chrome 41.0 - Validate Module Form validation custom field validation should trigger an error if our field is empty
+ok 1  - Chrome 43.0 - Toggle Module should exist
+ok 2  - Chrome 43.0 - Toggle Module Method access should have a toggle method
+ok 3  - Chrome 43.0 - Toggle Module Method access should return the object when calling toggle
+ok 4  - Chrome 43.0 - Toggle Module Method access should have a show method
+ok 5  - Chrome 43.0 - Toggle Module Method access should return the object when calling show
+ok 6  - Chrome 43.0 - Toggle Module Method access should have a hide method
+ok 7  - Chrome 43.0 - Toggle Module Method access should return the object when calling hide
+ok 8  - Chrome 43.0 - Toggle Module Method access should have a destroy method
+ok 9  - Chrome 43.0 - Toggle Module Method access should return the object when calling destroy
+ok 10  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should call the toggle function once when clicking the trigger
+ok 11  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should call the show function once when clicking the trigger
+ok 12  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to true when clicking the trigger
+ok 13  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should call the hide function once when clicking the trigger
+ok 14  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to false when clicking the trigger
+ok 15  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should call the toggle function once when clicking the trigger
+ok 16  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should call the show function once when clicking the trigger
+ok 17  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to true when clicking the trigger
+ok 18  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should call the hide function once when clicking the trigger
+ok 19  - Chrome 43.0 - Toggle Module Toggle functionality click action with toggleclick should update the state to false when clicking the trigger
+ok 20  - Chrome 43.0 - Toggle Module Toggle functionality click action without noPreventDefault true should call the toggle function once when clicking the trigger
+ok 21  - Chrome 43.0 - Toggle Module Toggle functionality click action without noPreventDefault true should call the show function once when clicking the trigger
+ok 22  - Chrome 43.0 - Toggle Module Toggle functionality click action without noPreventDefault true should update the state to true when clicking the trigger
+ok 23  - Chrome 43.0 - Toggle Module Toggle functionality click action without noPreventDefault true should not call the hide function once when clicking the trigger
+ok 24  - Chrome 43.0 - Toggle Module Toggle functionality click action without noPreventDefault true should not update the state to false when clicking the trigger
+ok 25  - Chrome 43.0 - Toggle Module Toggle functionality hover action with toggleclick should call the toggle function once when hovering the trigger
+ok 26  - Chrome 43.0 - Toggle Module Toggle functionality hover action with toggleclick should call the show function once when hovering the trigger
+ok 27  - Chrome 43.0 - Toggle Module Toggle functionality hover action with toggleclick should update the state to true when hovering the trigger
+ok 28  - Chrome 43.0 - Toggle Module Toggle functionality hover action with toggleclick should call the hide function once when the cursor leaves the trigger
+ok 29  - Chrome 43.0 - Toggle Module Toggle functionality hover action with toggleclick should update the state to false when the cursor leaves the trigger
+ok 30  - Chrome 43.0 - Toggle Module Toggle functionality hover action without toggleclick should call the toggle function once when hovering the trigger
+ok 31  - Chrome 43.0 - Toggle Module Toggle functionality hover action without toggleclick should call the show function once when hovering the trigger
+ok 32  - Chrome 43.0 - Toggle Module Toggle functionality hover action without toggleclick should update the state to true when hovering the trigger
+ok 33  - Chrome 43.0 - Toggle Module Toggle functionality hover action without toggleclick should not call the hide function once when the cursor leaves the trigger
+ok 34  - Chrome 43.0 - Toggle Module Toggle functionality hover action without toggleclick should not update the state to false when the cursor leaves the trigger
+ok 35  - Chrome 43.0 - Toggle Module Toggle functionality No globalclose functionality should not call the hide function when we click the document
+ok 36  - Chrome 43.0 - Toggle Module Toggle functionality No globalclose functionality should not update the state when we click the document
+ok 37  - Chrome 43.0 - Toggle Module Callback functionality should call the callback functions
+ok 38  - Chrome 43.0 - Tab Module should exist
+ok 39  - Chrome 43.0 - Tab Module Method access should have a show method
+ok 40  - Chrome 43.0 - Tab Module Method access should return the object when calling show
+ok 41  - Chrome 43.0 - Tab Module Method access should have a hide method
+ok 42  - Chrome 43.0 - Tab Module Method access should return the object when calling hide
+ok 43  - Chrome 43.0 - Tab Module Method access should have a destroy method
+ok 44  - Chrome 43.0 - Tab Module Method access should return the object when calling destroy
+ok 45  - Chrome 43.0 - Tab Module Tab functionality Withou WAI-ARIA attributes should be no toggle attribute
+ok 46  - Chrome 43.0 - Tab Module Tab functionality Click functionality should have a toggle attribute
+ok 47  - Chrome 43.0 - Tab Module Tab functionality Click functionality should call the tab show function when clicked
+ok 48  - Chrome 43.0 - Tab Module Tab functionality Click functionality should call the hide function on all tabs when clicked
+ok 49  - Chrome 43.0 - Tab Module Callback functionality should call the callback function
+ok 50  - Chrome 43.0 - Dialog Module should exist
+ok 51  - Chrome 43.0 - Dialog Module Method access should have a show method
+ok 52  - Chrome 43.0 - Dialog Module Method access should return the object when calling show
+ok 53  - Chrome 43.0 - Dialog Module Method access should have a hide method
+ok 54  - Chrome 43.0 - Dialog Module Method access should return the object when calling hide
+ok 55  - Chrome 43.0 - Dialog Module Method access should have a destroy method
+ok 56  - Chrome 43.0 - Dialog Module Method access should return the object when calling destroy
+ok 57  - Chrome 43.0 - Dialog Module Dialog functionality just a trigger and a modal should have a toggle attribute
+ok 58  - Chrome 43.0 - Dialog Module Dialog functionality just a trigger and a modal should call the show function when clicked
+ok 59  - Chrome 43.0 - Dialog Module Dialog functionality just a trigger, a modal and a closer should have a toggle attribute
+ok 60  - Chrome 43.0 - Dialog Module Dialog functionality just a trigger, a modal and a closer should call the show function when clicked
+ok 61  - Chrome 43.0 - Dialog Module Dialog functionality just a trigger, a modal and a closer should call the hide function when the closer is clicked
+ok 62  - Chrome 43.0 - Cycle Module should exist
+ok 63  - Chrome 43.0 - Cycle Module Method access should have a show method
+ok 64  - Chrome 43.0 - Cycle Module Method access should have a showPrevious method
+ok 65  - Chrome 43.0 - Cycle Module Method access should have a showNext method
+ok 66  - Chrome 43.0 - Cycle Module Method access should return the object when calling destroy
+ok 67  - Chrome 43.0 - Cycle Module Properties defaults should not have a cycle object
+ok 68  - Chrome 43.0 - Cycle Module Properties defaults should have a container object
+ok 69  - Chrome 43.0 - Cycle Module Properties defaults should have a slide collection object
+ok 70  - Chrome 43.0 - Cycle Module Properties defaults should have a min slide number
+ok 71  - Chrome 43.0 - Cycle Module Properties defaults should have a max slide number
+ok 72  - Chrome 43.0 - Cycle Module Properties defaults should have a cur slide number
+ok 73  - Chrome 43.0 - Cycle Module Properties defaults should have a default slide step
+ok 74  - Chrome 43.0 - Cycle Module Properties defaults should not have a navigation object
+ok 75  - Chrome 43.0 - Cycle Module Properties defaults should not have a numbers object
+ok 76  - Chrome 43.0 - Cycle Module Properties defaults should not have a bullets object
+ok 77  - Chrome 43.0 - Cycle Module Properties defaults should not have an autoplay object
+ok 78  - Chrome 43.0 - Cycle Module Properties defaults should have a default timer from 3000ms
+ok 79  - Chrome 43.0 - Cycle Module Properties defaults should not be infinite
+ok 80  - Chrome 43.0 - Cycle Module Properties defaults should not have an animation object
+ok 81  - Chrome 43.0 - Cycle Module Properties setters should have a cycle object
+ok 82  - Chrome 43.0 - Cycle Module Properties setters should have a container object
+ok 83  - Chrome 43.0 - Cycle Module Properties setters should have a slide collection object
+ok 84  - Chrome 43.0 - Cycle Module Properties setters should have a min slide number
+ok 85  - Chrome 43.0 - Cycle Module Properties setters should have a max slide number
+ok 86  - Chrome 43.0 - Cycle Module Properties setters should have a cur slide number
+ok 87  - Chrome 43.0 - Cycle Module Properties setters should have a default slide step
+ok 88  - Chrome 43.0 - Cycle Module Properties setters should have a navigation object
+ok 89  - Chrome 43.0 - Cycle Module Properties setters should have a numbers object
+ok 90  - Chrome 43.0 - Cycle Module Properties setters should have a bullets object
+ok 91  - Chrome 43.0 - Cycle Module Properties setters should not have an autoplay object
+ok 92  - Chrome 43.0 - Cycle Module Properties setters should have an altered timer from 4000ms
+ok 93  - Chrome 43.0 - Cycle Module Properties setters should be infinite
+ok 94  - Chrome 43.0 - Cycle Module Properties setters should have an animation object
+ok 95  - Chrome 43.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should have a show method
+ok 96  - Chrome 43.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the next slide when calling the showNext method
+ok 97  - Chrome 43.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the previous slide when calling the showPrevious method
+ok 98  - Chrome 43.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the last slide when calling the showPrevious method on the first slide
+ok 99  - Chrome 43.0 - Cycle Module Slideshow behaviour Basic infinite slideshow should show the first slide when calling the showNext method 3 times
+ok 100  - Chrome 43.0 - Cycle Module Slideshow behaviour Slideshow with nav should change the slide each second
+ok 101  - Chrome 43.0 - Cycle Module Slideshow behaviour Slideshow with nav should show the next slide when clicking the next button
+ok 102  - Chrome 43.0 - Cycle Module Slideshow behaviour Slideshow with nav should show the previous slide when clicking the previous button
+ok 103  - Chrome 43.0 - Cycle Module Slideshow behaviour Slideshow with nav should show the first slide when we ask it to
+ok 104  - Chrome 43.0 - Cycle Module Slideshow behaviour Slideshow with bullets and no autoplay should show the slide according to the bullet
+ok 105  - Chrome 43.0 - Cycle Module Slideshow behaviour Slideshow with bullets and autoplay should show the slide according to the bullet and stop the autoplay
+ok 106  - Chrome 43.0 - Validate Module should exist
+ok 107  - Chrome 43.0 - Validate Module Method access should have a checkValidation method
+ok 108  - Chrome 43.0 - Validate Module Method access should have a checkValue method
+ok 109  - Chrome 43.0 - Validate Module Method access should have a triggerError method
+ok 110  - Chrome 43.0 - Validate Module Method access should have a removeError method
+ok 111  - Chrome 43.0 - Validate Module Form validation nothing filled in should throw an error when we nothing is filled in
+ok 112  - Chrome 43.0 - Validate Module Form validation nothing filled in should throw an error when we submit the form
+ok 113  - Chrome 43.0 - Validate Module Form validation everything filled in correct should not throw an error when we everything is filled in
+ok 114  - Chrome 43.0 - Validate Module Form validation everything filled in correct should not throw an error when we submit the form
+ok 115  - Chrome 43.0 - Validate Module Form validation some things not filled in correct should throw an error when a number is not a number
+ok 116  - Chrome 43.0 - Validate Module Form validation some things not filled in correct should throw an error when the email is invalid
+ok 117  - Chrome 43.0 - Validate Module Form validation some things not filled in correct should throw an error when a required checkbox is unchecked
+ok 118  - Chrome 43.0 - Validate Module Form validation some things not filled in correct should throw an error when a required radio is unchecked
+ok 119  - Chrome 43.0 - Validate Module Form validation some things not filled in correct should throw an error when the length is too short
+ok 120  - Chrome 43.0 - Validate Module Form validation keypress events should throw an error when the value is too short
+ok 121  - Chrome 43.0 - Validate Module Form validation keypress events should throw an error when we type 1 extra letter
+ok 122  - Chrome 43.0 - Validate Module Form validation custom field validation should trigger an error if our field is empty
+ok 123  - Chrome 43.0 - Validate Module Form validation custom field validation should trigger an error if our field is empty
+not ok 124  - Error
+#    message: >
+#        
+#        fs.js:432
+#          return binding.open(pathModule._makeLong(path), stringToFlags(flags), mode);
+#                         ^
+#        Error: ENOENT, no such file or directory 'c:\working_dir\web-javascript-libraries\src\classes\cycle.js'
+#            at Object.fs.openSync (fs.js:432:18)
+#            at Object.fs.readFileSync (fs.js:289:15)
+#            at LookupStore.Store.mix.get (/usr/local/lib/node_modules/istanbul/lib/store/fslookup.js:39:19)
+#            at HtmlReport.Report.mix.writeDetailPage (/usr/local/lib/node_modules/istanbul/lib/report/html.js:378:67)
+#            at /usr/local/lib/node_modules/istanbul/lib/report/html.js:456:26
+#            at AsyncFileWriter.extend.processFile (/usr/local/lib/node_modules/istanbul/lib/util/file-writer.js:93:9)
+#            at Object.q.process [as _onImmediate] (/usr/local/lib/node_modules/istanbul/node_modules/async/lib/async.js:731:21)
+#            at processImmediate [as _immediateCallback] (timers.js:336:15)
+#        
 
-1..123
-# tests 123
+1..124
+# tests 124
 # pass 123
-# fail 0
+# fail 1

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Persgroep - De Persgroep Publishing</title>
+    <title>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/classes/dialog.js - De Persgroep Publishing</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -107,94 +107,183 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>Persgroep <small>Module</small></h1>
+    <h1>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/classes/dialog.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small">
-    
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	Modals you say? Lightboxes? What&#x27;s in a name. This thing uses
+ *	the WAI ARIA specced items to create modals
+ *
+ *
+ *	@class Dialog
+ *	@constructor
+ *	@requires Toggle
+ *
+ *
+ *	@property {Bonzo} trigger The dom element item that needs to have tab functionality
+ *	@property {boolean} [overlay] does the modal has an overlay, default true
+ *	@property {String} [close] the class of the close button, default is none
+ *	@property {object} [position] the x / y coordinates. default is 50 / 50 percent
+ *	@property {function} onShow callback function when the dialog is shown
+ *	@property {function} onHide callback function when the dialog is hidden
+ *
+ *	@example
+ *
+ *		new Dialog({
+ *		trigger: $(&#x27;.modal-trigger&#x27;),
+ *		closer: &#x27;.close&#x27;
+ *	});
+ *
+ *
+ */
+function Dialog(args) {
+	if (args) {
+		var _this = this;
 
-    
+		_this.defaults = {
+				trigger: (args.trigger ? args.trigger : null),
+				overlay: (args.overlay === false ? args.overlay : true),
+				closer: (args.close ? args.close : false),
+				position: (args.position ? args.position : {
+					x: &#x27;50%&#x27;,
+					y: &#x27;50%&#x27;
+				}),
+				onShow: (args.onShow ? args.onShow : function() {}),
+				onHide: (args.onHide ? args.onHide : function() {})
+			};
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/_Users_joggink_Dropbox_www_clients_depersgroep_web-javascript-libraries_src_classes_validate.js.html#l2"><code>&#x2F;Users&#x2F;joggink&#x2F;Dropbox&#x2F;www&#x2F;clients&#x2F;depersgroep&#x2F;web-javascript-libraries&#x2F;src&#x2F;classes&#x2F;validate.js:2</code></a>
-        </div>
-    
+		// create toggle modules without global close
+		$(_this.defaults.trigger).each(function() {
+			// if we have a panel create a toggle
+			var trigger = $(this),
+				id = trigger.attr(&#x27;data-trigger&#x27;),
+				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;),
+				oRef;
 
-    
-</div>
+			if (id &amp;&amp; modal.length) {
+				oRef = new Toggle({
+						trigger: this,
+						toggle: modal,
+						globalClose: false,
+						onShow: function() {
+							_this.show(trigger, modal);
+						},
+						onHide: function() {
+							_this.hide(trigger, modal);
+						}
+					});
+				trigger.data(&#x27;toggle&#x27;, oRef);
 
+				if (_this.defaults.closer) {
+					$(_this.defaults.closer, modal).on(&#x27;click.dialog.close&#x27;, function() {
+						if (oRef) {
+							oRef.hide.call(oRef);
+						}
+					});
+				}
+			}
+		});
+	}
 
+	return this;
+}
 
-<div class="moduledesc well well-small">
-    <p>&#39;De Persgroep&#39; library can be used just like jQuery but
-    our $ function is a layer to communicate with  minimalistic
-    3rd party libraries:</p>
-<h2 id="-arbiter-http-arbiterjs-com-"><a href="http://arbiterjs.com">Arbiter</a></h2>
-<pre class="code prettyprint"><code>A light-weight, library-agnostic javascript implementation of the pub/sub pattern</code></pre>
-<h2 id="-bonzo-https-github-com-ded-bonzo-"><a href="https://github.com/ded/bonzo">Bonzo</a></h2>
-<pre class="code prettyprint"><code>A library agnostic extensible DOM utility. Nothing else.</code></pre>
-<h2 id="-qwery-https-github-com-ded-qwery-"><a href="https://github.com/ded/qwery">Qwery</a></h2>
-<pre class="code prettyprint"><code>Qwery is a modern selector engine built on top of querySelectorAll giving you practical utility.</code></pre>
-<h2 id="-bean-https-github-com-fat-bean-"><a href="https://github.com/fat/bean">Bean</a></h2>
-<pre class="code prettyprint"><code>A small, fast, cross-platform, framework-agnostic event manager designed for desktop, mobile, and touch-based browsers.</code></pre>
-<h2 id="-reqwest-https-github-com-ded-reqwest-"><a href="https://github.com/ded/reqwest">Reqwest</a></h2>
-<pre class="code prettyprint"><code>Ajax all over again! Includes support for xmlHttpRequest, JSONP, CORS and CommonJS Promises A.</code></pre>
+/**
+ *
+ *	@method show
+ *	@for Dialog
+ *
+ *	@description
+ *	calls the show callback function
+ *
+ *	@example
+ *
+ *		var obj = new Dialog({
+ *	trigger: $(&#x27;.modal-trigger&#x27;),
+ *	closer: &#x27;.close&#x27;
+ *	});
+ *	obj.show();
+ *
+ */
+Dialog.prototype.show = function(trigger, modal) {
+	if (this.defaults &amp;&amp; trigger &amp;&amp; modal) {
+		App.views.dialog.unshift($(this.defaults.trigger).data(&#x27;toggle&#x27;));
 
-</div>
+		this.defaults.onShow.call(this, {
+			overlay: this.defaults.overlay,
+			modal: modal,
+			trigger: trigger,
+			position: this.defaults.position
+		});
+	}
 
+	return this;
+};
 
+/**
+ *
+ *	@method hide
+ *	@for Dialog
+ *
+ *	@description
+ *	calls the hide callback function
+ *
+ *	@example
+ *
+ *		var obj = new Dialog({
+ *	trigger: $(&#x27;.modal-trigger&#x27;),
+ *	closer: &#x27;.close&#x27;
+ *	});
+ *	obj.hide();
+ *
+ */
+Dialog.prototype.hide = function(trigger, modal) {
+	if (this.defaults) {
+		if (App.views.dialog.length) {
+			App.views.dialog.shift();
+		}
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+		this.defaults.onHide.call(this, {
+			overlay: this.defaults.overlay,
+			modal: modal,
+			trigger: trigger,
+			position: this.defaults.position
+		});
+	}
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/$.html">
-                        $
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Cycle.html">
-                        Cycle
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Dialog.html">
-                        Dialog
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Tabs.html">
-                        Tabs
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Toggle.html">
-                        Toggle
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Validate.html">
-                        Validate
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
+	return this;
+};
 
-    <div class="yui3-u-1-2">
-        
-    </div>
+Dialog.prototype.destroy = function() {
+	var _this = this;
+
+	if (this.defaults) {
+		$(this.defaults.trigger).each(function() {
+			if ($(this).data(&#x27;toggle&#x27;)) {
+				$(this).data(&#x27;toggle&#x27;).destroy();
+				$(this).data(&#x27;toggle&#x27;, &#x27;&#x27;);
+			}
+
+			var trigger = $(this),
+				id = trigger.attr(&#x27;data-trigger&#x27;),
+				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
+
+			if (_this.defaults.closer) {
+				$(_this.defaults.closer, modal).each(function() {
+					bean.off(this, &#x27;click.dialog&#x27;);
+				});
+			}
+		});
+	}
+
+	return this;
+};
+
+    </pre>
 </div>
 
                     </div>

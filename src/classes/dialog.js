@@ -47,11 +47,11 @@ function Dialog(args) {
 			// if we have a panel create a toggle
 			var trigger = $(this),
 				id = trigger.attr('data-trigger'),
-				modal = $('*[data-modal="' + id + '"]');
+				modal = $('*[data-modal="' + id + '"]'),
+				oRef;
 
 			if (id && modal.length) {
-				trigger.data('toggle',
-					new Toggle({
+				oRef = new Toggle({
 						trigger: this,
 						toggle: modal,
 						globalClose: false,
@@ -61,15 +61,13 @@ function Dialog(args) {
 						onHide: function() {
 							_this.hide(trigger, modal);
 						}
-					})
-				);
+					});
+				trigger.data('toggle', oRef);
 
 				if (_this.defaults.closer) {
 					$(_this.defaults.closer, modal).on('click.dialog.close', function() {
-						var tgl = $(_this.defaults.trigger).data('toggle');
-
-						if (tgl) {
-							tgl.hide.call(tgl);
+						if (oRef) {
+							oRef.hide.call(oRef);
 						}
 					});
 				}
