@@ -221,7 +221,7 @@ Validate.prototype.checkValidation = function() {
 		});
 	}
 
-	return error;
+	return !error;
 };
 
 /**
