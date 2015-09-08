@@ -281,11 +281,20 @@ Validate.prototype.triggerError = function(field, msg) {
 		}
 
 		this.defaults.fields[field].hasError = true;
-		// only attch the event once!
-		bean.off(_this.defaults.fields[field].htmlObj, 'keyup.validate');
-		bean.on(_this.defaults.fields[field].htmlObj, 'keyup.validate', function() {
-			_this.checkValidation();
-		});
+
+		if (_this.defaults.fields[field].htmlObj.type === 'radio') {
+			// only attch the event once!
+			bean.off(_this.defaults.fields[field].htmlObj, 'click.validate');
+			bean.on(_this.defaults.fields[field].htmlObj, 'click.validate', function() {
+				_this.checkValidation();
+			});
+		} else {
+			// only attch the event once!
+			bean.off(_this.defaults.fields[field].htmlObj, 'keyup.validate');
+			bean.on(_this.defaults.fields[field].htmlObj, 'keyup.validate', function() {
+				_this.checkValidation();
+			});
+		}
 
 		this.defaults.onError.call(this, {
 			field: this.defaults.fields[field].htmlObj,
