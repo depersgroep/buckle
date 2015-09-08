@@ -282,19 +282,13 @@ Validate.prototype.triggerError = function(field, msg) {
 
 		this.defaults.fields[field].hasError = true;
 
-		if (_this.defaults.fields[field].htmlObj.type === 'radio') {
-			// only attch the event once!
-			bean.off(_this.defaults.fields[field].htmlObj, 'click.validate');
-			bean.on(_this.defaults.fields[field].htmlObj, 'click.validate', function() {
-				_this.checkValidation();
-			});
-		} else {
-			// only attch the event once!
-			bean.off(_this.defaults.fields[field].htmlObj, 'keyup.validate');
-			bean.on(_this.defaults.fields[field].htmlObj, 'keyup.validate', function() {
-				_this.checkValidation();
-			});
-		}
+		var eventType = _this.defaults.fields[field].htmlObj.type === 'radio' ? 'click.validate' : 'keyup.validate';
+
+		// only attch the event once!
+		bean.off(_this.defaults.fields[field].htmlObj, eventType);
+		bean.on(_this.defaults.fields[field].htmlObj, eventType, function() {
+			_this.checkValidation();
+		});
 
 		this.defaults.onError.call(this, {
 			field: this.defaults.fields[field].htmlObj,
