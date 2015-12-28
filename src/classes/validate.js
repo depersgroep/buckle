@@ -65,7 +65,7 @@ function Validate(args) {
 			if (!_this.defaults.noFormevents) {
 				// hijack the form submit
 				bean.on(_this.defaults.frm, 'submit', function(e) {
-					if (_this.checkValidation()) {
+					if (!_this.isValid()) {
 						e.preventDefault();
 					} else {
 						$('[type="submit"]', this).attr('disabled', 'disabled');
@@ -89,6 +89,8 @@ function Validate(args) {
  *
  *	@description
  *	check the form validation
+ *
+ *	@deprecated Use `isValid()`
  *
  *	@example
  *
@@ -226,6 +228,27 @@ Validate.prototype.checkValidation = function() {
 
 /**
  *
+ *	@method isValid
+ *	@for Validate
+ *
+ *	@description
+ *	check the form validation
+ *
+ *	@example
+ *
+ *		var theForm = new Validate({
+ *	frm: $('.form-to-validate'),
+ *	});
+ *	theForm.isValid();
+ *
+ *
+ */
+Validate.prototype.isValid = function() {
+	return !this.checkValidation();
+};
+
+/**
+ *
  *	@method checkValue
  *	@for Validate
  *
@@ -284,7 +307,7 @@ Validate.prototype.triggerError = function(field, msg) {
 		// only attch the event once!
 		bean.off(_this.defaults.fields[field].htmlObj, 'keyup.validate');
 		bean.on(_this.defaults.fields[field].htmlObj, 'keyup.validate', function() {
-			_this.checkValidation();
+			_this.isValid();
 		});
 
 		this.defaults.onError.call(this, {
