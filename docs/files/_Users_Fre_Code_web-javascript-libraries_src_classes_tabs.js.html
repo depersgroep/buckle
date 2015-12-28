@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/classes/dialog.js - De Persgroep Publishing</title>
+    <title>/Users/Fre/Code/web-javascript-libraries/src/classes/tabs.js - De Persgroep Publishing</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -107,7 +107,7 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>/Users/joggink/Dropbox/www/clients/depersgroep/web-javascript-libraries/src/classes/dialog.js <small>File</small></h1>
+    <h1>/Users/Fre/Code/web-javascript-libraries/src/classes/tabs.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -115,76 +115,61 @@
 &#x27;use strict&#x27;;
 /**
  *
- *	Modals you say? Lightboxes? What&#x27;s in a name. This thing uses
- *	the WAI ARIA specced items to create modals
+ *	Our tabs module is used to have multiple toggle items as
+ *	tabbed behaviour items
  *
  *
- *	@class Dialog
+ *	@class Tabs
  *	@constructor
  *	@requires Toggle
  *
- *
- *	@property {Bonzo} trigger The dom element item that needs to have tab functionality
- *	@property {boolean} [overlay] does the modal has an overlay, default true
- *	@property {String} [close] the class of the close button, default is none
- *	@property {object} [position] the x / y coordinates. default is 50 / 50 percent
- *	@property {function} onShow callback function when the dialog is shown
- *	@property {function} onHide callback function when the dialog is hidden
+ *	@property {Bonzo} tabs The dom element item that needs to have tab functionality
+ *	@property {event} [mouseEvent] default &#x27;click&#x27;, can be changed to hover
+ *	@property {function} [onTabChange] callback function when the tab is changed
+ *	@property {boolean} [noPreventDefault] cancel the default action on the trigger, default false
  *
  *	@example
  *
- *		new Dialog({
- *		trigger: $(&#x27;.modal-trigger&#x27;),
- *		closer: &#x27;.close&#x27;
+ *		new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) {
+ *			// do stuff
+ *		}
  *	});
  *
  *
  */
-function Dialog(args) {
+function Tabs(args) {
 	if (args) {
 		var _this = this;
 
-		_this.defaults = {
-				trigger: (args.trigger ? args.trigger : null),
-				overlay: (args.overlay === false ? args.overlay : true),
-				closer: (args.close ? args.close : false),
-				position: (args.position ? args.position : {
-					x: &#x27;50%&#x27;,
-					y: &#x27;50%&#x27;
-				}),
-				onShow: (args.onShow ? args.onShow : function() {}),
-				onHide: (args.onHide ? args.onHide : function() {})
+		this.defaults = {
+				tabs: (args.tabs ? args.tabs : null),
+				mouseEvent: (args.mouseEvent ? args.mouseEvent : &#x27;click&#x27;),
+				onTabChange: (args.onTabChange ? args.onTabChange : function() {}),
+				noPreventDefault: (args.noPreventDefault ? args.noPreventDefault : false)
 			};
 
 		// create toggle modules without global close
-		$(_this.defaults.trigger).each(function() {
+		$(this.defaults.tabs).each(function() {
 			// if we have a panel create a toggle
-			var trigger = $(this),
-				id = trigger.attr(&#x27;data-trigger&#x27;),
-				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;),
-				tgl;
+			var tab = $(this),
+				id = tab.attr(&#x27;aria-controls&#x27;);
 
-			if (id &amp;&amp; modal.length) {
-				tgl = new Toggle({
-						trigger: this,
-						toggle: modal,
+			if (id) {
+				tab.data(&#x27;toggle&#x27;,
+					new Toggle({
+						trigger: tab,
+						toggle: $(&#x27;#&#x27; + id),
+						mouseEvent: _this.defaults.mouseEvent,
 						globalClose: false,
+						toggleClick: false,
 						onShow: function() {
-							_this.show(trigger, modal);
+							_this.show(tab);
 						},
-						onHide: function() {
-							_this.hide(trigger, modal);
-						}
-					});
-				trigger.data(&#x27;toggle&#x27;, tgl);
-
-				if (_this.defaults.closer) {
-					$(_this.defaults.closer, modal).on(&#x27;click.dialog.close&#x27;, function() {
-						if (tgl) {
-							tgl.hide.call(tgl);
-						}
-					});
-				}
+						noPreventDefault: _this.defaults.noPreventDefault
+					})
+				);
 			}
 		});
 	}
@@ -195,30 +180,35 @@ function Dialog(args) {
 /**
  *
  *	@method show
- *	@for Dialog
+ *	@for Tabs
  *
  *	@description
  *	calls the show callback function
  *
  *	@example
  *
- *		var obj = new Dialog({
- *	trigger: $(&#x27;.modal-trigger&#x27;),
- *	closer: &#x27;.close&#x27;
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) { // do stuff; },
  *	});
  *	obj.show();
  *
  */
-Dialog.prototype.show = function(trigger, modal) {
-	if (this.defaults &amp;&amp; trigger &amp;&amp; modal) {
-		App.views.dialog.unshift($(this.defaults.trigger).data(&#x27;toggle&#x27;));
+Tabs.prototype.show = function(tab) {
+	if (tab &amp;&amp; this.defaults) {
+		var _this = this;
 
-		this.defaults.onShow.call(this, {
-			overlay: this.defaults.overlay,
-			modal: modal,
-			trigger: trigger,
-			position: this.defaults.position
+		// loop throug the tabs that are not the active one and hide them
+		$(this.defaults.tabs).each(function() {
+			_this.hide($(this));
 		});
+
+		Arbiter.publish(&#x27;/tabs/show&#x27;, {
+			tab: tab,
+			pane: $(&#x27;#&#x27; + tab.attr(&#x27;aria-controls&#x27;))
+		});
+
+		_this.defaults.onTabChange.call(_this);
 	}
 
 	return this;
@@ -227,55 +217,60 @@ Dialog.prototype.show = function(trigger, modal) {
 /**
  *
  *	@method hide
- *	@for Dialog
+ *	@for Tabs
  *
  *	@description
  *	calls the hide callback function
  *
  *	@example
  *
- *		var obj = new Dialog({
- *	trigger: $(&#x27;.modal-trigger&#x27;),
- *	closer: &#x27;.close&#x27;
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) { // do stuff; },
  *	});
  *	obj.hide();
  *
  */
-Dialog.prototype.hide = function(trigger, modal) {
-	if (this.defaults) {
-		if (App.views.dialog.length) {
-			App.views.dialog.shift();
-		}
+Tabs.prototype.hide = function(tab) {
+	if (tab &amp;&amp; this.defaults) {
+		// hide the tab
+		tab.data(&#x27;toggle&#x27;).hide();
 
-		this.defaults.onHide.call(this, {
-			overlay: this.defaults.overlay,
-			modal: modal,
-			trigger: trigger,
-			position: this.defaults.position
+		Arbiter.publish(&#x27;/tabs/hide&#x27;, {
+			tab: tab,
+			pane: $(&#x27;#&#x27; + tab.attr(&#x27;aria-controls&#x27;))
 		});
 	}
 
 	return this;
 };
 
-Dialog.prototype.destroy = function() {
-	var _this = this;
-
+/**
+ *
+ *	@method destroy
+ *	@for Tabs
+ *
+ *	@description
+ *	destroys the tabs instance
+ *
+ *	@example
+ *
+ *		var obj = new Tabs({
+ *		tabs: $(&#x27;.tab-block&#x27;),
+ *		onTabChange: function(args) { // do stuff; },
+ *	});
+ *	obj.destroy();
+ *
+ */
+Tabs.prototype.destroy = function() {
 	if (this.defaults) {
-		$(this.defaults.trigger).each(function() {
-			if ($(this).data(&#x27;toggle&#x27;)) {
-				$(this).data(&#x27;toggle&#x27;).destroy();
-				$(this).data(&#x27;toggle&#x27;, &#x27;&#x27;);
-			}
+		$(this.defaults.tabs).each(function() {
+			// if we have a panel create a toggle
+			var tab = $(this);
 
-			var trigger = $(this),
-				id = trigger.attr(&#x27;data-trigger&#x27;),
-				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
-
-			if (_this.defaults.closer) {
-				$(_this.defaults.closer, modal).each(function() {
-					bean.off(this, &#x27;click.dialog&#x27;);
-				});
+			if (tab.data(&#x27;toggle&#x27;)) {
+				tab.data(&#x27;toggle&#x27;).destroy();
+				tab.data(&#x27;toggle&#x27;, &#x27;&#x27;);
 			}
 		});
 	}
