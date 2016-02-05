@@ -9,12 +9,12 @@ Examples can be found in the "examples"-folder.
 #### Development
 ```
 npm install
-grunt
+gulp
 ```
 
 Run tests:
 ```
 npm install
 npm install -g istanbul
-grunt test
+gulp test
 ```

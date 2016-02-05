@@ -4,6 +4,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "$",
         "Cycle",
         "Dialog",
+        "Inputmask",
         "Tabs",
         "Toggle",
         "Validate"
