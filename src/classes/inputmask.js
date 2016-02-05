@@ -35,7 +35,8 @@ function Inputmask(args) {
 		characterCountInPattern,
 		separatorIndexes,
 		separatorIndexesLength,
-		patternLength;
+		patternLength,
+		ieMobile = false;
 
 	if (args) {
 		this.defaults = {
@@ -85,6 +86,8 @@ function Inputmask(args) {
 		separatorIndexesLength = separatorIndexes.length;
 
 		patternLength = _this.defaults.pattern.length;
+
+		ieMobile = window.navigator.userAgent.toLowerCase().indexOf('iemobile') >= 0;
 	}
 
 	/* Handlers */
@@ -139,10 +142,19 @@ function Inputmask(args) {
 
 	function keyUpHandler(e) {
 		updateCursorPos(e);
-		inputHandler(e);
+		inputHandler();
 	}
 
 	function inputHandler() {
+		if (ieMobile) {
+			// Windows Phone IE bug fires the oninput-event before the value has actually changed ==> add set timeout
+			window.setTimeout(input, 0);
+		} else {
+			input();
+		}
+	}
+
+	function input() {
 		var cursorPos = getCursorPosition(),
 			value = _this.defaults.inputmask.value,
 			newValue,
