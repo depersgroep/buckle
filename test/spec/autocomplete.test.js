@@ -34,12 +34,16 @@ describe('Autocomplete Module', function() {
             expect(test.defaults.input).toBeNull();
         });
 
-        it('should not have a form', function(){
-            expect(test.defaults.form).toBeNull();
+        it('should not have an appendTo', function(){
+            expect(test.defaults.appendTo).toBeNull();
         });
 
-        it('should not have a button', function(){
-            expect(test.defaults.button).toBeNull();
+        it('should not have a url', function(){
+            expect(test.defaults.url).toBeNull();
+        });
+
+        it('should not have an onSelectCallback', function(){
+            expect(test.defaults.onSelectCallback).toBeDefined();
         });
 
         it('should not have an itemElement', function(){
@@ -54,8 +58,8 @@ describe('Autocomplete Module', function() {
             expect(test.defaults.minLength).toBeDefined();
         });
 
-        it('should not have a url', function(){
-            expect(test.defaults.url).toBeNull();
+        it('should not have a debounce', function(){
+            expect(test.defaults.debounce).toBeDefined();
         });
     });
 
@@ -66,8 +70,7 @@ describe('Autocomplete Module', function() {
             test = new Autocomplete({
                 'input': $('[data-autocomplete-url] input'),
                 'appendTo': $('.fjs-autocomplete-list'),
-                'url': '',
-                'button': $('[data-autocomplete-url] button'),
+                'url': ''
             });
         });
 
@@ -75,32 +78,36 @@ describe('Autocomplete Module', function() {
             test = null;
         });
 
-        it('should have an input', function() {
+        it('should not have an input', function(){
             expect(test.defaults.input).toBeDefined();
         });
 
-        it('should have a form', function() {
-            expect(test.defaults.form).toBeDefined();
+        it('should not have an appendTo', function(){
+            expect(test.defaults.appendTo).toBeDefined();
         });
 
-        it('should have a button', function() {
-            expect(test.defaults.button).toBeDefined();
+        it('should not have a url', function(){
+            expect(test.defaults.url).toBeDefined();
         });
 
-        it('should have an itemElement', function() {
+        it('should not have an onSelectCallback', function(){
+            expect(test.defaults.onSelectCallback).toBeDefined();
+        });
+
+        it('should not have an itemElement', function(){
             expect(test.defaults.itemElement).toBeDefined();
         });
 
-        it('should have a activeClass', function() {
+        it('should not have a activeClass', function(){
             expect(test.defaults.activeClass).toBeDefined();
         });
 
-        it('should have a minLength', function() {
+        it('should not have a minLength', function(){
             expect(test.defaults.minLength).toBeDefined();
         });
 
-        it('should have a url', function() {
-            expect(test.defaults.url).toBeDefined();
+        it('should not have a debounce', function(){
+            expect(test.defaults.debounce).toBeDefined();
         });
     });
 });
