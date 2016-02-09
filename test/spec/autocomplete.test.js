@@ -38,6 +38,10 @@ describe('Autocomplete Module', function() {
             expect(test.defaults.form).toBeNull();
         });
 
+        it('should not have a button', function(){
+            expect(test.defaults.button).toBeNull();
+        });
+
         it('should not have an itemElement', function(){
             expect(test.defaults.itemElement).toBeDefined();
         });
@@ -56,18 +60,14 @@ describe('Autocomplete Module', function() {
     });
 
     describe('Properties setters', function() {
-        var test = null,
-            $input = null,
-            $list = null;
+        var test = null;
 
         beforeEach(function() {
-            $input = $('[data-autocomplete-url] input');
-            $list = $('.fjs-autocomplete-list');
-
             test = new Autocomplete({
-                'input': $input,
-                'appendTo': $list,
-                'url': ''
+                'input': $('[data-autocomplete-url] input'),
+                'appendTo': $('.fjs-autocomplete-list'),
+                'url': '',
+                'button': $('[data-autocomplete-url] button'),
             });
         });
 
@@ -81,6 +81,10 @@ describe('Autocomplete Module', function() {
 
         it('should have a form', function() {
             expect(test.defaults.form).toBeDefined();
+        });
+
+        it('should have a button', function() {
+            expect(test.defaults.button).toBeDefined();
         });
 
         it('should have an itemElement', function() {

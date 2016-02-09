@@ -40,6 +40,7 @@ function Autocomplete(args) {
 			'input': args.input ? args.input : null,
 			'appendTo': args.appendTo ? args.appendTo : null,
 			'form': args.form ? args.form : null,
+			'button': args.button ? args.button : null,
 			'itemElement': args.itemElement ? args.itemElement : document.createElement('li'),
 			'activeClass': args.active ? args.activeClass : 'js-is-active',
 			'minLength': args.minLength ? args.minLength : 3,
@@ -168,10 +169,14 @@ function Autocomplete(args) {
 
 		_this.defaults.input.value = item.getAttribute('data-autocomplete-id');
 
-		// For iOS, otherwise the submit will be executed before the value is set.
-		window.setTimeout(function() {
-			_this.defaults.form.submit();
-		}, 0);
+		if (_this.defaults.button) {
+			_this.defaults.button.click();
+		} else {
+			// For iOS, otherwise the submit will be executed before the value is set.
+			window.setTimeout(function() {
+				// _this.defaults.form.submit();
+			}, 0);
+		}
 
 		reset();
 	}
