@@ -129,7 +129,7 @@ function Autocomplete(args) {
 
 		for (; i < l; i++) {
 			elem = _this.defaults.itemElement.cloneNode(true);
-			elem.innerText = result[i];
+			elem.innerHTML = result[i];
 			elem.setAttribute('data-autocomplete-id', result[i]);
 			$(elem).on('click.autocomplete', click.bind(_this));
 			_this.defaults.appendTo.appendChild(elem);
@@ -184,8 +184,6 @@ function Autocomplete(args) {
 	function reset() {
 		$appendTo.html('').removeClass(_this.defaults.activeClass);
 	}
-
-	console.log(this);
 
 	return this;
 }

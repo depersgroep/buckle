@@ -247,7 +247,7 @@ function Autocomplete(args) {
 
 		for (; i &lt; l; i++) {
 			elem = _this.defaults.itemElement.cloneNode(true);
-			elem.innerText = result[i];
+			elem.innerHTML = result[i];
 			elem.setAttribute(&#x27;data-autocomplete-id&#x27;, result[i]);
 			$(elem).on(&#x27;click.autocomplete&#x27;, click.bind(_this));
 			_this.defaults.appendTo.appendChild(elem);
@@ -302,8 +302,6 @@ function Autocomplete(args) {
 	function reset() {
 		$appendTo.html(&#x27;&#x27;).removeClass(_this.defaults.activeClass);
 	}
-
-	console.log(this);
 
 	return this;
 }
