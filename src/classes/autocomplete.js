@@ -49,7 +49,6 @@ function Autocomplete(args) {
 		};
 
 		if (this.defaults.input && this.defaults.appendTo) {
-			console.log('ok');
 			$input = $(this.defaults.input);
 			$appendTo = $(this.defaults.appendTo);
 
@@ -82,8 +81,6 @@ function Autocomplete(args) {
 	function keyDown(e) {
 		var $current,
 			keyCode = e.keyCode || e.which;
-
-			console.log('jaja');
 
 		if (keyCode === 40) {
 			e.preventDefault();
@@ -120,9 +117,6 @@ function Autocomplete(args) {
 	}
 
 	function response(resp) {
-		console.log(resp);
-		console.log(resp.items);
-
 		var elem,
 			result = resp.items,
 			i = 0,
