@@ -163,7 +163,8 @@ function Inputmask(args) {
 			i = 0,
 			x = 0,
 			added = false,
-			indexOfFirstMask = -1;
+			indexOfFirstMask = -1,
+			newValueNextCharacter;
 
 		if (previousValue.length > value.length) {
 			// removed
@@ -227,8 +228,9 @@ function Inputmask(args) {
 		if (added) {
 			// suppose someone clicked on the last _ and started typing there ==> update the cursor pos to resemble the correct spot
 			indexOfFirstMask = newValue.indexOf(_this.defaults.maskCharacter);
+			newValueNextCharacter = newValue.substr(cursorPos, 1);
 
-			if (indexOfFirstMask >= 0) {
+			if (indexOfFirstMask >= 0 && (newValueNextCharacter === _this.defaults.maskCharacter || newValueNextCharacter === '')) {
 				cursorPos = indexOfFirstMask;
 			}
 		}
