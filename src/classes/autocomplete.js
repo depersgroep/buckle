@@ -22,10 +22,10 @@
  *	    'input': document.querySelector('input'),
  *	    'appendTo': document.querySelector('ol'),
  *	    'url': 'http://google.com/search/autocomplete/?query=',
- *	    'onSelectCallback': function(item){ console.log(selectedValue); },
+ *	    'onSelectCallback': function(selectedValue){ console.log(selectedValue); },
  *	    'itemElement': document.querySelector('li'),
  *	    'activeClass': 'js-is-active',
- *	    'minLength: 5
+ *	    'minLength': 5
  *	});
  *
  *
@@ -49,6 +49,7 @@ function Autocomplete(args) {
 		};
 
 		if (this.defaults.input && this.defaults.appendTo) {
+			console.log('ok');
 			$input = $(this.defaults.input);
 			$appendTo = $(this.defaults.appendTo);
 
@@ -81,6 +82,8 @@ function Autocomplete(args) {
 	function keyDown(e) {
 		var $current,
 			keyCode = e.keyCode || e.which;
+
+			console.log('jaja');
 
 		if (keyCode === 40) {
 			e.preventDefault();
@@ -117,6 +120,9 @@ function Autocomplete(args) {
 	}
 
 	function response(resp) {
+		console.log(resp);
+		console.log(resp.items);
+
 		var elem,
 			result = resp.items,
 			i = 0,
