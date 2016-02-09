@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>/Users/Fre/Code/web-javascript-libraries/src/classes/inputmask.js - De Persgroep Publishing</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="De Persgroep Publishing" src="../assets/css/logo.png" style="max-height: 65%;" title="De Persgroep Publishing">
+        
+            De Persgroep Publishing
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/$", "classes/Autocomplete", "classes/Cycle", "classes/Dialog", "classes/Inputmask", "classes/Tabs", "classes/Toggle", "classes/Validate", "modules/Persgroep"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/$.html">$</a></li>
+                    
+                        <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
+                    
+                        <li><a href="../classes/Cycle.html">Cycle</a></li>
+                    
+                        <li><a href="../classes/Dialog.html">Dialog</a></li>
+                    
+                        <li><a href="../classes/Inputmask.html">Inputmask</a></li>
+                    
+                        <li><a href="../classes/Tabs.html">Tabs</a></li>
+                    
+                        <li><a href="../classes/Toggle.html">Toggle</a></li>
+                    
+                        <li><a href="../classes/Validate.html">Validate</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/Persgroep.html">Persgroep</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>/Users/Fre/Code/web-javascript-libraries/src/classes/inputmask.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	Our inputmask module is used to mask an input field which should contain a date: dd/mm/jjjj
+ *
+ *
+ *	@class Inputmask
+ *	@constructor
+ *
+ *	@property {Element} inputmask The dom element that needs to be inputmasked
+ *	@property {String} pattern The pattern to be displayed/used
+ *	@property {String} maskCharacter The character to be shown when empty
+ *	@property {String} separatorCharacter The character used to separate the date
+ *
+ *	@example
+ *
+ *		new Inputmask({
+ *		&#x27;inputmask&#x27;: document.querySelector(&#x27;input&#x27;),
+ *		&#x27;pattern&#x27;: &#x27;__/__/____&#x27;,
+ *		&#x27;maskCharacter&#x27;: &#x27;_&#x27;,
+ *		&#x27;separatorCharacter&#x27;: &#x27;/&#x27;
+ *	});
+ *
+ *
+ */
+
+function Inputmask(args) {
+	var _this = this,
+		previousValue,
+		previousCursorPos,
+		regexNumbers = /\d+/g,
+		regexNotNumbers = /[^\d+]/g,
+		regexMask,
+		regexSeparator,
+		characterCountInPattern,
+		separatorIndexes,
+		separatorIndexesLength,
+		patternLength,
+		ieMobile = false;
+
+	if (args) {
+		this.defaults = {
+			inputmask: (args.inputmask ? args.inputmask : null),
+			pattern: (args.pattern ? args.pattern : null),
+			maskCharacter: (args.maskCharacter ? args.maskCharacter : null),
+			separatorCharacter: (args.separatorCharacter ? args.separatorCharacter : null)
+		};
+
+		// Must be input field + must support setSelectionRange --&gt; no IE8 support
+		if (this.defaults.inputmask &amp;&amp; this.defaults.inputmask.tagName.toLowerCase() === &#x27;input&#x27; &amp;&amp; typeof this.defaults.inputmask.setSelectionRange === &#x27;function&#x27; &amp;&amp;
+			this.defaults.pattern &amp;&amp; this.defaults.maskCharacter &amp;&amp; this.defaults.separatorCharacter) {
+			attachHandlers();
+			initValues();
+		}
+	}
+
+	function attachHandlers() {
+		var $inputmask = $(_this.defaults.inputmask);
+
+		$inputmask.on(&#x27;focus.inputmask&#x27;, maskElement);
+		$inputmask.on(&#x27;blur.inputmask&#x27;, unMaskElement);
+
+		if (onInputSupport()) {
+			$inputmask.on(&#x27;input.inputmask&#x27;, inputHandler);
+			$inputmask.on(&#x27;keyup.inputmask&#x27;, updateCursorPos);
+		} else {
+			// no input or bad input support
+			$inputmask.on(&#x27;keydown.inputmask&#x27;, keyDownHandler, $inputmask);
+		}
+
+		// recalculate cursorPosition
+		$inputmask.on(&#x27;mouseup.inputmask&#x27;, updateCursorPos);
+
+		$inputmask.on(&#x27;paste.inputmask&#x27;, paste); // disable paste
+	}
+
+	function initValues() {
+		previousValue = _this.defaults.inputmask.value || _this.defaults.pattern;
+
+		regexMask = new RegExp(_this.defaults.maskCharacter, &#x27;g&#x27;);
+		regexSeparator = new RegExp(_this.defaults.separatorCharacter, &#x27;g&#x27;);
+
+		characterCountInPattern = (_this.defaults.pattern.match(regexMask) || []).length;
+
+		separatorIndexes = findSeparatorCharacters((_this.defaults.inputmask.value || _this.defaults.pattern));
+		separatorIndexesLength = separatorIndexes.length;
+
+		patternLength = _this.defaults.pattern.length;
+
+		ieMobile = window.navigator.userAgent.toLowerCase().indexOf(&#x27;iemobile&#x27;) &gt;= 0;
+	}
+
+	/* Handlers */
+	function maskElement() {
+		if (_this.defaults.inputmask.value === &#x27;&#x27;) {
+			_this.defaults.inputmask.value = _this.defaults.pattern;
+		}
+
+		// set cursor to first maskCharacter
+		window.setTimeout(function() {
+			var index = _this.defaults.inputmask.value.indexOf(_this.defaults.maskCharacter);
+
+			if (index &gt;= 0) {
+				setCursorPosition(index);
+			}
+
+			previousCursorPos = getCursorPosition();
+		}, 0);
+	}
+
+	function unMaskElement() {
+		if (_this.defaults.inputmask.value === _this.defaults.pattern) {
+			_this.defaults.inputmask.value = &#x27;&#x27;;
+		}
+	}
+
+	function keyDownHandler(e, $inputmask) {
+		var keyCode = e.keyCode || e.which;
+
+		if (keyCode &gt;= 96 &amp;&amp; keyCode &lt;= 105) {
+			keyCode -= 48;
+		}
+
+		/*
+			48-57 = numeric ==&gt; NOT numeric
+			8 = backspace
+			46 = delete
+			37 = left arrow
+			39 = right arrow
+		*/
+		if ((keyCode &lt; 48 || keyCode &gt; 57) &amp;&amp; keyCode !== 8 &amp;&amp; keyCode !== 46 &amp;&amp; keyCode !== 37 &amp;&amp; keyCode !== 39) {
+			// don&#x27;t trigger keyup
+			$inputmask.off(&#x27;keyup.inputmask&#x27;);
+
+			// prevent the character from being inserted
+			e.preventDefault();
+		} else {
+			// add keyup when typing any other character, but first remove it, otherwise multiple handlers
+			$inputmask.off(&#x27;keyup.inputmask&#x27;).on(&#x27;keyup.inputmask&#x27;, keyUpHandler);
+		}
+	}
+
+	function keyUpHandler(e) {
+		updateCursorPos(e);
+		inputHandler();
+	}
+
+	function inputHandler() {
+		if (ieMobile) {
+			// Windows Phone IE bug fires the oninput-event before the value has actually changed ==&gt; add set timeout
+			window.setTimeout(input, 0);
+		} else {
+			input();
+		}
+	}
+
+	function input() {
+		var cursorPos = getCursorPosition(),
+			value = _this.defaults.inputmask.value,
+			newValue,
+			notNumberCount,
+			additionalMaskCharacters,
+			i = 0,
+			x = 0,
+			added = false,
+			indexOfFirstMask = -1;
+
+		if (previousValue.length &gt; value.length) {
+			// removed
+			if (previousCursorPos === cursorPos) {
+				// delete
+				if (previousValue.substr(cursorPos, 1) === _this.defaults.separatorCharacter) {
+					// a slash was deleted ==&gt; delete the next character
+					value = value.substr(0, cursorPos) + _this.defaults.separatorCharacter + value.substr(cursorPos + 1);
+					cursorPos += 1;
+				}
+			} else {
+				// backspace
+				if (value.substr(cursorPos - 1, 1) === _this.defaults.separatorCharacter) {
+					// move the cursor to before the separatorCharacter
+					cursorPos -= 1;
+				} else {
+					// if you click just before the separatorCharacter and press backspace, then delete the character before the separatorCharacter
+					if (previousValue.substr(cursorPos, 1) === _this.defaults.separatorCharacter) {
+						// a slash was deleted ==&gt; delete the previous character
+						value = value.substr(0, cursorPos - 1) + _this.defaults.separatorCharacter + value.substr(cursorPos);
+						cursorPos -= 1;
+					}
+				}
+			}
+		} else {
+			// added
+			// update cursor pos when writing a none-number
+			notNumberCount = (value.replace(regexMask, &#x27;&#x27;).replace(regexSeparator, &#x27;&#x27;).match(regexNotNumbers) || []).length;
+
+			if (notNumberCount &gt; 0) {
+				cursorPos -= notNumberCount;
+			} else {
+				added = true;
+			}
+
+			// check if we need to jump one after the separator
+			if (previousCursorPos &lt; cursorPos) {
+				if (previousValue.substr(cursorPos - 1, 1) === _this.defaults.separatorCharacter) {
+					cursorPos += 1;
+				}
+			}
+		}
+
+		newValue = (value.match(regexNumbers) || []).join(&#x27;&#x27;);
+		additionalMaskCharacters = characterCountInPattern - newValue.length;
+
+		// add additional mask characters
+		for (i; i &lt; additionalMaskCharacters; i++) {
+			newValue += &#x27;_&#x27;;
+		}
+
+		// replace the separator characters
+		for (x; x &lt; separatorIndexesLength; x++) {
+			newValue = newValue.substr(0, separatorIndexes[x]) + _this.defaults.separatorCharacter + newValue.substr(separatorIndexes[x]);
+		}
+
+		if (newValue.length &gt; patternLength) {
+			newValue = newValue.substr(0, patternLength);
+		}
+
+		if (added) {
+			// suppose someone clicked on the last _ and started typing there ==&gt; update the cursor pos to resemble the correct spot
+			indexOfFirstMask = newValue.indexOf(_this.defaults.maskCharacter);
+
+			if (indexOfFirstMask &gt;= 0) {
+				cursorPos = indexOfFirstMask;
+			}
+		}
+
+		// update input field
+		_this.defaults.inputmask.value = newValue;
+
+		// update previous values for future comparison
+		previousValue = _this.defaults.inputmask.value;
+		previousCursorPos = cursorPos;
+
+		setCursorPosition(cursorPos);
+	}
+
+	function paste(e) {
+		e.preventDefault();
+	}
+
+	/* Helper function */
+	function updateCursorPos(e) {
+		var keyCode = e.keyCode || e.which;
+		/*
+			37 = left arrow
+			39 = right arrow
+			229 = damn android &quot;bug&quot; which always returns the wrong keyCode!
+		*/
+		if (e.type !== &#x27;keyup&#x27; || (e.type === &#x27;keyup&#x27; &amp;&amp; keyCode === 37 || keyCode === 39 || keyCode === 229)) {
+			previousCursorPos = getCursorPosition();
+		}
+	}
+
+	function onInputSupport() {
+		// window.atob is to check if we&#x27;re dealing with IE9, which does have oninput, but doesn&#x27;t trigger on backspace, delete, ...
+		return &#x27;oninput&#x27; in _this.defaults.inputmask &amp;&amp; typeof window.atob !== &#x27;undefined&#x27;;
+	}
+
+	function findSeparatorCharacters(value) {
+		var arr = [],
+			index,
+			i = 0;
+
+		while ((index = value.indexOf(_this.defaults.separatorCharacter, i)) &gt;= 0) {
+			i = index + 1;
+			arr.push(index);
+		}
+
+		return arr;
+	}
+
+	function getCursorPosition() {
+		var position = 0,
+			selectRange,
+			selectRangeLength;
+
+		if (document.selection) {
+			_this.defaults.inputmask.focus();
+			selectRange = document.selection.createRange();
+			selectRangeLength = selectRange.text.length;
+			selectRange.moveStart(&#x27;character&#x27;, -_this.defaults.inputmask.value.length);
+			position = selectRange.text.length - selectRangeLength;
+		} else if (_this.defaults.inputmask.selectionStart || _this.defaults.inputmask.selectionStart === &#x27;0&#x27;) {
+			position = _this.defaults.inputmask.selectionStart;
+		}
+
+		return position;
+	}
+
+	function setCursorPosition(index) {
+		var range;
+
+		if (_this.defaults.inputmask !== null) {
+			if (_this.defaults.inputmask.createTextRange) {
+				range = _this.defaults.inputmask.createTextRange();
+
+				range.move(&#x27;character&#x27;, index);
+				range.select();
+			} else {
+				if (_this.defaults.inputmask.selectionStart) {
+					_this.defaults.inputmask.focus();
+
+					_this.defaults.inputmask.setSelectionRange(index, index);
+				} else {
+					_this.defaults.inputmask.focus();
+				}
+			}
+		}
+	}
+
+	return this;
+}
+
+/**
+ *
+ *	@method destroy
+ *	@for Inputmask
+ *
+ *	@description
+ *	destroys the inputmask instance
+ *
+ *	@example
+ *
+ *		var obj = new Inputmask({
+ *		&#x27;inputmask&#x27;: document.querySelector(&#x27;input&#x27;),
+ *		&#x27;pattern&#x27;: &#x27;__/__/____&#x27;,
+ *		&#x27;maskCharacter&#x27;: &#x27;_&#x27;,
+ *		&#x27;separatorCharacter&#x27;: &#x27;/&#x27;
+ *	});
+ *	obj.destroy();
+ *
+ */
+Inputmask.prototype.destroy = function() {
+	// destroy it
+	if (this.defaults) {
+		Arbiter.publish(&#x27;/inputmask/destroy&#x27;, this.defaults);
+
+		$(this.defaults.inputmask).off(&#x27;focus.inputmask blur.inputmask input.inputmask keyup.inputmask keydown.inputmask paste.inputmask&#x27;);
+
+		// remove the defaults
+		this.defaults = null;
+	}
+
+	return this;
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

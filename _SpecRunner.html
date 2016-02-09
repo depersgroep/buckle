@@ -25,6 +25,7 @@
 		<script src="instrumented/tabs.js"></script>
 		<script src="instrumented/validate.js"></script>
 		<script src="instrumented/inputmask.js"></script>
+		<script src="instrumented/autocomplete.js"></script>
 
 		<script src="test/spec/toggle.test.js"></script>
 		<script src="test/spec/tabs.test.js"></script>
@@ -32,6 +33,7 @@
 		<script src="test/spec/cycle.test.js"></script>
 		<script src="test/spec/validate.test.js"></script>
 		<script src="test/spec/inputmask.test.js"></script>
+		<script src="test/spec/autocomplete.test.js"></script>
 
 		<script>
 			var App = {
@@ -106,6 +108,10 @@
 		<!-- Input mask -->
 		<form id="anothertestform">
 			<input type="text" class="inputmask" />
+		</form>
+
+		<form id="autocomplete-form" data-autocomplete-url="http://testurl">
+			<input type="text" class="autocomplete">
 		</form>
 
 		<script src="/testem.js"></script>

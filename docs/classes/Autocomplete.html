@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>/Users/Fre/Code/web-javascript-libraries/src/classes/dialog.js - De Persgroep Publishing</title>
+    <title>Autocomplete - De Persgroep Publishing</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,183 +111,143 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>/Users/Fre/Code/web-javascript-libraries/src/classes/dialog.js <small>File</small></h1>
+    <h1>Autocomplete <small>Class</small></h1>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-&#x27;use strict&#x27;;
-/**
- *
- *	Modals you say? Lightboxes? What&#x27;s in a name. This thing uses
- *	the WAI ARIA specced items to create modals
- *
- *
- *	@class Dialog
- *	@constructor
- *	@requires Toggle
- *
- *
- *	@property {Bonzo} trigger The dom element item that needs to have tab functionality
- *	@property {boolean} [overlay] does the modal has an overlay, default true
- *	@property {String} [close] the class of the close button, default is none
- *	@property {object} [position] the x / y coordinates. default is 50 / 50 percent
- *	@property {function} onShow callback function when the dialog is shown
- *	@property {function} onHide callback function when the dialog is hidden
- *
- *	@example
- *
- *		new Dialog({
- *		trigger: $(&#x27;.modal-trigger&#x27;),
- *		closer: &#x27;.close&#x27;
- *	});
- *
- *
- */
-function Dialog(args) {
-	if (args) {
-		var _this = this;
+<div class="well well-small">
+    
 
-		_this.defaults = {
-				trigger: (args.trigger ? args.trigger : null),
-				overlay: (args.overlay === false ? args.overlay : true),
-				closer: (args.close ? args.close : false),
-				position: (args.position ? args.position : {
-					x: &#x27;50%&#x27;,
-					y: &#x27;50%&#x27;
-				}),
-				onShow: (args.onShow ? args.onShow : function() {}),
-				onHide: (args.onHide ? args.onHide : function() {})
-			};
+    
 
-		// create toggle modules without global close
-		$(_this.defaults.trigger).each(function() {
-			// if we have a panel create a toggle
-			var trigger = $(this),
-				id = trigger.attr(&#x27;data-trigger&#x27;),
-				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;),
-				tgl;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/_Users_Fre_Code_web-javascript-libraries_src_classes_autocomplete.js.html#l2"><code>&#x2F;Users&#x2F;Fre&#x2F;Code&#x2F;web-javascript-libraries&#x2F;src&#x2F;classes&#x2F;autocomplete.js:2</code></a>
+        </div>
+    
 
-			if (id &amp;&amp; modal.length) {
-				tgl = new Toggle({
-						trigger: this,
-						toggle: modal,
-						globalClose: false,
-						onShow: function() {
-							_this.show(trigger, modal);
-						},
-						onHide: function() {
-							_this.hide(trigger, modal);
-						}
-					});
-				trigger.data(&#x27;toggle&#x27;, tgl);
+    
+        
+            Module: <a href="../modules/Persgroep.html">Persgroep</a>
+        
+    
 
-				if (_this.defaults.closer) {
-					$(_this.defaults.closer, modal).on(&#x27;click.dialog.close&#x27;, function() {
-						if (tgl) {
-							tgl.hide.call(tgl);
-						}
-					});
-				}
-			}
-		});
-	}
+    
+</div>
 
-	return this;
-}
 
-/**
- *
- *	@method show
- *	@for Dialog
- *
- *	@description
- *	calls the show callback function
- *
- *	@example
- *
- *		var obj = new Dialog({
- *	trigger: $(&#x27;.modal-trigger&#x27;),
- *	closer: &#x27;.close&#x27;
- *	});
- *	obj.show();
- *
- */
-Dialog.prototype.show = function(trigger, modal) {
-	if (this.defaults &amp;&amp; trigger &amp;&amp; modal) {
-		App.views.dialog.unshift($(this.defaults.trigger).data(&#x27;toggle&#x27;));
 
-		this.defaults.onShow.call(this, {
-			overlay: this.defaults.overlay,
-			modal: modal,
-			trigger: trigger,
-			position: this.defaults.position
-		});
-	}
+<div class="well well-small">
+    <p>Our autocomplete</p>
 
-	return this;
-};
+</div>
 
-/**
- *
- *	@method hide
- *	@for Dialog
- *
- *	@description
- *	calls the hide callback function
- *
- *	@example
- *
- *		var obj = new Dialog({
- *	trigger: $(&#x27;.modal-trigger&#x27;),
- *	closer: &#x27;.close&#x27;
- *	});
- *	obj.hide();
- *
- */
-Dialog.prototype.hide = function(trigger, modal) {
-	if (this.defaults) {
-		if (App.views.dialog.length) {
-			App.views.dialog.shift();
-		}
 
-		this.defaults.onHide.call(this, {
-			overlay: this.defaults.overlay,
-			modal: modal,
-			trigger: trigger,
-			position: this.defaults.position
-		});
-	}
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_Autocomplete" class="method item">
+    <h3 class="name"><code>Autocomplete</code></h3>
 
-	return this;
-};
+    
+        <span class="paren">()</span>
+    
 
-Dialog.prototype.destroy = function() {
-	var _this = this;
+    
 
-	if (this.defaults) {
-		$(this.defaults.trigger).each(function() {
-			if ($(this).data(&#x27;toggle&#x27;)) {
-				$(this).data(&#x27;toggle&#x27;).destroy();
-				$(this).data(&#x27;toggle&#x27;, &#x27;&#x27;);
-			}
+    
 
-			var trigger = $(this),
-				id = trigger.attr(&#x27;data-trigger&#x27;),
-				modal = $(&#x27;*[data-modal=&quot;&#x27; + id + &#x27;&quot;]&#x27;);
+    
 
-			if (_this.defaults.closer) {
-				$(_this.defaults.closer, modal).each(function() {
-					bean.off(this, &#x27;click.dialog&#x27;);
-				});
-			}
-		});
-	}
+    
 
-	return this;
-};
+    
 
-    </pre>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_Users_Fre_Code_web-javascript-libraries_src_classes_autocomplete.js.html#l2"><code>&#x2F;Users&#x2F;Fre&#x2F;Code&#x2F;web-javascript-libraries&#x2F;src&#x2F;classes&#x2F;autocomplete.js:2</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>new Autocomplete({
+        &#39;input&#39;: document.querySelector(&#39;input&#39;),
+        &#39;appendTo&#39;: document.querySelector(&#39;ol&#39;),
+        &#39;url&#39;: &#39;<a href="http://google.com/search/autocomplete/?query=">http://google.com/search/autocomplete/?query=</a>&#39;,
+        &#39;form&#39;: document.querySelector(&#39;form&#39;),
+        &#39;itemElement&#39;: document.querySelector(&#39;li&#39;),
+        &#39;activeClass&#39;: &#39;js-is-active&#39;,
+        &#39;minLength: 5
+    });</p>
+
+            </div>
+        </div>
+    
+</div>
+
+    </div>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

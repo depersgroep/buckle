@@ -1,0 +1,1 @@
+{"output":{"coverage":"_test/tmp/coverage/from_browsers/"},"routes":{"/instrumented":"_test/instrumented"},"before_tests":"istanbul instrument --output _test/instrumented src/classes","after_tests":"istanbul report --root _test/tmp/coverage/from_browsers --dir coverage lcov","test_page":"_SpecRunner.html","launch_in_ci":["Chrome"]}
