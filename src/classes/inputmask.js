@@ -225,6 +225,12 @@ function Inputmask(args) {
 			newValue = newValue.substr(0, patternLength);
 		}
 
+		// update input field
+		_this.defaults.inputmask.value = newValue;
+
+		// update previous values for future comparison
+		previousValue = _this.defaults.inputmask.value;
+
 		if (added) {
 			// suppose someone clicked on the last _ and started typing there ==> update the cursor pos to resemble the correct spot
 			indexOfFirstMask = newValue.indexOf(_this.defaults.maskCharacter);
@@ -235,13 +241,7 @@ function Inputmask(args) {
 			}
 		}
 
-		// update input field
-		_this.defaults.inputmask.value = newValue;
-
-		// update previous values for future comparison
-		previousValue = _this.defaults.inputmask.value;
 		previousCursorPos = cursorPos;
-
 		setCursorPosition(cursorPos);
 	}
 
