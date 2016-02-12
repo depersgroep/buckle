@@ -199,13 +199,6 @@ function Inputmask(args) {
 			} else {
 				added = true;
 			}
-
-			// check if we need to jump one after the separator
-			if (previousCursorPos < cursorPos) {
-				if (previousValue.substr(cursorPos - 1, 1) === _this.defaults.separatorCharacter) {
-					cursorPos += 1;
-				}
-			}
 		}
 
 		newValue = (value.match(regexNumbers) || []).join('');
@@ -238,6 +231,13 @@ function Inputmask(args) {
 
 			if (indexOfFirstMask >= 0 && (newValueNextCharacter === _this.defaults.maskCharacter || newValueNextCharacter === '')) {
 				cursorPos = indexOfFirstMask;
+			}
+
+			// check if we need to jump one after the separator
+			if (previousCursorPos < cursorPos) {
+				if (newValue.substr(cursorPos, 1) === _this.defaults.separatorCharacter) {
+					cursorPos += 1;
+				}
 			}
 		}
 
