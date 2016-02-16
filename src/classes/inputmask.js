@@ -235,6 +235,12 @@ function Inputmask(args) {
 
 			// check if we need to jump one after the separator
 			if (previousCursorPos < cursorPos) {
+				// cursor is before "/", then add a character ==> jump after the newly typed character
+				if (newValue.substr(cursorPos - 1, 1) === _this.defaults.separatorCharacter) {
+					cursorPos += 1;
+				}
+
+				// we added one and the next character is a "/" ==> jump after it
 				if (newValue.substr(cursorPos, 1) === _this.defaults.separatorCharacter) {
 					cursorPos += 1;
 				}
