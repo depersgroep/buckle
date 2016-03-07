@@ -165,7 +165,7 @@ Validate.prototype.checkValidation = function() {
 							regexp = new RegExp(regexData.regex, regexData.flags);
 
 							if (!regexp.test(value)) {
-								this.triggerError(k, 'invalid');
+								this.triggerError(k, 'invalid', false);
 								error = true;
 							}
 						}
@@ -175,7 +175,7 @@ Validate.prototype.checkValidation = function() {
 					value = this.defaults.fields[k].htmlObj.options[this.defaults.fields[k].htmlObj.selectedIndex].value;
 
 					if (!value) {
-						this.triggerError(k, 'invalid');
+						this.triggerError(k, 'invalid', false);
 						error = true;
 					}
 					break;
@@ -183,7 +183,7 @@ Validate.prototype.checkValidation = function() {
 					switch (this.defaults.fields[k].htmlObj.getAttribute('type')) {
 					case 'checkbox':
 						if (!this.defaults.fields[k].htmlObj.checked) {
-							this.triggerError(k, 'unchecked');
+							this.triggerError(k, 'unchecked', false);
 							error = true;
 						} else {
 							bean.off(this);
@@ -193,7 +193,7 @@ Validate.prototype.checkValidation = function() {
 						radiogroup = $('input[name="' + this.defaults.fields[k].htmlObj.name + '"]:checked');
 
 						if (radiogroup.length < 1 || !radiogroup[0].value) {
-							this.triggerError(k, 'unchecked');
+							this.triggerError(k, 'unchecked', false);
 							error = true;
 						}
 						break;
@@ -204,7 +204,7 @@ Validate.prototype.checkValidation = function() {
 						value = this.defaults.fields[k].htmlObj.value;
 
 						if (!/^(\+?\d+)(\/?[\s\.]?\d+)*$/.test(value)) {
-							this.triggerError(k, 'invalidTelephone');
+							this.triggerError(k, 'invalidTelephone', false);
 							error = true;
 						}
 						break;
@@ -213,7 +213,7 @@ Validate.prototype.checkValidation = function() {
 						value = this.defaults.fields[k].htmlObj.value;
 
 						if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
-							this.triggerError(k, 'invalidEmail');
+							this.triggerError(k, 'invalidEmail', false);
 							error = true;
 						}
 						break;
@@ -228,7 +228,7 @@ Validate.prototype.checkValidation = function() {
 								regexp = new RegExp(regexData.regex, regexData.flags);
 
 								if (!regexp.test(value)) {
-									this.triggerError(k, 'invalid');
+									this.triggerError(k, 'invalid', false);
 									error = true;
 								}
 							}
@@ -240,12 +240,12 @@ Validate.prototype.checkValidation = function() {
 
 				if (!error && customValidation && typeof customValidation.rule === 'function') {
 					if (!customValidation.rule(value)) {
-						this.triggerError(k, customValidation.message);
+						this.triggerError(k, customValidation.message, true);
 						error = true;
 					}
 				}
 			} else if (!this.defaults.fields[k].htmlObj.getAttribute('data-validate')) {
-				this.triggerError(k, 'empty');
+				this.triggerError(k, 'empty', false);
 				error = true;
 			}
 
@@ -324,7 +324,7 @@ Validate.prototype.checkValue = function(htmlObj) {
 };
 
 // this is not a public function
-Validate.prototype.triggerError = function(field, msg) {
+Validate.prototype.triggerError = function(field, msg, custom) {
 	if ((field || field === 0) && msg) {
 		var _this = this;
 
@@ -353,7 +353,8 @@ Validate.prototype.triggerError = function(field, msg) {
 
 		this.defaults.onError.call(this, {
 			field: this.defaults.fields[field].htmlObj,
-			message: this.defaults.i18n[msg] || ''
+			message: this.defaults.i18n[msg] || '',
+			custom: custom
 		});
 	}
 

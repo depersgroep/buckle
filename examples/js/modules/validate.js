@@ -48,11 +48,9 @@ App.modules.validate = (function() {
 		var div = document.createElement('div');
 		div.className = 'js-form__error error';
 
-		if ($(args.field).attr('data-error')) {
-
+		if (!args.custom && $(args.field).attr('data-error')) {
 			div.innerHTML = $(args.field).attr('data-error');
 		} else {
-
 			div.innerHTML = args.message;
 		}
 
