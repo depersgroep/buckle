@@ -239,7 +239,7 @@ Validate.prototype.checkValidation = function() {
 				customValidation = this.defaults.customValidation[this.defaults.fields[k].htmlObj.getAttribute('name')];
 
 				if (!error && customValidation && typeof customValidation.rule === 'function') {
-					if (!customValidation.rule(value)) {
+					if (!customValidation.rule.call(this.defaults.fields[k].htmlObj, value)) {
 						this.triggerError(k, customValidation.message, true);
 						error = true;
 					}
