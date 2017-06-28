@@ -1,6 +1,6 @@
 # Using testem 0.6.24
 # Whole list of tests
-not ok 1  - Chrome - Browser "C:\Users\yvanavermaet\Local Settings\Application Data\Google\Chrome\Application\chrome.exe,C:\Users\yvanavermaet\AppData\Local\Google\Chrome\Application\chrome.exe,C:\Program Files\Google\Chrome\Application\Chrome.exe,C:\Program Files (x86)\Google\Chrome\Application\Chrome.exe --user-data-dir=C:\Windows\Temp\testem.chrome --no-default-browser-check --no-first-run --ignore-certificate-errors http://localhost:7357/3079" exited unexpectedly.
+not ok 1  - Chrome - Browser "C:\Users\yvanavermaet\Local Settings\Application Data\Google\Chrome\Application\chrome.exe,C:\Users\yvanavermaet\AppData\Local\Google\Chrome\Application\chrome.exe,C:\Program Files\Google\Chrome\Application\Chrome.exe,C:\Program Files (x86)\Google\Chrome\Application\Chrome.exe --user-data-dir=C:\Windows\Temp\testem.chrome --no-default-browser-check --no-first-run --ignore-certificate-errors http://localhost:7357/8140" exited unexpectedly.
 
 1..1
 # tests 1

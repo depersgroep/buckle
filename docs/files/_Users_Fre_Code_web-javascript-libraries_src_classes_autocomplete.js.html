@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>/Users/Fre/Code/web-javascript-libraries/src/classes/autocomplete.js - De Persgroep Publishing</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="De Persgroep Publishing" src="../assets/css/logo.png" style="max-height: 65%;" title="De Persgroep Publishing">
+        
+            De Persgroep Publishing
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/$", "classes/Autocomplete", "classes/Cycle", "classes/Dialog", "classes/Inputmask", "classes/Tabs", "classes/Toggle", "classes/Validate", "modules/Persgroep"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/$.html">$</a></li>
+                    
+                        <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
+                    
+                        <li><a href="../classes/Cycle.html">Cycle</a></li>
+                    
+                        <li><a href="../classes/Dialog.html">Dialog</a></li>
+                    
+                        <li><a href="../classes/Inputmask.html">Inputmask</a></li>
+                    
+                        <li><a href="../classes/Tabs.html">Tabs</a></li>
+                    
+                        <li><a href="../classes/Toggle.html">Toggle</a></li>
+                    
+                        <li><a href="../classes/Validate.html">Validate</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/Persgroep.html">Persgroep</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>/Users/Fre/Code/web-javascript-libraries/src/classes/autocomplete.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+&#x27;use strict&#x27;;
+/**
+ *
+ *	Our autocomplete
+ *
+ *
+ *	@class Autocomplete
+ *	@constructor
+ *
+ *	@property {Element} input The input trigger
+ *  @property {Element} appendTo The list to append the results to
+ *  @property {String} url The url to send requests to
+ *  @property {Element|Optional} form The form elements, default: closest form
+ *  @property {Element|Optional} itemElement The element used for the result list, default: li
+ *  @property {String|Optional} activeClass Class to indicate active, default: js-is-active
+ *  @property {Number|Optional} minLength The min length before we start to do requests, default: 3
+ *
+ *	@example
+ *
+ *	new Autocomplete({
+ *	    &#x27;input&#x27;: document.querySelector(&#x27;input&#x27;),
+ *	    &#x27;appendTo&#x27;: document.querySelector(&#x27;ol&#x27;),
+ *	    &#x27;url&#x27;: &#x27;http://google.com/search/autocomplete/?query=&#x27;,
+ *	    &#x27;form&#x27;: document.querySelector(&#x27;form&#x27;),
+ *	    &#x27;itemElement&#x27;: document.querySelector(&#x27;li&#x27;),
+ *	    &#x27;activeClass&#x27;: &#x27;js-is-active&#x27;,
+ *	    &#x27;minLength: 5
+ *	});
+ *
+ *
+ */
+
+function Autocomplete(args) {
+	var _this = this,
+		$input,
+		$appendTo;
+
+	if (args) {
+		this.defaults = {
+			&#x27;input&#x27;: args.input ? args.input : null,
+			&#x27;appendTo&#x27;: args.appendTo ? args.appendTo : null,
+			&#x27;form&#x27;: args.form ? args.form : null,
+			&#x27;button&#x27;: args.button ? args.button : null,
+			&#x27;itemElement&#x27;: args.itemElement ? args.itemElement : document.createElement(&#x27;li&#x27;),
+			&#x27;activeClass&#x27;: args.active ? args.activeClass : &#x27;js-is-active&#x27;,
+			&#x27;minLength&#x27;: args.minLength ? args.minLength : 3,
+			&#x27;url&#x27;: args.url ? args.url : null
+		};
+
+		if (this.defaults.input &amp;&amp; this.defaults.appendTo) {
+			$input = $(this.defaults.input);
+			$appendTo = $(this.defaults.appendTo);
+
+			if (!this.defaults.form) {
+				this.defaults.form = $input.closest(&#x27;form&#x27;)[0];
+			}
+
+			create();
+		}
+	}
+
+	function create() {
+		$input.attr(&#x27;autocomplete&#x27;, &#x27;off&#x27;);
+		$input.on(&#x27;keyup.autocomplete&#x27;, keyUp.bind(_this));
+		$input.on(&#x27;keydown.autocomplete&#x27;, keyDown.bind(_this));
+		$input.on(&#x27;focus.autocomplete&#x27;, keyUp.bind(_this));
+		$input.on(&#x27;blur.autocomplete&#x27;, blur);
+		$(window).on(&#x27;click.autocomplete&#x27;, globalClose.bind(_this));
+	}
+
+	function keyUp(e) {
+		if (e.keyCode === 40) {
+			nextItem();
+			e.preventDefault();
+		} else if (e.keyCode === 38) {
+			prevItem();
+			e.preventDefault();
+		} else if (e.keyCode !== 13 &amp;&amp; _this.defaults.input.value.length &gt;= _this.defaults.minLength) {
+			request(_this.defaults.input.value);
+		} else {
+			_this.defaults.appendTo.innerHTML = &#x27;&#x27;;
+			$appendTo.removeClass(_this.defaults.activeClass);
+		}
+	}
+
+	function keyDown(e) {
+		var $current;
+
+		if (e.keyCode === 13) {
+			$current = $(&#x27;.&#x27; + _this.defaults.activeClass, _this.defaults.appendTo);
+
+			if ($current.length) {
+				click($current[0]);
+			}
+		}
+	}
+
+	function blur() {
+		window.setTimeout(reset, 150);
+	}
+
+	function globalClose(e) {
+		if (_this.defaults.input !== e.target) {
+			reset();
+		}
+	}
+
+	function request(query) {
+		$.ajax({
+			&#x27;url&#x27;: _this.defaults.url + query,
+			&#x27;method&#x27;: &#x27;get&#x27;,
+			&#x27;success&#x27;: response.bind(_this)
+		});
+	}
+
+	function response(resp) {
+		var elem,
+			result = resp.items,
+			i = 0,
+			l = result.length;
+
+		if (l &gt; 0) {
+			$appendTo.addClass(_this.defaults.activeClass);
+		} else {
+			reset();
+		}
+
+		_this.defaults.appendTo.innerHTML = &#x27;&#x27;;
+
+		for (; i &lt; l; i++) {
+			elem = _this.defaults.itemElement.cloneNode(true);
+			elem.innerHTML = result[i];
+			elem.setAttribute(&#x27;data-autocomplete-id&#x27;, result[i]);
+			$(elem).on(&#x27;click.autocomplete&#x27;, click.bind(_this));
+			_this.defaults.appendTo.appendChild(elem);
+		}
+	}
+
+	function nextItem() {
+		var $items = $(&#x27;li&#x27;, _this.defaults.appendTo),
+			$current = $(&#x27;.&#x27; + _this.defaults.activeClass, _this.defaults.appendTo),
+			$next = $current.next();
+
+		$current.removeClass(_this.defaults.activeClass);
+
+		if (!$current.length || !$next.length) {
+			$items.first().addClass(_this.defaults.activeClass);
+		} else if ($next.length) {
+			$next.addClass(_this.defaults.activeClass);
+		}
+	}
+
+	function prevItem() {
+		var $items = $(&#x27;li&#x27;, _this.defaults.appendTo),
+			$current = $(&#x27;.js-is-active&#x27;, _this.defaults.appendTo),
+			$prev = $current.previous();
+
+		$current.removeClass(_this.defaults.activeClass);
+
+		if (!$current.length || !$prev.length) {
+			$items.last().addClass(_this.defaults.activeClass);
+		} else {
+			$prev.addClass(_this.defaults.activeClass);
+		}
+	}
+
+	function click(e) {
+		var item = e.target ? e.target : e;
+
+		_this.defaults.input.value = item.getAttribute(&#x27;data-autocomplete-id&#x27;);
+
+		if (_this.defaults.button) {
+			_this.defaults.button.click();
+		} else {
+			// For iOS, otherwise the submit will be executed before the value is set.
+			window.setTimeout(function() {
+				// _this.defaults.form.submit();
+			}, 0);
+		}
+
+		reset();
+	}
+
+	function reset() {
+		$appendTo.html(&#x27;&#x27;).removeClass(_this.defaults.activeClass);
+	}
+
+	return this;
+}
+
+Autocomplete.prototype.destory = function() {
+	if (this.defaults) {
+		$(this.defaults.input).off(&#x27;keyup.autocomplete keydown.autocomplete focus.autocomplete&#x27;);
+		this.defaults =  null;
+	}
+
+	return this;
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

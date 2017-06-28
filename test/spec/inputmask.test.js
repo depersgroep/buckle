@@ -69,7 +69,6 @@ describe('Inputmask Module', function() {
 
 			$input = $('input.inputmask');
 
-			console.log($input);
 			test = new Inputmask({
 				'inputmask': $input[0], // dummy object
 				'pattern': '__/__/____',
