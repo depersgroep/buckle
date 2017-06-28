@@ -22,11 +22,20 @@ App.modules.validate = (function() {
 					onError: _showError,
 					onRemoveError: _removeError,
 					onValidationComplete: _validationComplete,
+					customValidation: {
+						field4: {
+							rule: function(value) {
+								return value === 'hallo';
+							},
+							message: 'customErrorMessage'
+						}
+					},
 					i18n: {
 						empty: 'Dit veld mag niet leeg zijn (custom i18n)',
 						unchecked: 'U moet dit veld aanvinken (custom i18n)',
 						invalidEmail: 'Gelieve een bestaand email adres in te voeren (custom i18n)',
-						invalidTelephone: 'Geldig nummer aub (custom i18n)'
+						invalidTelephone: 'Geldig nummer aub (custom i18n)',
+						customErrorMessage: 'Dit is een error message voor een custom validatie'
 					}
 				});
 			}
@@ -39,11 +48,9 @@ App.modules.validate = (function() {
 		var div = document.createElement('div');
 		div.className = 'js-form__error error';
 
-		if ($(args.field).attr('data-error')) {
-
+		if (!args.custom && $(args.field).attr('data-error')) {
 			div.innerHTML = $(args.field).attr('data-error');
 		} else {
-
 			div.innerHTML = args.message;
 		}
 

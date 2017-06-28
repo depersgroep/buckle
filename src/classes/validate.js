@@ -35,21 +35,31 @@
  */
 function Validate(args) {
 	if (args) {
-		var _this = this;
+		var _this = this,
+			attr;
+
 		_this.defaults = {
 				frm: (args.frm ? args.frm : false),
 				fields: [],
 				noFormevents: (args.noFormevents ? true : false),
 				i18n: {
-					empty: (args.i18n && args.i18n.empty ? args.i18n.empty : 'This field is required.'),
-					unchecked: (args.i18n && args.i18n.unchecked ? args.i18n.unchecked : 'This field is required.'),
-					invalidEmail: (args.i18n && args.i18n.invalidEmail ? args.i18n.invalidEmail : 'Please enter a valid email address.'),
-					invalidTelephone: (args.i18n && args.i18n.invalidTelephone ? args.i18n.invalidTelephone : 'Please enter a valid telephone number.')
+					empty: 'This field is required.',
+					unchecked: 'This field is required.',
+					invalidEmail: 'Please enter a valid email address.',
+					invalidTelephone: 'Please enter a valid telephone number.'
 				},
+				customValidation: (args.customValidation ? args.customValidation : {}),
 				onError: (args.onError ? args.onError : function() {}),
 				onRemoveError: (args.onRemoveError ? args.onRemoveError : function() {}),
 				onValidationComplete: (args.onValidationComplete ? args.onValidationComplete : function() {})
 			};
+
+		// Update i18n defaults
+		if (args.i18n) {
+			for (attr in args.i18n) {
+				_this.defaults.i18n[attr] = args.i18n[attr];
+			}
+		}
 
 		if (_this.defaults.frm) {
 			_this.defaults.frm.setAttribute('novalidate', '');
@@ -102,7 +112,8 @@ function Validate(args) {
  *
  */
 Validate.prototype.checkValidation = function() {
-	var error = false;
+	var globalError = false,
+		error = false;
 
 	// private function to check Regex
 	function validateAndReturnRegex(pattern) {
@@ -132,31 +143,39 @@ Validate.prototype.checkValidation = function() {
 			this.removeError(k);
 			// check if there is a value
 
+			error = false;
+
 			if (this.checkValue(this.defaults.fields[k].htmlObj)) {
 				// check the type
 				var regexData,
 					regexp,
-					radiogroup;
+					radiogroup,
+					value,
+					customValidation;
 
 				switch (this.defaults.fields[k].htmlObj.nodeName.toLowerCase()) {
 				case 'textarea':
 					// check if we have a data-regex, if so check if it is valid
+					value = this.defaults.fields[k].htmlObj.value;
+
 					if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')) {
 						regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
 
 						if (regexData.regex) {
 							regexp = new RegExp(regexData.regex, regexData.flags);
 
-							if (!regexp.test(this.defaults.fields[k].htmlObj.value)) {
-								this.triggerError(k, 'invalid');
+							if (!regexp.test(value)) {
+								this.triggerError(k, 'invalid', false);
 								error = true;
 							}
 						}
 					}
 					break;
 				case 'select':
-					if (!this.defaults.fields[k].htmlObj.options[this.defaults.fields[k].htmlObj.selectedIndex].value) {
-						this.triggerError(k, 'invalid');
+					value = this.defaults.fields[k].htmlObj.options[this.defaults.fields[k].htmlObj.selectedIndex].value;
+
+					if (!value) {
+						this.triggerError(k, 'invalid', false);
 						error = true;
 					}
 					break;
@@ -164,7 +183,7 @@ Validate.prototype.checkValidation = function() {
 					switch (this.defaults.fields[k].htmlObj.getAttribute('type')) {
 					case 'checkbox':
 						if (!this.defaults.fields[k].htmlObj.checked) {
-							this.triggerError(k, 'unchecked');
+							this.triggerError(k, 'unchecked', false);
 							error = true;
 						} else {
 							bean.off(this);
@@ -174,7 +193,7 @@ Validate.prototype.checkValidation = function() {
 						radiogroup = $('input[name="' + this.defaults.fields[k].htmlObj.name + '"]:checked');
 
 						if (radiogroup.length < 1 || !radiogroup[0].value) {
-							this.triggerError(k, 'unchecked');
+							this.triggerError(k, 'unchecked', false);
 							error = true;
 						}
 						break;
@@ -182,19 +201,25 @@ Validate.prototype.checkValidation = function() {
 						// must be regex
 						// added leading +-sign
 						// added spaces and slashes to the regex
-						if (!/^(\+?\d+)(\/?[\s\.]?\d+)*$/.test(this.defaults.fields[k].htmlObj.value)) {
-							this.triggerError(k, 'invalidTelephone');
+						value = this.defaults.fields[k].htmlObj.value;
+
+						if (!/^(\+?\d+)(\/?[\s\.]?\d+)*$/.test(value)) {
+							this.triggerError(k, 'invalidTelephone', false);
 							error = true;
 						}
 						break;
 					case 'email':
 						// new regex by Sven
-						if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.defaults.fields[k].htmlObj.value)) {
-							this.triggerError(k, 'invalidEmail');
+						value = this.defaults.fields[k].htmlObj.value;
+
+						if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
+							this.triggerError(k, 'invalidEmail', false);
 							error = true;
 						}
 						break;
 					default:
+						value = this.defaults.fields[k].htmlObj.value;
+
 						// check if we have a data-regex, if so check if it is valid
 						if (this.defaults.fields[k].htmlObj.getAttribute('data-regex')) {
 							regexData = validateAndReturnRegex(this.defaults.fields[k].htmlObj.getAttribute('data-regex'));
@@ -202,28 +227,41 @@ Validate.prototype.checkValidation = function() {
 							if (regexData.regex) {
 								regexp = new RegExp(regexData.regex, regexData.flags);
 
-								if (!regexp.test(this.defaults.fields[k].htmlObj.value)) {
-									this.triggerError(k, 'invalid');
+								if (!regexp.test(value)) {
+									this.triggerError(k, 'invalid', false);
 									error = true;
 								}
 							}
 						}
 					}
 				}
+
+				customValidation = this.defaults.customValidation[this.defaults.fields[k].htmlObj.getAttribute('name')];
+
+				if (!error && customValidation && typeof customValidation.rule === 'function') {
+					if (!customValidation.rule.call(this.defaults.fields[k].htmlObj, value)) {
+						this.triggerError(k, customValidation.message, true);
+						error = true;
+					}
+				}
 			} else if (!this.defaults.fields[k].htmlObj.getAttribute('data-validate')) {
-				this.triggerError(k, 'empty');
+				this.triggerError(k, 'empty', false);
 				error = true;
+			}
+
+			if (!globalError) {
+				globalError = error;
 			}
 		}
 
 		this.defaults.onValidationComplete.call(this, {
-			error: error,
+			error: globalError,
 			validate: this,
 			frm: this.defaults.frm
 		});
 	}
 
-	return error;
+	return globalError;
 };
 
 /**
@@ -286,7 +324,9 @@ Validate.prototype.checkValue = function(htmlObj) {
 };
 
 // this is not a public function
-Validate.prototype.triggerError = function(field, msg) {
+Validate.prototype.triggerError = function(field, msg, custom) {
+	var eventType;
+
 	if ((field || field === 0) && msg) {
 		var _this = this;
 
@@ -305,7 +345,19 @@ Validate.prototype.triggerError = function(field, msg) {
 
 		this.defaults.fields[field].hasError = true;
 
-		var eventType = _this.defaults.fields[field].htmlObj.type === 'radio' ? 'click.validate' : 'keyup.validate';
+		// different event for different field-types
+		switch (_this.defaults.fields[field].htmlObj.type) {
+			case 'radio':
+			case 'checkbox':
+				eventType = 'click.validate';
+				break;
+			case 'select-one':
+			case 'select-multiple':
+				eventType = 'change.validate';
+				break;
+			default:
+				eventType = 'keyup.validate';
+		}
 
 		// only attch the event once!
 		bean.off(_this.defaults.fields[field].htmlObj, eventType);
@@ -315,7 +367,8 @@ Validate.prototype.triggerError = function(field, msg) {
 
 		this.defaults.onError.call(this, {
 			field: this.defaults.fields[field].htmlObj,
-			message: this.defaults.i18n[msg]
+			message: this.defaults.i18n[msg] || '',
+			custom: custom
 		});
 	}
 

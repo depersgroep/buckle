@@ -163,7 +163,8 @@ function Inputmask(args) {
 			i = 0,
 			x = 0,
 			added = false,
-			indexOfFirstMask = -1;
+			indexOfFirstMask = -1,
+			newValueNextCharacter;
 
 		if (previousValue.length > value.length) {
 			// removed
@@ -198,13 +199,6 @@ function Inputmask(args) {
 			} else {
 				added = true;
 			}
-
-			// check if we need to jump one after the separator
-			if (previousCursorPos < cursorPos) {
-				if (previousValue.substr(cursorPos - 1, 1) === _this.defaults.separatorCharacter) {
-					cursorPos += 1;
-				}
-			}
 		}
 
 		newValue = (value.match(regexNumbers) || []).join('');
@@ -224,22 +218,36 @@ function Inputmask(args) {
 			newValue = newValue.substr(0, patternLength);
 		}
 
-		if (added) {
-			// suppose someone clicked on the last _ and started typing there ==> update the cursor pos to resemble the correct spot
-			indexOfFirstMask = newValue.indexOf(_this.defaults.maskCharacter);
-
-			if (indexOfFirstMask >= 0) {
-				cursorPos = indexOfFirstMask;
-			}
-		}
-
 		// update input field
 		_this.defaults.inputmask.value = newValue;
 
 		// update previous values for future comparison
 		previousValue = _this.defaults.inputmask.value;
-		previousCursorPos = cursorPos;
 
+		if (added) {
+			// suppose someone clicked on the last _ and started typing there ==> update the cursor pos to resemble the correct spot
+			indexOfFirstMask = newValue.indexOf(_this.defaults.maskCharacter);
+			newValueNextCharacter = newValue.substr(cursorPos, 1);
+
+			if (indexOfFirstMask >= 0 && (newValueNextCharacter === _this.defaults.maskCharacter || newValueNextCharacter === '')) {
+				cursorPos = indexOfFirstMask;
+			}
+
+			// check if we need to jump one after the separator
+			if (previousCursorPos < cursorPos) {
+				// cursor is before "/", then add a character ==> jump after the newly typed character
+				if (newValue.substr(cursorPos - 1, 1) === _this.defaults.separatorCharacter) {
+					cursorPos += 1;
+				}
+
+				// we added one and the next character is a "/" ==> jump after it
+				if (newValue.substr(cursorPos, 1) === _this.defaults.separatorCharacter) {
+					cursorPos += 1;
+				}
+			}
+		}
+
+		previousCursorPos = cursorPos;
 		setCursorPosition(cursorPos);
 	}
 
