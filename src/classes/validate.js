@@ -325,6 +325,8 @@ Validate.prototype.checkValue = function(htmlObj) {
 
 // this is not a public function
 Validate.prototype.triggerError = function(field, msg, custom) {
+	var eventType;
+
 	if ((field || field === 0) && msg) {
 		var _this = this;
 
@@ -343,7 +345,19 @@ Validate.prototype.triggerError = function(field, msg, custom) {
 
 		this.defaults.fields[field].hasError = true;
 
-		var eventType = _this.defaults.fields[field].htmlObj.type === 'radio' ? 'click.validate' : 'keyup.validate';
+		// different event for different field-types
+		switch (_this.defaults.fields[field].htmlObj.type) {
+			case 'radio':
+			case 'checkbox':
+				eventType = 'click.validate';
+				break;
+			case 'select-one':
+			case 'select-multiple':
+				eventType = 'change.validate';
+				break;
+			default:
+				eventType = 'keyup.validate';
+		}
 
 		// only attch the event once!
 		bean.off(_this.defaults.fields[field].htmlObj, eventType);
