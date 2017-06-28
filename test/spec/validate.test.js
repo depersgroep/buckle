@@ -208,15 +208,15 @@ describe('Validate Module', function() {
 			});
 
 		});
-		
-		describe('keypress events', function(){
+
+		describe('keyup event', function(){
 			var test = null;
-	
+
 			beforeEach(function(){
 				test = new Validate({
 					frm: document.getElementById('testform')
 				});
-				
+
 				document.getElementById('inpName').value = 'jochen';
 				document.getElementById('inpNumber').value = '1234';
 				document.getElementById('inpCheck').checked = 'checked';
@@ -226,13 +226,13 @@ describe('Validate Module', function() {
 				document.getElementById('inpSelect').value = 'test';
 				document.getElementById('inpText').value = 'dit is wat tekst';
 				document.getElementById('inpRadioA').checked = 'checked';
-				
+
 			});
-		
+
 			afterEach(function(){
 				test = null;
 			});
-			
+
 			// @deprecated
 			it('should throw an error when the value is too short', function(){
 				expect(test.checkValidation()).toBeTruthy();
@@ -261,6 +261,86 @@ describe('Validate Module', function() {
 				bean.fire(inp, 'keyup');
 				expect(test.isValid).toHaveBeenCalled();
 				expect(test.isValid()).toBeFalsy();
+			});
+		});
+
+		describe('change event', function(){
+			var test = null;
+
+			beforeEach(function(){
+				test = new Validate({
+					frm: document.getElementById('testform')
+				});
+
+				document.getElementById('inpName').value = 'jochen';
+				document.getElementById('inpNumber').value = '1234';
+				document.getElementById('inpCheck').checked = 'checked';
+				document.getElementById('inpMinlength').value = 'abc';
+				document.getElementById('inpEmail').value = 'test@gmail.com';
+				document.getElementById('inpTel').value = '1234';
+				document.getElementById('inpSelect').options.selectedIndex = 0;
+				document.getElementById('inpText').value = 'dit is wat tekst';
+				document.getElementById('inpRadioA').checked = 'checked';
+
+			});
+
+			afterEach(function(){
+				test = null;
+			});
+
+			it('should throw an error when no option is selected', function(){
+				expect(test.isValid()).toBeFalsy();
+			});
+
+			it('should not throw an error when an option is selected', function(){
+				test.isValid();
+				spyOn(test, 'isValid').and.callThrough();
+				var inp = document.getElementById('inpSelect');
+				inp.options.selectedIndex = 1;
+				bean.fire(inp, 'change');
+				expect(test.isValid).toHaveBeenCalled();
+				expect(test.isValid()).toBeTruthy();
+			});
+
+		});
+
+		describe('click event', function(){
+			var test = null;
+
+			beforeEach(function(){
+				test = new Validate({
+					frm: document.getElementById('testform')
+				});
+
+				document.getElementById('inpName').value = 'jochen';
+				document.getElementById('inpNumber').value = '1234';
+				document.getElementById('inpCheck').checked = 'checked';
+				document.getElementById('inpMinlength').value = 'abc';
+				document.getElementById('inpEmail').value = 'test@gmail.com';
+				document.getElementById('inpTel').value = '1234';
+				document.getElementById('inpSelect').options.selectedIndex = 1;
+				document.getElementById('inpText').value = 'dit is wat tekst';
+				document.getElementById('inpRadioA').checked = false;
+				document.getElementById('inpRadioB').checked = false;
+
+			});
+
+			afterEach(function(){
+				test = null;
+			});
+
+			it('should throw an error when no radiobutton is checked', function(){
+				expect(test.isValid()).toBeFalsy();
+			});
+
+			it('should not throw an error when an radiobutton is checked', function(){
+				test.isValid();
+				spyOn(test, 'isValid').and.callThrough();
+				var inp = document.getElementById('inpRadioA');
+				inp.checked = true;
+				bean.fire(inp, 'click');
+				expect(test.isValid).toHaveBeenCalled();
+				expect(test.isValid()).toBeTruthy();
 			});
 
 		});
